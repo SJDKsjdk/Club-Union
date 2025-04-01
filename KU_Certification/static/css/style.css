@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.login-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #8b1f41;
+    margin-bottom: 2rem;
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #8b1f41;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #8b1f41;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #6b1832;
+}
+
+.alert {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* PC 버전 (768px 이상) */
+@media screen and (min-width: 768px) {
+    .login-container {
+        padding: 3rem;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    input {
+        padding: 1rem;
+    }
+
+    button {
+        padding: 1rem;
+    }
+}
+
+/* 모바일 버전 (768px 미만) */
+@media screen and (max-width: 767px) {
+    .login-container {
+        margin: 15px;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input {
+        padding: 0.5rem;
+    }
+
+    button {
+        padding: 0.75rem;
+    }
+}
+
+/* 작은 모바일 화면 (320px 이하) */
+@media screen and (max-width: 320px) {
+    .login-container {
+        margin: 10px;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+}
