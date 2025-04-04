@@ -6,6 +6,10 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     return render_template('main.html')
+    
+@app.route('/clubs')
+def clubs():
+    return render_template('clubs.html')
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):
