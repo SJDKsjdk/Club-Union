@@ -37,18 +37,10 @@ main {
     position: relative;
 }
 
-/* 로고 오버레이 */
-.logo-overlay {
-    position: fixed;
-    top: 30px;
-    left: 30px;
-    z-index: 1000;
-}
-
 .ku-logo {
-    height: 60px;
+    height: 110px;
     width: auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    padding: 10px;       
 }
 
 /* 히어로 슬라이더 */
@@ -340,15 +332,21 @@ section h2::after {
     background: var(--ku-gold);
 }
 
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .logo-overlay {
-        top: 10px;
-        left: 10px;
+        position: absolute;      
+        top: 20px;
+        left: 20px;
+        z-index: 10;             
+        padding: 10px;
     }
 
     .ku-logo {
-        height: 40px;
+        height: 110px;
+        width: auto;
+        padding: 10px;
     }
 
     .text_1 span {
@@ -361,6 +359,7 @@ section h2::after {
 
     .hero-slider {
         height: 100vh;
+        position: relative;
     }
 
     section {
