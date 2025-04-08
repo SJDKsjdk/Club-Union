@@ -11,6 +11,10 @@ def main():
 def clubs():
     return render_template('clubs.html')
 
+@app.route('/soma')
+def soma():
+    return render_template('soma.html')
+
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
