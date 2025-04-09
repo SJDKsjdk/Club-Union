@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>아람소래 - 기타 동아리</title>
+  <link rel="stylesheet" href="/static/css/clubInfo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <header>
+    <nav>
+      <div class="logo">아람소래</div>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-active">홈</a></li>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#activities">활동</a></li>
+        <li><a href="#gallery">갤러리</a></li>
+        <li><a href="#join">홍보/문의사항</a></li>
+      </ul>
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="text-section">
+        <h1 class="animate-text">아람소래</h1>
+        <h2 class="animate-text">통기타는 재밌다!</h2>
+        <div class="info-box">
+          <p><i class="fas fa-music"></i> 분류 : 중앙 기타동아리</p>
+          <p><i class="fas fa-theater-masks"></i> 소속분과 : 기악예술분과</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 19??년</p>
+        </div>
+        <a href="#join" class="btn btn-animated">가입문의</a>
+      </div>
+      <div class="image-section">
+        <img src="/static/images/logo_clubs/instrument/aram.png" alt="아람소래" class="hero-img" />
+      </div>
+    </div>
+    <div class="scroll-down">
+      <span>스크롤</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">동아리 소개</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p class="typewriter-text">아람소래는 클래식기타, 통기타를 사랑하는 사람들이 모인 동아리로, <br> 함께 기타를 연습하고 연주하는 활동을 합니다.</p>
+          <p>기타를 배우고 싶으신 분, 기타를 좋아하시는 분, <br> 새로운 사람을 만나고 싶으신 분 모두 환영합니다!</p>
+        </div>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-text">활동 년수</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-text">회원 수</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="0">0</span>
+            <span class="stat-text">연간 공연</span>
+          </div>
+        </div>
+      </div>
+      <div class="parallax-container">
+        <div class="parallax-item" data-speed="0.5">
+          <i class="fas fa-music"></i>
+        </div>
+        <div class="parallax-item" data-speed="-0.3">
+          <i class="fas fa-guitar"></i>
+        </div>
+        <div class="parallax-item" data-speed="0.8">
+          <i class="fas fa-headphones"></i>
+        </div>
+        <div class="parallax-item" data-speed="-0.6">
+          <i class="fas fa-drum"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities" class="activities">
+    <div class="container">
+      <h2 class="section-title">주요 활동</h2>
+      <div class="cards">
+        <div class="card" data-tilt>
+          <div class="card-icon">
+            <i class="fas fa-microphone-alt"></i>
+          </div>
+          <h3>정기 연습</h3>
+          <p>조별 레슨을 통해서 기타를 배웁니다.</p>
+        </div>
+        <div class="card" data-tilt>
+          <div class="card-icon">
+            <i class="fas fa-guitar"></i>
+          </div>
+          <h3>자유 연습</h3>
+          <p>혼자 혹은 다른 부원과 함께 연주 및 연습을 진행합니다.</p>
+        </div>
+        <div class="card" data-tilt>
+          <div class="card-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>친목 활동</h3>
+          <p>개강, 종강총회 및 MT 등으로 부원 간의 친목을 다집니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2 class="section-title">갤러리</h2>
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="performance">공연</button>
+        <button class="filter-btn" data-filter="practice">연습</button>
+        <button class="filter-btn" data-filter="member">회원</button>
+      </div>
+      <div class="gallery-container">
+        <div class="gallery-item" data-category="performance">
+          <div class="image-placeholder">공연 사진 1</div>
+          <div class="gallery-overlay">
+            <h3>정기공연</h3>
+            <p>2024년 여름</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="performance">
+          <div class="image-placeholder">공연 사진 2</div>
+          <div class="gallery-overlay">
+            <h3>정기공연</h3>
+            <p>2025년 봄</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="practice">
+          <div class="image-placeholder">연습 사진1</div>
+          <div class="gallery-overlay">
+            <h3>정기 연습</h3>
+            <p>동아리방</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="member">
+          <div class="image-placeholder">동아리방</div>
+          <div class="gallery-overlay">
+            <h3>친목 활동</h3>
+            <p>친목 활동</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="join">
+    <div class="container">
+      <h2 class="section-title">홍보 및 문의사항</h2>
+      <div class="join-content">
+        <div class="join-text">
+          <p>동아리 가입에 있어서 기타 연주 경험의 유무는 제한이 되지 않습니다!</p>
+          <P>아람소래와 함께하고 싶다면 3월, 9월에 망설이지 말고 동아리방 문을 두드려주세요!</P>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Address</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 학생회관 B103호 (동아리방)</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Instagram</h3>
+                <p><i class="fab fa-instagram"></i> @aramsorae</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Youtube</h3>
+                <p><i class="fab fa-youtube"></i> aramsorae@example.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-container">
+          <form class="join-form" id="joinForm">
+            <input type="text" placeholder="이름" required id="name">
+            <input type="email" placeholder="이메일" required id="email">
+            <input type="tel" placeholder="연락처" required id="phone">
+            <select required id="instrument">
+              <option value="" disabled selected>관심 악기</option>
+              <option value="vocal">통기타</option>
+              <option value="guitar">클래식기타</option>
+            </select>
+            <textarea placeholder="지원 동기" id="motivation"></textarea>
+            <button type="submit" class="btn">가입 신청</button>
+            <div class="form-message"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">아람소래</div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <p class="copyright">© 2025 아람소래. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script src="/static/js/clubInfo.js"></script>
+</body>
+</html>

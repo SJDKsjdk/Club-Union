@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>서화회 - 서예 동아리</title>
+  <link rel="stylesheet" href="/static/css/clubInfo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <header>
+    <nav>
+      <div class="logo">서화회</div>
+      <ul class="nav-links"></ul>
+        <li><a href="#home" class="nav-active">홈</a></li>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#activities">활동</a></li>
+        <li><a href="#gallery">갤러리</a></li>
+        <li><a href="#join">홍보/문의사항</a></li>
+      </ul>
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="text-section">
+        <h1 class="animate-text">서화회</h1>
+        <h2 class="animate-text">글씨를 그려라!</h2>
+        <div class="info-box">
+          <p><i class="fas fa-music"></i> 분류 : 중앙 서예동아리</p>
+          <p><i class="fas fa-theater-masks"></i> 소속분과 : 전시창작분과</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 19??년</p>
+        </div>
+        <a href="#join" class="btn btn-animated">가입문의</a>
+      </div>
+      <div class="image-section">
+        <img src="/static/images/logo_clubs/display/green.png" alt="서화회" class="hero-img" />
+      </div>
+    </div>
+    <div class="scroll-down">
+      <span>스크롤</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">동아리 소개</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p class="typewriter-text">서화회는 서예와 캘리그라피, 동양화를 사랑하는 사람들이 모인 동아리로 <br> 서예, 캘리그라피에 관심있는 모든 분들을 환영합니다.</p>
+          <p>캘리그라피, 서예, 동양화를 그리는 활동을 합니다. </p>
+        </div>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number" data-target="30">0</span>
+            <span class="stat-text">활동 년수</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-text">회원 수</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="10">0</span>
+            <span class="stat-text">연간 활동</span>
+          </div>
+        </div>
+      </div>
+      <div class="parallax-container">
+        <div class="parallax-item" data-speed="0.5">
+          <i class="fas fa-music"></i>
+        </div>
+        <div class="parallax-item" data-speed="-0.3">
+          <i class="fas fa-guitar"></i>
+        </div>
+        <div class="parallax-item" data-speed="0.8">
+          <i class="fas fa-headphones"></i>
+        </div>
+        <div class="parallax-item" data-speed="-0.6">
+          <i class="fas fa-drum"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities" class="activities">
+    <div class="container">
+      <h2 class="section-title">주요 활동</h2>
+      <div class="cards">
+        <div class="card" data-tilt>
+          <div class="card-icon">
+            <i class="fas fa-microphone-alt"></i>
+          </div>
+          <h3>전시회 개최</h3>
+          <p>작품들을 모아서 전시회를 개최합니다.</p>
+        </div>
+        <div class="card" data-tilt>
+          <div class="card-icon">
+            <i class="fas fa-guitar"></i>
+          </div>
+          <h3>답사</h3>
+          <p>박물관, 미술관 등을 답사하러 갑니다.</p>
+        </div>
+        <div class="card" data-tilt>
+          <div class="card-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>친목 활동</h3>
+          <p>개강, 종강총회 및 MT 등으로 부원 간의 친목을 다집니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2 class="section-title">갤러리</h2>
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="performance">전시회</button>
+        <button class="filter-btn" data-filter="practice">답사</button>
+        <button class="filter-btn" data-filter="member">회원</button>
+      </div>
+      <div class="gallery-container">
+        <div class="gallery-item" data-category="performance">
+          <div class="image-placeholder">전시회 사진 1</div>
+          <div class="gallery-overlay">
+            <h3>전시회</h3>
+            <p>2024년 여름</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="performance">
+          <div class="image-placeholder">전시회 사진 2</div>
+          <div class="gallery-overlay">
+            <h3>전시회</h3>
+            <p>2024년 겨울</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="practice">
+          <div class="image-placeholder">답사 사진</div>
+          <div class="gallery-overlay">
+            <h3>답사</h3>
+            <p>학생회관</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="member">
+          <div class="image-placeholder">동아리방</div>
+          <div class="gallery-overlay">
+            <h3>친목 활동</h3>
+            <p>친목 활동</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="join">
+    <div class="container">
+      <h2 class="section-title">홍보 및 문의사항</h2>
+      <div class="join-content">
+        <div class="join-text">
+          <p>서화회는 글씨에 큰 관심이 있으며 열정이 가득한 분들을 기다립니다.</p>
+          <P>서화회와 함께하고 싶다면 3월과 9월에 망설이지 말고 동아리방 문을 두드려주세요!</P>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Address</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 학생회관 B103호 (동아리방)</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Instagram</h3>
+                <p><i class="fab fa-instagram"></i> @seohwa</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Youtube</h3>
+                <p><i class="fab fa-youtube"></i> seohwa@example.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-container">
+          <form class="join-form" id="joinForm">
+            <input type="text" placeholder="이름" required id="name">
+            <input type="email" placeholder="이메일" required id="email">
+            <input type="tel" placeholder="연락처" required id="phone">
+            <select required id="instrument">
+              <option value="" disabled selected>관심 분야</option>
+              <option value="none">None</option>
+            </select>
+            <textarea placeholder="지원 동기" id="motivation"></textarea>
+            <button type="submit" class="btn">가입 신청</button>
+            <div class="form-message"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">서화회</div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <p class="copyright">© 2025 서화회. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script src="/static/js/clubInfo.js"></script>
+</body>
+</html>
