@@ -11,6 +11,10 @@ def main():
 def clubs():
     return render_template('clubs.html')
 
+@app.route('/introduce')
+def introduce():
+    return render_template('introduce.html')
+
 @app.route('/soma')
 def soma():
     return render_template('soma.html')
