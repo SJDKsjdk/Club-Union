@@ -119,3 +119,76 @@ if (contactForm) {
         this.reset();
     });
 }
+
+const canvas = document.getElementById('meteor-canvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const heroSection = document.querySelector('.hero');
+    let meteors = [];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createMeteor() {
+        // 화면 상단의 랜덤한 x 위치 또는 왼쪽의 랜덤한 y 위치에서 시작
+        const startFromTop = Math.random() < 0.5;
+    
+        let x, y;
+        if (startFromTop) {
+            // 화면 위쪽에서 시작하되 x 위치는 화면 전체로 확장
+            x = Math.random() * canvas.width;
+            y = -Math.random() * 100; // 살짝 위쪽
+        } else {
+            // 왼쪽에서 시작하되 y 위치도 다양화
+            x = -Math.random() * 100;
+            y = Math.random() * canvas.height;
+        }
+    
+        return {
+            x,
+            y,
+            length: Math.random() * 60 + 20,
+            speed: Math.random() * 2 + 2,
+            angle: Math.PI / 4, // 그대로 45도 유지
+            alpha: Math.random() * 0.5 + 0.5
+        };
+    }
+
+    function drawMeteor(meteor) {
+        const { x, y, length, angle, alpha } = meteor;
+        const xEnd = x + Math.cos(angle) * length;
+        const yEnd = y + Math.sin(angle) * length;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.stroke();
+    }
+
+    function updateMeteors() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        meteors.forEach((meteor, index) => {
+            meteor.x += meteor.speed;
+            meteor.y += meteor.speed;
+
+            drawMeteor(meteor);
+
+            if (meteor.x > canvas.width || meteor.y > canvas.height) {
+                meteors[index] = createMeteor();
+            }
+        });
+
+        requestAnimationFrame(updateMeteors);
+    }
+
+    for (let i = 0; i < 15; i++) {
+        meteors.push(createMeteor());
+    }
+    updateMeteors();
+}

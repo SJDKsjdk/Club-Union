@@ -7,6 +7,7 @@
 
   <link rel="icon" type="image/x-icon" href="/static/images/logo.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <link rel="stylesheet" href="/static/css/main.css" />
 </head>
@@ -63,34 +64,37 @@
 
   <!-- 소개 영역 -->
   <div class="background-wrapper">
-    <img src="/static/images/background.png" alt="공통 배경 이미지" class="background-img" />
-
+    <canvas id="meteor-canvas"></canvas>
     <section class="hero">
-        <div class="overlay">
-            <div class="title-container">
-                <h1 class="main-title">파란</h1>
-                <h2 class="main-title2">신선한, 새로운 문화의 물결</h2>
-            </div>
-            <div class="button-container">
-                <a href="introduce" class="button-box">
-                    <h2>소개</h2>
-                    <p>총동아리연합회를 소개합니다.</p>
-                    <div class="icon"><img src="icons/building.png" alt="소개 아이콘" /></div>
-                </a>
-                <a href="event.html" class="button-box">
-                    <h2>주관 행사</h2>
-                    <p>총동아리연합회 주관 행사를 확인하세요.</p>
-                    <div class="icon"><img src="icons/event.png" alt="행사 아이콘" /></div>
-                </a>
-                <a href="clubs" class="button-box">
-                    <h2>중앙동아리 목록</h2>
-                    <p>교내 중앙동아리들을 확인해보세요.</p>
-                    <div class="icon"><img src="icons/club.png" alt="동아리 아이콘" /></div>
-                </a>
-            </div>
+        <div class="title-container">
+            <h1 class="main-title">파란</h1>
+            <h2 class="main-title2">신선한, 새로운 문화의 물결</h2>
+        </div>
+        <div class="button-container">
+            <a href="introduce" class="button-box">
+                <h2>소개</h2>
+                <p>총동아리연합회를 소개합니다.</p>
+                <div class="card-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </a>
+            <a href="event.html" class="button-box">
+                <h2>주관 행사</h2>
+                <p>총동아리연합회 주관 행사를 확인하세요.</p>
+                <div class="card-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+            </a>
+            <a href="clubs" class="button-box">
+                <h2>중앙동아리 목록</h2>
+                <p>교내 중앙동아리들을 확인해보세요.</p>
+                <div class="card-icon">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+            </a>
         </div>
     </section>
-</div>
+  </div>
 
   <!-- 푸터 -->
   <footer class="footer">
