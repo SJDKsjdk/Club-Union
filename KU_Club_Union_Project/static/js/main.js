@@ -1,39 +1,93 @@
-// 이미지 슬라이더 기능
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const sliderContainer = document.querySelector('.slider-container');
     const slides = document.querySelectorAll('.slide');
-    
+    const currentSpan = document.querySelector('.wrap_visual .now');
+    const totalSpan = document.querySelector('.wrap_visual .total');
+    const prevBtn = document.querySelector('.wrap_visual .vis-prev');
+    const nextBtn = document.querySelector('.wrap_visual .vis-next');
+
     let currentSlide = 0;
     const totalSlides = slides.length;
+    let slideInterval;
 
-    // 슬라이드 이동 함수
-    function goToSlide(n) {
-        currentSlide = n;
+    function startInterval() {
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        startInterval();
+    }
+
+    if (totalSpan) {
+        totalSpan.textContent = totalSlides.toString().padStart(2, '0');
+    }
+
+    function goToSlide(index) {
+        currentSlide = (index + totalSlides) % totalSlides;
         sliderContainer.style.transform = `translateX(-${currentSlide * 25}%)`;
 
-        // 텍스트 애니메이션
-        const currentTexts = slides[currentSlide].querySelectorAll('.text_1, .text_2');
-        currentTexts.forEach(text => {
-            text.style.opacity = '0';
-            text.style.transform = 'translate(-50%, -30%)';
-            setTimeout(() => {
-                text.style.transition = 'all 1s ease-out';
-                text.style.opacity = '1';
-                text.style.transform = 'translate(-50%, -50%)';
-            }, 100);
+        slides.forEach(slide => {
+            slide.querySelector('.text_1')?.classList.remove('show');
+            slide.querySelector('.text_2')?.classList.remove('show');
+            slide.querySelector('.text_3')?.classList.remove('show');
         });
+
+        const activeSlide = slides[currentSlide];
+        const text1 = activeSlide.querySelector('.text_1');
+        const text2 = activeSlide.querySelector('.text_2');
+        const text3 = activeSlide.querySelector('.text_3');
+
+        if (text1) {
+            const span1 = text1.querySelector('span');
+            if (span1) {
+                span1.style.color = span1.getAttribute('data-color') || '#8B0029';
+                span1.style.fontFamily = `'Comic Sans MS', serif`;
+            }
+            setTimeout(() => {
+                text1.classList.add('show');
+            }, 100);
+        }
+
+        if (text2) {
+            const strong = text2.querySelector('strong');
+            if (strong) {
+                strong.style.fontFamily = `'Noto Sans KR', sans-serif`;
+                strong.style.fontWeight = '500';
+            }
+            setTimeout(() => {
+                text2.classList.add('show');
+            }, 700);
+        }
+
+        if (text3) {
+            setTimeout(() => {
+                text3.classList.add('show');
+            }, 1200);
+        }
+
+        if (currentSpan) {
+            currentSpan.textContent = (currentSlide + 1).toString().padStart(2, '0');
+        }
     }
 
-    // 다음 슬라이드
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        goToSlide(currentSlide);
+        goToSlide(currentSlide + 1);
+        resetInterval();
     }
 
-    // 자동 슬라이드
-    let slideInterval = setInterval(nextSlide, 5000);
+    function prevSlide() {
+        goToSlide(currentSlide - 1);
+        resetInterval();
+    }
 
-    // 터치 슬라이드 지원
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+    }
+
+    startInterval();
+
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -46,35 +100,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (touchStartX - touchEndX > 50) {
             nextSlide();
         } else if (touchEndX - touchStartX > 50) {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            goToSlide(currentSlide);
+            prevSlide();
         }
     });
 
-    // 초기 텍스트 애니메이션
-    const initialTexts = slides[0].querySelectorAll('.text_1, .text_2');
-    initialTexts.forEach(text => {
-        text.style.opacity = '0';
-        text.style.transform = 'translate(-50%, -30%)';
-        setTimeout(() => {
-            text.style.transition = 'all 1s ease-out';
-            text.style.opacity = '1';
-            text.style.transform = 'translate(-50%, -50%)';
-        }, 100);
-    });
+    goToSlide(0);
 });
 
-// 문의 폼 제출 처리
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
-        // 폼 데이터 수집
+
         const formData = new FormData(this);
         const data = Object.fromEntries(formData);
-        
-        // 성공 메시지 표시
+
         alert('문의가 성공적으로 전송되었습니다. 감사합니다!');
         this.reset();
     });
