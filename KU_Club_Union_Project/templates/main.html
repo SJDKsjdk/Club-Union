@@ -7,11 +7,43 @@
 
   <link rel="icon" type="image/x-icon" href="/static/images/logo.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
   <link rel="stylesheet" href="/static/css/main.css" />
 </head>
 <body>
+
+<!-- 햄버거 버튼 -->
+<div id="menuBtn" class="btn-gnb only-button">
+  <button type="button" title="메뉴 열기" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- GNB 전체 오버레이 -->
+<nav class="head_navi gnb" id="gnbMenu">
+  <button class="btn-mgnb-close" title="메뉴 닫기" aria-label="메뉴 닫기">
+    <img src="/static/images/menu-close.png" alt="닫기 버튼" />
+  </button>
+
+  <!-- 배경 이미지는 JS 에서 동적으로 교체 -->
+  <div class="gnb-bg-image" id="gnbBg"></div>
+
+  <div class="gnb-container">
+    <!-- 소분류 -->
+    <div class="gnb-left" id="subMenuContainer"></div>
+
+    <!-- 중분류 -->
+    <div class="gnb-center" id="midMenuContainer"></div>
+
+    <!-- 대분류 -->
+    <ul class="gnb-main-list right" id="mainMenu">
+      <li data-menu="ClubUnion"><span>총동아리연합회 소개</span></li>
+      <li data-menu="Clubs"><span>동아리 분과</span></li>
+      <li data-menu="Notification"><span>공지사항</span></li>
+      <li data-menu="Service"><span>동아리 활동지원</span></li>
+      <li data-menu="Communication"><span>소통</span></li>
+    </ul>
+  </div>
+</nav>
 
   <!-- 메인 슬라이더 -->
   <div class="hero-slider">
@@ -22,7 +54,7 @@
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="고려대학교 커피스" />
         <div class="item">
-          <p class="text_1"><span style="color: #1909f1; font-family: Comic Sans MS, serif;">The 45th Korea University Sejong Campus</span></p>
+          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The 45th Korea University Sejong Campus</span></p>
           <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">KUS Club Union Paran</strong>'</span></p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
@@ -30,23 +62,23 @@
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="중앙광장" />
         <div class="item">
-          <p class="text_1"><span style="color: #8B0029; font-family: 'Comic Sans MS', serif;">The Power of Korea</span></p>
-          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">Welcome to KUS world</strong>'</span></p>
+          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The Power of Korea</span></p>
+          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">More Than Clubs, A Community</strong>'</span></p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
       </div>
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="동아리 활동" />
         <div class="item">
-          <p class="text_1"><span style="color: #E7DED0; font-family: 'Comic Sans MS', serif;">The Power of Korea</span></p>
-          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">Now, your story begins</strong>'</span></p>
+          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The Power of Korea</span></p>
+          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">Opportunity comes to those who are ready</strong>'</span></p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
       </div>
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="학생 활동" />
         <div class="item">
-          <p class="text_1"><span style="color: #8B0029; font-family: 'Comic Sans MS', serif;">The Power of Korea</span></p>
+          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The Power of Korea</span></p>
           <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">Create your future</strong>'</span></p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
@@ -99,11 +131,11 @@
   <!-- 푸터 -->
   <footer class="footer">
     <div class="footer-content">
-      <p>고려대학교 세종캠퍼스 제45대 총동아리연합회</p>
-      <p>세종특별자치시 조치원읍 세종로 2511</p>
+      <p>(30019) 세종특별자치시 세종로 2511 고려대학교 세종캠퍼스 Tel : 044-860-1114  Fax : 044-860-1048</p>
       <p>&copy; 2025 Korea University(Sejong Campus) Club Union. All rights reserved.</p>
     </div>
   </footer>
+
 
   <!-- JS 파일 -->
   <script src="/static/js/main.js"></script>
