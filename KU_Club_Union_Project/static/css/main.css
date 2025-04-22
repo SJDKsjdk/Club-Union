@@ -776,6 +776,7 @@ a {
 /* 색상 클래스 */
 .text-white { color: #fff; }
 .text-blue  { color: #034da1; }
+
 /* 여기서 부터 이미지 컨테이너 수정 (2025.04.23 수정) */
 
 .custom-gallery-wrap{
@@ -850,4 +851,19 @@ a {
 .gallery-item .overlay p{
   font: 300 18px/1.5 'Noto Sans KR', sans-serif;
   margin: 0 0 50px;
+}
+
+/* ── (추가) 스크롤 후 3초 뒤에 나타나는 애니메이션 ───────────── */
+@keyframes fadeSlideUp {
+  from { opacity:0; transform:translateY(40px); }
+  to   { opacity:1; transform:none; }
+}
+
+.custom-gallery-wrap {          /* 기존 규칙 위에 이어서 작성 */
+  opacity:0;                    /* ← 처음엔 안 보이게 */
+  transform:translateY(40px);
+}
+
+.custom-gallery-wrap.reveal {   /* .reveal 클래스가 붙으면 3초 지연 후 나타남 */
+  animation: fadeSlideUp .8s ease-out 2s forwards;
 }

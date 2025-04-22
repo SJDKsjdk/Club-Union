@@ -374,3 +374,20 @@ function snapToCard(){
   const snapX = Math.round(left / step) * step;
   gallery.scrollTo({ left: snapX, behavior: 'smooth' });
 }
+
+/* --- 갤러리 등장 애니메이션 ----------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const wrap = document.querySelector('.custom-gallery-wrap');
+  if (!wrap) return;
+
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        wrap.classList.add('reveal');   // 2초 뒤 애니메이션 시작
+        obs.unobserve(entry.target);    // 한 번만 실행
+      }
+    });
+  }, { threshold: 0.2 });
+
+  io.observe(wrap);
+});
