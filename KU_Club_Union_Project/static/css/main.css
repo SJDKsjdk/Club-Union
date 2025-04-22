@@ -693,7 +693,7 @@ a {
    
    /* 3) 텍스트 중앙 정렬 및 화면 가득 채우기 */
    .hero-logo-anim svg text {
-     font-size: 10vw;               /* 필요에 따라 조절 가능 */
+     font-size: 5vw;               /* 필요에 따라 조절 가능 */
      font-family: 'Noto Bold', sans-serif;
      text-transform: uppercase;
      text-anchor: middle;           /* 가로 중심 정렬 */
@@ -731,3 +731,165 @@ a {
      }
    }
    
+/* 1) 부모 컨테이너: 항상 중앙 고정 */
+.scroll-text {
+  position: absolute;
+  top: var(--scroll-text-top, 50px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: var(--scroll-text-size, 3.5rem);
+  font-weight: 700;
+  overflow: visible;
+}
+
+/* 2) 자식 텍스트 초기 상태: 화면 오른쪽 밖(100vw)에서 투명 */
+.scroll-text span {
+  display: inline-block;
+  transform: translateX(100vw);
+  opacity: 0;
+}
+
+/* 3) 슬라이드 인 키프레임 */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 4) 뷰포트 진입 시 트리거 */
+.scroll-text.in-view .text-white {
+  animation: slideInFromRight 0.8s ease-out forwards;
+  animation-delay: 0s;
+}
+.scroll-text.in-view .text-blue {
+  animation: slideInFromRight 0.8s ease-out forwards;
+  animation-delay: 0.6s; /* 0.6초 뒤에 등장 */
+}
+
+/* 색상 클래스 */
+.text-white { color: #fff; }
+.text-blue  { color: #034da1; }
+
+/* ───────────────────────────────────────
+   1410×640 고정 슬라이더 + 오버레이 텍스트
+─────────────────────────────────────── */
+.newsMain {
+  padding-top: 55px;  /* 원하는 만큼 */
+}
+
+.newsMain .Main-slider {
+  width: 1410px;
+  height: 640px;
+  /* padding-left 제거 */
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  z-index: 1000000;
+  
+  /* 페이드인 기본값 */
+  opacity: 0;
+  /* in-view 붙는 순간부터 2초 뒤에 1초간 페이드인 */
+  transition: opacity 1s ease 2s;
+}
+
+/* in-view가 붙었을 때 */
+.newsMain .Main-slider.in-view {
+  opacity: 1;
+}
+
+/* ───────────────────────────────────────
+   슬라이드 리스트 기본 스타일
+─────────────────────────────────────── */
+.newsMain .Main-slider .list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ───────────────────────────────────────
+   슬라이드 아이템
+─────────────────────────────────────── */
+.newsMain .Main-slider .list .slide-item {
+  width: 1410px;
+  height: 640px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 이미지 꽉 채우기 */
+.newsMain .Main-slider .list .slide-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ───────────────────────────────────────
+   오버레이 기본 숨김
+─────────────────────────────────────── */
+.newsMain .Main-slider .list .slide-item .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* hover 시 오버레이 보이기 */
+.newsMain .Main-slider .list .slide-item:hover .overlay {
+  opacity: 1;
+}
+
+/* 오버레이 텍스트 스타일 */
+.newsMain .Main-slider .list .overlay h3 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #fff;
+}
+.newsMain .Main-slider .list .overlay p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #fff;
+}
+
+/* ───────────────────────────────────────
+   Slick 트랙 flex 처리 (wrap 방지)
+─────────────────────────────────────── */
+.newsMain .Main-slider .slick-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden;
+}
+.newsMain .Main-slider .slick-slide {
+  float: none !important;
+  width: 1410px !important; /* 슬라이드 너비가 컨테이너와 일치하도록 */
+}
+
+
+/* Slick 화살표·도트 z‑index 조정 */
+.newsMain .Main-slider .slick-prev,
+.newsMain .Main-slider .slick-next,
+.newsMain .Main-slider .slick-dots {
+  z-index: 3;
+}
+
+
+
+
+
