@@ -96,36 +96,49 @@
 
   <!-- 소개 영역 -->
   <div class="background-wrapper">
-    <canvas id="meteor-canvas"></canvas>
+    <!-- <canvas id="meteor-canvas"></canvas> -->
     <section class="hero">
-        <div class="title-container">
-            <h1 class="main-title">파란</h1>
-            <h2 class="main-title2">신선한, 새로운 문화의 물결</h2>
-        </div>
-        <div class="button-container">
-            <a href="introduce" class="button-box">
-                <h2>소개</h2>
-                <p>총동아리연합회를 소개합니다.</p>
-                <div class="card-icon">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-            </a>
-            <a href="event.html" class="button-box">
-                <h2>주관 행사</h2>
-                <p>총동아리연합회 주관 행사를 확인하세요.</p>
-                <div class="card-icon">
-                    <i class="fa-solid fa-calendar-days"></i>
-                </div>
-            </a>
-            <a href="clubs" class="button-box">
-                <h2>중앙동아리 목록</h2>
-                <p>교내 중앙동아리들을 확인해보세요.</p>
-                <div class="card-icon">
-                    <i class="fa-solid fa-landmark"></i>
-                </div>
-            </a>
-        </div>
-    </section>
+      <!-- 여기에 애니메이션 로고 추가 -->
+      <div class="hero-logo-anim">
+        <svg viewBox="0 0 300 300">
+          <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+            CLUB UNION
+          </text>
+        </svg>
+      </div>
+<!-- 1) 스크롤 텍스트는 슬라이더 밖, hero 영역 안에만 -->
+<div class="scroll-text" id="scrollText">
+  <span class="text-white">총동아리연합회.</span>
+  <span class="text-blue">파란.</span>
+</div>
+
+<!-- 2) 슬라이더는 따로 -->
+<section class="newsMain">
+  <div class="Main-slider">
+    <ul class="list">
+      <li class="slide-item">
+        <a href="/detail/1" class="slide-link">
+          <img src="/static/images/전간수.jpg" alt="전체간부수련회">
+          <div class="overlay">
+            <h3>총동아리연합회 파란, 전체간부수련회 참석</h3>
+            <p>회장 서가인 외 NN명 참가</p>
+          </div>
+        </a>
+      </li>
+      <li class="slide-item">
+        <a href="/detail/2" class="slide-link">
+          <img src="/static/images/전간수2.jpg" alt="전체간부수련회2">
+          <div class="overlay">
+            <h3>총동아리연합회 파란, 전체간부수련회 참석 (2)</h3>
+            <p>회장 서가인 외 NN명 참가</p>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
   </div>
 
   <!-- 푸터 -->

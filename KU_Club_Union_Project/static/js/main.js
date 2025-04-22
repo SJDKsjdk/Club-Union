@@ -307,3 +307,50 @@ if (canvas) {
     }
     updateMeteors();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 1) 스크롤 텍스트(in-view) 관찰
+  const txt = document.getElementById('scrollText');
+  if (txt) {
+    const ioText = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    ioText.observe(txt);
+  }
+
+  // 2) 슬라이더(in-view) 관찰
+  const sliderEl = document.querySelector('.newsMain .Main-slider');
+  if (sliderEl) {
+    const ioSlider = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    ioSlider.observe(sliderEl);
+  }
+
+  // 3) Slick 슬라이더 초기화 (centerMode + centerPadding 적용)
+  $('.newsMain .Main-slider > ul.list').slick({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: true,
+    adaptiveHeight: false,
+    centerMode: false, // 센터 모드 비활성화
+    centerPadding: '0px', // 센터 패딩 초기화
+    slide: 'li'
+  });
+});
+
+
+
+
