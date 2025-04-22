@@ -322,35 +322,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.3 });
     ioText.observe(txt);
   }
-
-  // 2) 슬라이더(in-view) 관찰
-  const sliderEl = document.querySelector('.newsMain .Main-slider');
-  if (sliderEl) {
-    const ioSlider = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    ioSlider.observe(sliderEl);
-  }
-
-  // 3) Slick 슬라이더 초기화 (centerMode + centerPadding 적용)
-  $('.newsMain .Main-slider > ul.list').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: true,
-    adaptiveHeight: false,
-    centerMode: false, // 센터 모드 비활성화
-    centerPadding: '0px', // 센터 패딩 초기화
-    slide: 'li'
-  });
 });
 
 
+// 여기서 부터 이미지 컨테이너 부분 (2025.04.23 수정정)
 
+/* --- 갤러리 스크립트 (main.js 아래 부분) ------------------ */
+const gallery = document.getElementById('gallery');
 
+let isDown   = false;
+let startX   = 0;
+let scroll0  = 0;
+
+/* 1) 이미지 기본 drag 차단 */
+gallery.addEventListener('dragstart', e => e.preventDefault());
+
+/* 2) pointer down ─ 모든 입력(마우스·터치·펜) 대응 */
+gallery.addEventListener('pointerdown', e => {
+  isDown  = true;
+  startX  = e.clientX;
+  scroll0 = gallery.scrollLeft;
+  gallery.setPointerCapture(e.pointerId);
+  gallery.classList.add('dragging');
+});
+
+/* 3) pointer move */
+gallery.addEventListener('pointermove', e => {
+  if (!isDown) return;
+  const dx = e.clientX - startX;
+  gallery.scrollLeft = scroll0 - dx * 1.2;   // 감도 계수
+});
+
+/* 4) pointer up / cancel */
+['pointerup', 'pointercancel'].forEach(type => {
+  gallery.addEventListener(type, e => {
+    if (!isDown) return;
+    isDown = false;
+    gallery.releasePointerCapture(e.pointerId);
+    gallery.classList.remove('dragging');
+    snapToCard();
+  });
+});
+
+/* 5) 카드 폭 단위로 스냅 정렬 */
+function snapToCard(){
+  const card = gallery.querySelector('.gallery-item');
+  if (!card) return;
+  const gap   = parseInt(getComputedStyle(gallery).gap) || 0;
+  const step  = card.offsetWidth + gap;                 // 한 장 + 간격
+  const left  = gallery.scrollLeft;
+  const snapX = Math.round(left / step) * step;
+  gallery.scrollTo({ left: snapX, behavior: 'smooth' });
+}
