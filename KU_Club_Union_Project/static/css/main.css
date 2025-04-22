@@ -458,7 +458,8 @@
     width: 100vw;
     min-height: 100vh;
     overflow: hidden;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/background.jpg');
+    /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/background.jpg'); */
+    background-color: #0a0a3f;
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
@@ -622,3 +623,111 @@ a {
     margin: 0;
     padding: 5px 0;
   }
+
+/* ===============================
+   Global Reset & Variables
+   =============================== */
+   *,
+   *::before,
+   *::after {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
+   
+   html,
+   body {
+     width: 100%;
+     height: 100%;
+     overflow-x: hidden;
+     position: relative;
+   }
+   
+   :root {
+     --ku-red:   #8B1E31;
+     --ku-gold:  #C8A87D;
+     --ku-dark:  #2C2C2C;
+     --ku-light: #F5F5F5;
+   }
+   
+   /* ===============================
+      Body & Main Sections
+      =============================== */
+   body {
+     font-family: 'Noto Sans KR', sans-serif;
+     line-height: 1.6;
+     color: var(--ku-dark);
+     background-color: var(--ku-light);
+     min-height: 100vh;
+   }
+   
+   main,
+   .background-wrapper,
+   section.hero {
+     position: relative;
+     width: 100vw;
+     height: 100vh;
+     overflow: hidden;
+   }
+   
+   /* ===============================
+      SVG 애니메이션 로고 (hero-logo-anim)
+      =============================== */
+   /* 1) 뷰포트 전체에 고정하여 항상 표시 */
+   .hero-logo-anim {
+     position: fixed;   /* 화면 스크롤과 무관하게 고정 */
+     top: 0;
+     left: 0;
+     width: 100vw;      /* 뷰포트 전체 너비 */
+     height: 100vh;     /* 뷰포트 전체 높이 */
+     pointer-events: none;
+     z-index: 999;      /* 다른 요소 위에 표시 */
+     transform: none;   /* 기존의 translate/scale 제거 */
+   }
+   
+   /* 2) SVG 가로·세로 채우기 */
+   .hero-logo-anim svg {
+     width: 100%;
+     height: 100%;
+   }
+   
+   /* 3) 텍스트 중앙 정렬 및 화면 가득 채우기 */
+   .hero-logo-anim svg text {
+     font-size: 10vw;               /* 필요에 따라 조절 가능 */
+     font-family: 'Noto Bold', sans-serif;
+     text-transform: uppercase;
+     text-anchor: middle;           /* 가로 중심 정렬 */
+     dominant-baseline: middle;     /* 세로 중심 정렬 */
+     fill: transparent;
+     stroke: #ffffff;
+     stroke-width: 2px;             /* 글자 두껍게 변경 */
+     stroke-linejoin: round;        /* 부드러운 모서리 */
+     stroke-linecap: butt;
+     opacity: 0.6;
+     animation: stroke 5s ease infinite;
+   }
+   
+   /* ===============================
+      Keyframes for stroke animation
+      =============================== */
+   @keyframes stroke {
+     0% {
+       stroke-dasharray: 0 100%;
+       stroke-dashoffset: 0%;
+       stroke-width: 2px;
+       opacity: 0.5;
+     }
+     50% {
+       stroke-dasharray: 60% 40%;
+       stroke-dashoffset: -10%;
+       stroke-width: 0.5px;            /* 중간에는 더욱 굵게 */
+       opacity: 0.8;
+     }
+     100% {
+       stroke-dasharray: 100% 0;
+       stroke-dashoffset: -100%;
+       stroke-width: 2px;
+       opacity: 0.3;
+     }
+   }
+   
