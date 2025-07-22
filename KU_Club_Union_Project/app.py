@@ -15,6 +15,10 @@ def clubs():
 def introduce():
     return render_template('introduce.html')
 
+@app.route('/logo')
+def logo():
+    return render_template('logo.html')
+
 @app.route('/soma')
 def soma():
     return render_template('soma.html')

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파란 로고 - 고려대학교 총동아리연합회</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/logo.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/logo.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">파란</div>
+            <ul class="nav-links">
+                <li><a href="#" id="home-link" class="nav-active">홈</a></li>
+                <li><a href="#logo-showcase" id="logo-link">로고</a></li>
+                <li><a href="#logo-meaning" id="meaning-link">설명</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- 헤더 섹션 -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="main-title">
+                    <span class="title-line1">The 45th Korea University Sejong Campus</span>
+                    <span class="title-line2">KUS Club Union</span>
+                    <span class="title-line3">파란</span>
+                </h1>
+                <p class="subtitle">고려대학교 세종캠퍼스 제45대 총동아리연합회</p>
+            </div>
+        </section>
+
+        <!-- 메인 로고 섹션 -->
+        <section id="logo-showcase" class="logo-showcase">
+            <div class="logo-grid">
+                <!-- 파란 로고 -->
+                <div class="logo-item main-logo-item">
+                    <div class="logo-frame">
+                        <img src="{{ url_for('static', filename='images/paran_logo.png') }}" alt="파란 로고"
+                            class="paran-logo">
+                    </div>
+                    <div class="logo-info">
+                        <h3>파란 로고</h3>
+                        <p>고려대학교 세종캠퍼스 총동아리연합회 '파란'의 공식 로고입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 슬로건 -->
+                <div class="logo-item slogan-item">
+                    <div class="logo-frame">
+                        <img src="{{ url_for('static', filename='images/paran_slogan.png') }}" alt="파란 슬로건"
+                            class="paran-slogan">
+                    </div>
+                    <div class="logo-info">
+                        <h3>파란 슬로건</h3>
+                        <p>"More Than Clubs, A Community" - 동아리를 넘어선 하나의 공동체</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 로고 의미 섹션 -->
+        <section id="logo-meaning" class="logo-meaning">
+            <div class="meaning-container">
+                <h2>파란의 의미</h2>
+                <div class="meaning-content">
+                    <div class="meaning-text">
+                        <p class="highlight-text">'파란'은 대학문화생활 속에서 빛나는</p>
+                        <p>젊음과 열정, 그리고 무한한 가능성을 상징하는 파란색에서 따온 이름입니다.</p>
+                        <p>총동아리연합회 파란은 모든 동아리가 하나로 연결되어</p>
+                        <p class="emphasis">더 큰 공동체를 만들어가겠다는 의지를 담고 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 네비게이션 -->
+        <div class="navigation">
+            <a href="/introduce" class="nav-btn secondary">총동아리연합회 소개</a>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>(30019) 세종특별자치시 세종로 2511 고려대학교 세종캠퍼스 Tel : 044-860-1114 Fax : 044-860-1048</p>
+            <p>&copy; 2025 Korea University(Sejong Campus) Club Union. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/logo.js') }}"></script>
+</body>
+
+</html>

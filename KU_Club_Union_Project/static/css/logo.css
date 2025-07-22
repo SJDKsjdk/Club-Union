@@ -1,0 +1,531 @@
+/* ===============================
+   Global Reset & Variables
+   =============================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+:root {
+    --ku-blue: #034da1;
+    --ku-blue-light: #4a90e2;
+    --ku-blue-dark: #002a5c;
+    --ku-dark: #2C2C2C;
+    --ku-light: #F5F5F5;
+    --white: #ffffff;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-600: #6c757d;
+    --blue-signature: #000063;
+    --blue-gradient: linear-gradient(135deg, var(--ku-blue) 0%, var(--ku-blue-light) 100%);
+    --shadow: 0 4px 20px rgba(3, 77, 161, 0.15);
+    --shadow-hover: 0 8px 30px rgba(3, 77, 161, 0.25);
+}
+
+/* ===============================
+   Base Typography & Body
+   =============================== */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    color: var(--ku-dark);
+    background: linear-gradient(135deg, var(--ku-light) 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+/* ===============================
+   Header Elements
+   =============================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ku-blue);
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    list-style: none;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: var(--ku-dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.nav-active {
+    color: var(--ku-blue);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--ku-blue);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.nav-active::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div,
+.line1,
+.line2,
+.line3 {
+    width: 25px;
+    height: 3px;
+    background-color: var(--ku-blue);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* ===============================
+   Main Container
+   =============================== */
+.main-container {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+/* ===============================
+   Hero Section
+   =============================== */
+.hero-section {
+    text-align: center;
+    padding: 60px 20px 80px;
+    background: linear-gradient(135deg, var(--ku-blue) 0%, #0056b3 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.main-title {
+    margin-bottom: 20px;
+}
+
+.title-line1 {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    font-family: 'Comic Sans MS', serif;
+}
+
+.title-line2 {
+    display: block;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.title-line3 {
+    display: block;
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.1em;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-top: 20px;
+}
+
+/* ===============================
+   Logo Showcase Section
+   =============================== */
+.logo-showcase {
+    padding: 80px 20px;
+    background: transparent;
+}
+
+.logo-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 60px;
+    align-items: start;
+}
+
+.logo-item {
+    text-align: center;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.logo-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.logo-item:hover::before {
+    left: 100%;
+}
+
+.logo-frame {
+    background: var(--gray-100);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-logo-item .logo-frame {
+    background: linear-gradient(135deg, var(--ku-blue-light), var(--ku-blue));
+}
+
+.slogan-item .logo-frame {
+    background: linear-gradient(135deg, var(--ku-blue-light), var(--ku-blue));
+}
+
+.paran-logo,
+.paran-slogan {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.logo-item:hover .paran-logo,
+.logo-item:hover .paran-slogan {
+    transform: scale(1.05);
+}
+
+.logo-info h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--ku-dark);
+    margin-bottom: 15px;
+}
+
+.logo-info p {
+    font-size: 1em;
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* ===============================
+   Logo Meaning Section
+   =============================== */
+.logo-meaning {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+}
+
+.meaning-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.meaning-container h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--blue-signature);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.meaning-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--ku-blue);
+    border-radius: 2px;
+}
+
+.meaning-content {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+}
+
+.meaning-text p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: var(--ku-dark);
+}
+
+.highlight-text {
+    color: var(--blue-signature) !important;
+    font-weight: 600;
+}
+
+.emphasis {
+    color: var(--ku-blue-dark) !important;
+    font-weight: 600;
+    font-size: 1.3em !important;
+}
+
+/* ===============================
+   Navigation
+   =============================== */
+.navigation {
+    text-align: center;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn.primary {
+    background: var(--ku-blue);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(3, 77, 161, 0.3);
+}
+
+.nav-btn.primary:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(3, 77, 161, 0.4);
+}
+
+.nav-btn.secondary {
+    background: var(--white);
+    color: var(--ku-blue);
+    border: 2px solid var(--ku-blue);
+}
+
+.nav-btn.secondary:hover {
+    background: var(--ku-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   Footer
+   =============================== */
+.footer {
+    background: var(--ku-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: auto;
+}
+
+.footer-content p {
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.footer-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===============================
+   Responsive Design
+   =============================== */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        height: 92vh;
+        top: 8vh;
+        background-color: rgba(255, 255, 255, 0.95);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-links li {
+        opacity: 0;
+        margin: 15px 0;
+    }
+
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .hero-content {
+        width: 90%;
+        height: 350px;
+    }
+
+    .title-line1 {
+        font-size: 1em;
+    }
+
+    .title-line2 {
+        font-size: 2em;
+    }
+
+    .title-line3 {
+        font-size: 2.5em;
+    }
+
+    .logo-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .logo-item {
+        padding: 30px 20px;
+    }
+
+    .meaning-container h2 {
+        font-size: 2em;
+    }
+
+    .meaning-text p {
+        font-size: 1.1em;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-btn {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 40px 15px 60px;
+    }
+
+    .logo-showcase {
+        padding: 60px 15px;
+    }
+
+    .logo-meaning {
+        padding: 60px 15px;
+    }
+
+    .meaning-content {
+        padding: 30px 20px;
+    }
+}
