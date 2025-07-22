@@ -100,15 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
         '연합회': [
           { name: '소개', url: 'introduce' },
           { name: '연혁', url: '/univ/vision' },
-          { name: '조직도', url: '/univ/goal' },
+          { name: '조직도', url: 'introduce' },
         ],
         '공약보고': [
-          { name: '회장단 공약', url: '/univ/president' },
-          { name: '실행 현황', url: '/univ/president' }
+          { name: '회장단 공약', url: 'introduce' }
         ],
         '로고/슬로건': [
-          { name: '공식 로고', url: '/univ/vice-president' },
-          { name: '슬로건', url: '/univ/vice-president' }
+          { name: '공식 로고', url: 'logo' },
+          { name: '슬로건', url: 'logo' }
         ]
       },
       Clubs: {
@@ -134,15 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       Service: {
         '물품대여서비스': [
-          { name: '이용 방법', url: '/univ/status' },
-          { name: '대여 목록', url: '/univ/vision' },
+          { name: '이용 방법', url: 'service' },
+          { name: '대여 목록', url: 'service' },
         ],
         '상주': [
-          { name: '상주 활동 소개', url: '/univ/president' }
+          { name: '상주 활동 소개', url: 'service' }
         ],
         '제휴업체': [
-          { name: '업체 목록', url: '/univ/symbol'},
-          { name: '업체 혜택 소개', url: '/univ/symbol'}
+          { name: '업체 목록', url: 'service'},
+          { name: '업체 혜택 소개', url: 'service'}
         ]
       },
       Communication : {
