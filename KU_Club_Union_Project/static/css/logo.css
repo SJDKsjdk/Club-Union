@@ -1,7 +1,7 @@
 /* ===============================
    Global Reset & Variables
    =============================== */
-* {
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,6 +16,9 @@ body {
 }
 
 :root {
+    --primary-color: #000063;
+    --secondary-color: #271697;
+    --accent-color: #1d59a7;
     --ku-blue: #034da1;
     --ku-blue-light: #4a90e2;
     --ku-blue-dark: #002a5c;
@@ -26,6 +29,12 @@ body {
     --gray-200: #e9ecef;
     --gray-600: #6c757d;
     --blue-signature: #000063;
+    --text-color: #333;
+    --light-text: #777;
+    --light-bg: #f8f9fa;
+    --dark-bg: #2c2c2c;
+    --transition: all 0.3s ease;
+    --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     --blue-gradient: linear-gradient(135deg, var(--ku-blue) 0%, var(--ku-blue-light) 100%);
     --shadow: 0 4px 20px rgba(3, 77, 161, 0.15);
     --shadow-hover: 0 8px 30px rgba(3, 77, 161, 0.25);
@@ -69,7 +78,7 @@ nav {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--ku-blue);
+    color: var(--primary-color);
     cursor: pointer;
 }
 
@@ -85,16 +94,16 @@ nav {
 }
 
 .nav-links a {
-    color: var(--ku-dark);
+    color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .nav-links a:hover,
 .nav-links a.nav-active {
-    color: var(--ku-blue);
+    color: var(--primary-color);
 }
 
 .nav-links a::after {
@@ -104,7 +113,7 @@ nav {
     height: 3px;
     bottom: -5px;
     left: 0;
-    background-color: var(--ku-blue);
+    background-color: var(--primary-color);
     transition: width 0.3s;
 }
 
@@ -124,7 +133,7 @@ nav {
 .line3 {
     width: 25px;
     height: 3px;
-    background-color: var(--ku-blue);
+    background-color: var(--primary-color);
     margin: 5px;
     transition: all 0.3s ease;
 }
@@ -230,7 +239,7 @@ nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     gap: 60px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .logo-item {
@@ -242,6 +251,9 @@ nav {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
 }
 
 .logo-item::before {
@@ -271,6 +283,11 @@ nav {
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
 }
 
 .main-logo-item .logo-frame {

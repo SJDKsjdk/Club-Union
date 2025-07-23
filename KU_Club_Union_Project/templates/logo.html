@@ -16,7 +16,7 @@
         <nav>
             <div class="logo">파란</div>
             <ul class="nav-links">
-                <li><a href="#" id="home-link" class="nav-active">홈</a></li>
+                <li><a href="#" id="home-link" onclick="location.reload()">홈</a></li>
                 <li><a href="#logo-showcase" id="logo-link">로고</a></li>
                 <li><a href="#logo-meaning" id="meaning-link">설명</a></li>
             </ul>
@@ -47,7 +47,7 @@
                 <!-- 파란 로고 -->
                 <div class="logo-item main-logo-item">
                     <div class="logo-frame">
-                        <img src="{{ url_for('static', filename='images/paran_logo.png') }}" alt="파란 로고"
+                        <img src="{{ url_for('static', filename='/images/logo_paranImage.png') }}" alt="파란 로고"
                             class="paran-logo">
                     </div>
                     <div class="logo-info">
@@ -59,12 +59,12 @@
                 <!-- 슬로건 -->
                 <div class="logo-item slogan-item">
                     <div class="logo-frame">
-                        <img src="{{ url_for('static', filename='images/paran_slogan.png') }}" alt="파란 슬로건"
+                        <img src="{{ url_for('static', filename='/images/union_logo.png') }}" alt="파란 슬로건"
                             class="paran-slogan">
                     </div>
                     <div class="logo-info">
                         <h3>파란 슬로건</h3>
-                        <p>"More Than Clubs, A Community" - 동아리를 넘어선 하나의 공동체</p>
+                        <p>고려대학교 세종캠퍼스 총동아리연합회 '파란'의 공식 로고입니다.</p>
                     </div>
                 </div>
             </div>

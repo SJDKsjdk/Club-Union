@@ -232,19 +232,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // 모든 네비게이션 링크에 스무스 스크롤 적용
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // 홈 링크 클릭 시 새로고침
+        const homeLink = document.getElementById('home-link');
+        if (homeLink) {
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                location.reload();
+            });
+        }
+
+        // 로고, 설명 링크에 스무스 스크롤 적용
+        document.querySelectorAll('#logo-link, #meaning-link').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
-                
-                // 홈 링크는 새로고침
-                if (this.id === 'home-link') {
-                    location.reload();
-                    return;
-                }
-                
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
