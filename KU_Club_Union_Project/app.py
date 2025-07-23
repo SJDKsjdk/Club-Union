@@ -19,6 +19,10 @@ def introduce():
 def logo():
     return render_template('logo.html')
 
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
 @app.route('/soma')
 def soma():
     return render_template('soma.html')

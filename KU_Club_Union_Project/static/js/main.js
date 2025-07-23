@@ -133,15 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       Service: {
         '물품대여서비스': [
-          { name: '이용 방법', url: 'service' },
-          { name: '대여 목록', url: 'service' },
+          { name: '이용 방법', url: 'help' },
+          { name: '대여 목록', url: 'help' },
         ],
         '상주': [
-          { name: '상주 활동 소개', url: 'service' }
+          { name: '상주 활동 소개', url: 'help' }
         ],
         '제휴업체': [
-          { name: '업체 목록', url: 'service'},
-          { name: '업체 혜택 소개', url: 'service'}
+          { name: '업체 목록', url: 'help'},
+          { name: '업체 혜택 소개', url: 'help'}
         ]
       },
       Communication : {

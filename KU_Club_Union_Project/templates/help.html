@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리 지원 사업 - 고려대학교 총동아리연합회</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/logo.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">파란</div>
+            <ul class="nav-links">
+                <li><a href="#" id="home-link" class="nav-active">홈</a></li>
+                <li><a href="#rental-section" id="rental-link">물품대여</a></li>
+                <li><a href="#residence-section" id="residence-link">상주</a></li>
+                <li><a href="#partnership-section" id="partnership-link">제휴업체</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- 헤더 섹션 -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="main-title">
+                    <span class="title-line1">Club Support Services</span>
+                    <span class="title-line2">동아리 지원 사업</span>
+                    <span class="title-line3">파란</span>
+                </h1>
+                <p class="subtitle">총동아리연합회에서 동아리를 위해 진행하는 다양한 지원 사업을 소개합니다</p>
+            </div>
+        </section>
+  
+      <!-- 물품대여 섹션 -->
+        <section id="rental-section" class="service-section">
+            <div class="section-container">
+                <h2>물품대여 사업</h2>
+                <div class="service-content">
+                    <div class="service-info">
+                        <div class="info-card">
+                            <div class="card-icon">📦</div>
+                            <h3>대여 가능 물품</h3>
+                            <ul>
+                                <li>음향 장비 (마이크, 앰프, 연결선)</li>
+                                <li>리드선, 릴선</li>
+                                <li>돗자리 및 램프</li>
+                                <li>구르마, 손수레차</li>
+                                <li>기타 보유 중인 물품</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">📋</div>
+                            <h3>대여 절차</h3>
+                            <ol>
+                                <li>총동아리연합회 사무실 방문</li>
+                                <li>학생증 및 동아리 확인</li>
+                                <li>물품대여 신청서 작성</li>
+                                <li>물품 수령 및 사용</li>
+                                <li>사용 후 재방문하여 반납</li>
+                            </ol>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">⚠️</div>
+                            <h3>주의사항</h3>
+                            <ul>
+                                <li>대여 기간: 최대 7일(연장 가능)</li>
+                                <li>파손 시 변상 의무</li>
+                                <li>대리 대여 불가능</li>
+                                <li>반납 지연 시 패널티</li>
+                                <li>동아리 활동 목적으로만 사용</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 상주 섹션 -->
+        <section id="residence-section" class="service-section">
+            <div class="section-container">
+                <h2>상주 지원 사업</h2>
+                <div class="service-content">
+                    <div class="service-info">
+                        <div class="info-card">
+                            <div class="card-icon">🏢</div>
+                            <h3>상주 공간</h3>
+                            <ul>
+                                <li>학생회관 310호</li>
+                                <li>총동아리연합회 사무실</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">⏰</div>
+                            <h3>상주 시간</h3>
+                            <ul>
+                                <li>평일 13:00~18:00</li>
+                                <li>주말, 공휴일 X</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon">📝</div>
+                            <h3>지원 업무</h3>
+                            <ul>
+                                <li>물품대여 사업</li>
+                                <li>수령지불증 작성</li>
+                                <li>서류 공동구매 물품(티켓) 수합/배부</li>
+                                <li>프린트기 사용</li>
+                                <li>기타 문의사항</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+        <!-- 제휴업체 섹션 -->
+        <section id="partnership-section" class="service-section">
+            <div class="section-container">
+                <h2>제휴업체 할인 혜택</h2>
+                <div class="service-content">
+                    <div class="service-info">
+                        <div class="info-card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/jehyu/soju.jpg') }}" alt="음식점 할인">
+                            </div>
+                            <div class="card-text">
+                                <h3>회식 관련 제휴</h3>
+                                <p>쿠폰 제출 시 서비스 제공 혜택</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/jehyu/bus.jpg') }}" alt="교통 서비스">
+                            </div>
+                            <div class="card-text">
+                                <h3>교통 관련 제휴</h3>
+                                <p>버스 대절 시 10% 할인 혜택</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/jehyu/cloth.jpg') }}" alt="용품 구매 할인">
+                            </div>
+                            <div class="card-text">
+                                <h3>의류 관련 제휴</h3>
+                                <p>단체복 문의 시 할인 혜택</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/jehyu/english.jpg') }}" alt="교육/서비스 할인">
+                            </div>
+                            <div class="card-text">
+                                <h3>학습 관련 제휴</h3>
+                                <p>온라인 강의 플랫폼 프로모션 할인 혜택</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/jehyu/hotel.jpg') }}" alt="교통/숙박 할인">
+                            </div>
+                            <div class="card-text">
+                                <h3>숙박 관련 제휴</h3>
+                                <p>숙박시설 프로모션 할인 혜택</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/jehyu/eye.jpg') }}" alt="문화/레저 할인">
+                            </div>
+                            <div class="card-text">
+                                <h3>의료 관련 제휴</h3>
+                                <p>진료, 수술 할인 혜택</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+<!-- 문의 및 신청 -->
+        <section class="contact-section">
+            <div class="contact-container">
+                <h2>문의 및 신청</h2>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>📞 연락처</h3>
+                        <p>총동아리연합회 사무실</p>
+                        <p>전화: 010-서가인의-전화번호</p>
+                        <p>이메일: 서가인의@이메일.ac.kr</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>🕒 운영시간</h3>
+                        <p>평일: 13:00 - 18:00</p>
+                        <p>주말 및 공휴일 휴무</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>📍 위치</h3>
+                        <p>학생회관 3층</p>
+                        <p>총동아리연합회 사무실</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 네비게이션 -->
+        <div class="navigation">
+            <a href="/clubs" class="nav-btn secondary">동아리 소개</a>
+            <a href="/introduce" class="nav-btn secondary">총동아리연합회 소개</a>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>(30019) 세종특별자치시 세종로 2511 고려대학교 세종캠퍼스 Tel : 044-860-1114 Fax : 044-860-1048</p>
+            <p>&copy; 2025 Korea University(Sejong Campus) Club Union. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/help.js') }}"></script>
+</body>
+
+</html>
