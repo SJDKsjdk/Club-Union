@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ClubUnion: {
       '연합회': [
         { name: '소개', url: 'introduce' },
-        { name: '연혁', url: '/univ/vision' },
+        { name: '연혁', url: 'history' },
         { name: '조직도', url: 'introduce' },
       ],
       '공약보고': [
