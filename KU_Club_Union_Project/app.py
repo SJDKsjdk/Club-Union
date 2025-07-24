@@ -19,6 +19,10 @@ def introduce():
 def logo():
     return render_template('logo.html')
 
+@app.route('/history')
+def history():
+    return render_template('history.html')
+
 @app.route('/help')
 def help():
     return render_template('help.html')

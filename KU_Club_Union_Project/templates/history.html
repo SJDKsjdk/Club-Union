@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연혁 - 고려대학교 총동아리연합회</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/logo.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- 커스텀 커서 -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <div class="logo">파란</div>
+            <ul class="nav-links">
+                <li><a href="/" id="home-link">홈</a></li>
+                <li><a href="#history" id="history-link" class="nav-active">연혁</a></li>
+                <li><a href="/introduce" id="introduce-link">소개</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main>
+        <!-- 히어로 섹션 -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="text-section">
+                    <h1 class="animate-text">연혁</h1>
+                    <h2 class="animate-text">History</h2>
+                    <div class="info-box">
+                        <p><i class="fas fa-calendar-alt"></i>고려대학교 세종캠퍼스 총동아리연합회의 역사</p>
+                        <p><i class="fas fa-users"></i>43대부터 45대까지의 발자취</p>
+                        <p><i class="fas fa-heart"></i>학생들과 함께한 소중한 시간들</p>
+                    </div>
+                    <a href="#history" class="btn btn-animated">연혁 보기</a>
+                </div>
+                <div class="image-section">
+                    <img src="{{ url_for('static', filename='/images/전간수.jpg') }}" alt="총동아리연합회 로고" class="hero-img">
+                </div>
+            </div>
+            <div class="scroll-down">
+                <span>스크롤 다운</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- 연혁 섹션 -->
+        <section id="history" class="history-section">
+            <div class="container">
+                <h2 class="section-title">총동아리연합회 연혁</h2>
+                <div class="history-timeline">
+                    <!-- 45대 파란 (최신순) -->
+                    <div class="history-item" data-generation="45">
+                        <div class="history-box paran-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">45대</span>
+                                <span class="generation-name">파란</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제45대 총동아리연합회 '파란'</h3>
+                                <p>깊은 남색으로 대표되는 파란의 시대, 안정적이고 신뢰할 수 있는 학생 자치를 실현하고 있습니다.</p>
+                                <div class="history-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>안정적인 운영</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <span>혁신적인 서비스</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 44대 동심 -->
+                    <div class="history-item" data-generation="44">
+                        <div class="history-box innocence-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">44대</span>
+                                <span class="generation-name">동심</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제44대 총동아리연합회 '동심'</h3>
+                                <p>순수한 분홍색으로 상징되는 동심의 시대, 학생들의 순수한 마음과 꿈을 지켜나간 시기입니다.</p>
+                                <div class="history-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-seedling"></i>
+                                        <span>새로운 동아리 지원</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-hands-helping"></i>
+                                        <span>상호 협력 증진</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 43대 낭만 -->
+                    <div class="history-item" data-generation="43">
+                        <div class="history-box romance-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">43대</span>
+                                <span class="generation-name">낭만</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제43대 총동아리연합회 '낭만'</h3>
+                                <p>따뜻한 주황색으로 대표되는 낭만의 시대, 학생들의 꿈과 열정이 가득했던 시기입니다.</p>
+                                <div class="history-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-star"></i>
+                                        <span>동아리 활동 활성화</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-heart"></i>
+                                        <span>학생 소통 강화</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 42대 -->
+                    <div class="history-item" data-generation="42">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">42대</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제42대 총동아리연합회</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 41대 청춘 -->
+                    <div class="history-item" data-generation="41">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">41대</span>
+                                <span class="generation-name">청춘</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제41대 총동아리연합회 '청춘'</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 40대 활주 -->
+                    <div class="history-item" data-generation="40">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">40대</span>
+                                <span class="generation-name">활주</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제40대 총동아리연합회 '활주'</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 39대 두드림 -->
+                    <div class="history-item" data-generation="39">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">39대</span>
+                                <span class="generation-name">두드림</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제39대 총동아리연합회 '두드림'</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 38대 지음 -->
+                    <div class="history-item" data-generation="38">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">38대</span>
+                                <span class="generation-name">지음</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제38대 총동아리연합회 '지음'</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 37대 RUN2U -->
+                    <div class="history-item" data-generation="37">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">37대</span>
+                                <span class="generation-name">RUN2U</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제37대 총동아리연합회 'RUN2U'</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 36대 동고동락 -->
+                    <div class="history-item" data-generation="36">
+                        <div class="history-box transparent-gradient">
+                            <div class="generation-info">
+                                <span class="generation-number">36대</span>
+                                <span class="generation-name">동고동락</span>
+                            </div>
+                            <div class="history-content">
+                                <h3>제36대 총동아리연합회 '동고동락'</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 네비게이션 -->
+        <div class="navigation">
+            <a href="/introduce" class="nav-btn secondary">총동아리연합회 소개</a>
+            <a href="/logo" class="nav-btn primary">로고 보기</a>
+        </div>
+    </main>
+
+    <!-- 백투탑 버튼 -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">파란</div>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/ku_club_union/" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://open.kakao.com/o/goqQFNkh" target="_blank"><i class="fab fa-kickstarter-k"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>(30019) 세종특별자치시 세종로 2511 고려대학교 세종캠퍼스 Tel : 044-860-1114 Fax : 044-860-1048</p>
+                <p>&copy; 2025 Korea University(Sejong Campus) Club Union. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+</body>
+
+</html>
