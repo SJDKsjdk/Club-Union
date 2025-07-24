@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for kus-club-union on 2025-07-24T21:48:36+09:00
+# fly.toml app configuration file generated for club-union on 2025-07-24T13:00:56Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'kus-club-union'
-primary_region = 'nrt'
+app = 'club-union'
+primary_region = 'sin'
 
 [build]
 
@@ -20,3 +20,4 @@ primary_region = 'nrt'
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 512
