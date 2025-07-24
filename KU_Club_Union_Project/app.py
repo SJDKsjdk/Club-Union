@@ -1,7 +1,12 @@
 from flask import Flask, render_template, send_from_directory
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            static_folder='static',
+            static_url_path='/static')
+
+# 정적 파일 캐싱 설정 (선택사항)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 3600
 
 @app.route('/')
 def main():
@@ -171,9 +176,6 @@ def news():
 def mana():
     return render_template('mana.html')
 
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    return send_from_directory('static', filename)
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
