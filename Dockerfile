@@ -13,6 +13,9 @@ WORKDIR /app
 COPY --from=builder /app/.venv .venv/
 COPY . .
 
+# Flask 앱 파일 지정
 ENV FLASK_APP=app.py
+ENV FLASK_ENV=production
 
+# 직접 python으로 실행하는 방식으로 변경
 CMD ["/app/.venv/bin/python", "app.py"]
