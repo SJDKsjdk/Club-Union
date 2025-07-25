@@ -456,7 +456,64 @@ nav {
 /* ===============================
    Responsive Design
    =============================== */
+@media (max-width: 1024px) {
+    nav {
+        padding: 15px 3%;
+    }
+    
+    .logo {
+        font-size: 1.6rem;
+    }
+    
+    .nav-links {
+        width: 40%;
+    }
+    
+    .hero-content {
+        width: 85%;
+        height: 380px;
+        padding: 35px;
+    }
+    
+    .title-line1 {
+        font-size: 1.1em;
+    }
+    
+    .title-line2 {
+        font-size: 2.3em;
+    }
+    
+    .title-line3 {
+        font-size: 3.2em;
+    }
+    
+    .logo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 50px;
+    }
+    
+    .logo-item {
+        padding: 35px;
+    }
+    
+    .meaning-container {
+        max-width: 700px;
+    }
+    
+    .meaning-content {
+        padding: 35px;
+    }
+}
+
 @media (max-width: 768px) {
+    nav {
+        padding: 15px 5%;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
     .nav-links {
         position: absolute;
         right: 0;
@@ -466,15 +523,22 @@ nav {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 50%;
+        width: 60%;
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         backdrop-filter: blur(10px);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        padding-top: 50px;
     }
 
     .nav-links li {
         opacity: 0;
-        margin: 15px 0;
+        margin: 20px 0;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 10px 20px;
     }
 
     .nav-active {
@@ -484,65 +548,243 @@ nav {
     .burger {
         display: block;
     }
+    
+    .main-container {
+        padding-top: 80px;
+    }
+    
+    .hero-section {
+        padding: 50px 15px 70px;
+    }
 
     .hero-content {
-        width: 90%;
-        height: 350px;
+        width: 95%;
+        height: auto;
+        min-height: 320px;
+        padding: 30px 20px;
     }
 
     .title-line1 {
-        font-size: 1em;
+        font-size: 0.9em;
+        margin-bottom: 8px;
     }
 
     .title-line2 {
-        font-size: 2em;
+        font-size: 1.8em;
+        margin-bottom: 8px;
     }
 
     .title-line3 {
         font-size: 2.5em;
     }
+    
+    .subtitle {
+        font-size: 1em;
+        margin-top: 15px;
+    }
+    
+    .logo-showcase {
+        padding: 60px 15px;
+    }
 
     .logo-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
+        max-width: 100%;
     }
 
     .logo-item {
-        padding: 30px 20px;
+        padding: 25px 20px;
+        min-height: auto;
+    }
+    
+    .logo-frame {
+        padding: 20px;
+        margin-bottom: 20px;
+        min-height: 180px;
+    }
+    
+    .paran-logo,
+    .paran-slogan {
+        max-height: 150px;
+    }
+    
+    .logo-info h3 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    
+    .logo-info p {
+        font-size: 0.95em;
+    }
+    
+    .logo-meaning {
+        padding: 60px 15px;
     }
 
     .meaning-container h2 {
         font-size: 2em;
+        margin-bottom: 30px;
+    }
+    
+    .meaning-content {
+        padding: 30px 20px;
     }
 
     .meaning-text p {
-        font-size: 1.1em;
+        font-size: 1.05em;
+        line-height: 1.7;
+        margin-bottom: 12px;
+    }
+    
+    .emphasis {
+        font-size: 1.2em !important;
     }
 
     .navigation {
         flex-direction: column;
         align-items: center;
+        padding: 50px 15px;
+        gap: 15px;
     }
 
     .nav-btn {
-        width: 200px;
+        width: 250px;
+        padding: 12px 25px;
+    }
+    
+    .footer {
+        padding: 30px 15px;
+    }
+    
+    .footer-content p {
+        font-size: 0.9em;
+        line-height: 1.5;
     }
 }
 
 @media (max-width: 480px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+    
+    .nav-links {
+        width: 70%;
+    }
+    
+    .nav-links a {
+        font-size: 1.1rem;
+    }
+    
+    .main-container {
+        padding-top: 70px;
+    }
+    
     .hero-section {
-        padding: 40px 15px 60px;
+        padding: 40px 10px 60px;
     }
 
+    .hero-content {
+        width: 98%;
+        min-height: 280px;
+        padding: 25px 15px;
+    }
+
+    .title-line1 {
+        font-size: 0.8em;
+        margin-bottom: 6px;
+    }
+
+    .title-line2 {
+        font-size: 1.5em;
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+    }
+
+    .title-line3 {
+        font-size: 2.2em;
+    }
+    
+    .subtitle {
+        font-size: 0.9em;
+        margin-top: 12px;
+    }
+    
     .logo-showcase {
-        padding: 60px 15px;
+        padding: 50px 10px;
+    }
+    
+    .logo-item {
+        padding: 20px 15px;
+    }
+    
+    .logo-frame {
+        padding: 15px;
+        margin-bottom: 15px;
+        min-height: 150px;
+    }
+    
+    .paran-logo,
+    .paran-slogan {
+        max-height: 120px;
+    }
+    
+    .logo-info h3 {
+        font-size: 1.2em;
+        margin-bottom: 8px;
+    }
+    
+    .logo-info p {
+        font-size: 0.9em;
+        line-height: 1.5;
     }
 
     .logo-meaning {
-        padding: 60px 15px;
+        padding: 50px 10px;
+    }
+    
+    .meaning-container h2 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+    
+    .meaning-container h2::after {
+        width: 50px;
+        height: 3px;
     }
 
     .meaning-content {
-        padding: 30px 20px;
+        padding: 25px 15px;
+    }
+
+    .meaning-text p {
+        font-size: 1em;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    
+    .emphasis {
+        font-size: 1.1em !important;
+    }
+
+    .navigation {
+        padding: 40px 10px;
+        gap: 12px;
+    }
+
+    .nav-btn {
+        width: 200px;
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    
+    .footer {
+        padding: 25px 10px;
+    }
+    
+    .footer-content p {
+        font-size: 0.8em;
+        line-height: 1.4;
+        margin-bottom: 8px;
     }
 }

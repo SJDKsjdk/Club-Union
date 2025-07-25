@@ -146,22 +146,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     runCounters();
     
-    // 패럴랙스 효과
+    // 패럴랙스 효과 (데스크톱에서만)
     const parallaxItems = document.querySelectorAll('.parallax-item');
     
-    window.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-      
-      parallaxItems.forEach(item => {
-        const speed = item.getAttribute('data-speed');
+    if (window.innerWidth > 768) {
+      window.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
         
-        const x = (window.innerWidth - mouseX * speed) / 100;
-        const y = (window.innerHeight - mouseY * speed) / 100;
-        
-        item.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        parallaxItems.forEach(item => {
+          const speed = item.getAttribute('data-speed');
+          
+          const x = (window.innerWidth - mouseX * speed) / 100;
+          const y = (window.innerHeight - mouseY * speed) / 100;
+          
+          item.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        });
       });
-    });
+    }
     
     // 갤러리 필터링
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -257,15 +259,22 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // 타이핑 효과 재활성화
+    // 타이핑 효과 재활성화 (반응형 개선)
     const typewriterText = document.querySelector('.typewriter-text');
     
     const restartTypewriter = () => {
-      if (typewriterText && window.innerWidth > 768) {
-        typewriterText.style.animation = 'none';
-        setTimeout(() => {
-          typewriterText.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
-        }, 10);
+      if (typewriterText) {
+        if (window.innerWidth > 768) {
+          typewriterText.style.animation = 'none';
+          setTimeout(() => {
+            typewriterText.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
+          }, 10);
+        } else {
+          // 모바일에서는 타이핑 효과 제거
+          typewriterText.style.animation = 'none';
+          typewriterText.style.borderRight = 'none';
+          typewriterText.style.whiteSpace = 'normal';
+        }
       }
     };
     
@@ -280,6 +289,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typewriterText) {
       typewriterObserver.observe(typewriterText);
     }
+    
+    // 윈도우 리사이즈 시 타이핑 효과 재조정
+    window.addEventListener('resize', () => {
+      restartTypewriter();
+    });
     
     // 이미지 로드 오류 처리
     const images = document.querySelectorAll('img');

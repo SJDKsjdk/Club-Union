@@ -520,7 +520,75 @@ nav {
 /* ===============================
    Responsive Design
    =============================== */
+@media (max-width: 1024px) {
+    nav {
+        padding: 15px 3%;
+    }
+    
+    .logo {
+        font-size: 1.6rem;
+    }
+    
+    .nav-links {
+        width: 70%;
+    }
+    
+    .hero-content {
+        left: 3%;
+        max-width: 550px;
+        padding: 25px 35px;
+    }
+    
+    .title-line1 {
+        font-size: 1.3rem;
+    }
+    
+    .title-line2 {
+        font-size: 3rem;
+    }
+    
+    .title-line3 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .service-info {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+    
+    #partnership-section .service-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .info-card {
+        padding: 25px;
+        min-height: 350px;
+    }
+    
+    #partnership-section .info-card {
+        min-height: 520px;
+        height: 520px;
+    }
+    
+    .card-image {
+        height: 420px;
+    }
+}
+
 @media (max-width: 768px) {
+    nav {
+        padding: 15px 5%;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
     .nav-links {
         position: absolute;
         right: 0;
@@ -530,15 +598,22 @@ nav {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 50%;
+        width: 60%;
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         backdrop-filter: blur(10px);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        padding-top: 50px;
     }
 
     .nav-links li {
         opacity: 0;
-        margin: 15px 0;
+        margin: 20px 0;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 10px 20px;
     }
 
     .nav-active {
@@ -548,69 +623,271 @@ nav {
     .burger {
         display: block;
     }
-
-    .hero-content {
-        width: 90%;
+    
+    .main-container {
+        padding-top: 80px;
+    }
+    
+    .hero-section {
         height: 350px;
     }
 
+    .hero-content {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        max-width: 90%;
+        padding: 25px 20px;
+    }
+
     .title-line1 {
-        font-size: 1em;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
     }
 
     .title-line2 {
-        font-size: 2em;
+        font-size: 2.5rem;
+        margin-bottom: 8px;
     }
 
     .title-line3 {
-        font-size: 2.5em;
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+        margin-top: 15px;
+    }
+    
+    .service-section {
+        padding: 40px 15px;
     }
 
     .service-info {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
+        padding: 0 10px;
+    }
+    
+    #partnership-section .service-info {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        max-width: 100%;
+        padding: 0 10px;
     }
 
     .info-card {
-        padding: 30px 20px;
+        padding: 25px 20px;
+        min-height: auto;
+    }
+    
+    #partnership-section .info-card {
+        min-height: auto;
+        height: auto;
+        padding: 20px;
+    }
+    
+    .card-image {
+        height: 300px;
+    }
+    
+    .card-text {
+        height: auto;
+        padding: 15px 0;
+    }
+    
+    .card-text h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    
+    .card-text p {
+        font-size: 14px;
     }
 
     .section-container h2 {
-        font-size: 2em;
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .section-container h2::after {
+        width: 150px;
+    }
+    
+    .contact-section {
+        padding: 60px 15px;
     }
 
     .contact-info {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .contact-card {
+        padding: 25px 20px;
+    }
+    
+    .contact-container h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
     }
 
     .navigation {
         flex-direction: column;
         align-items: center;
+        padding: 50px 15px;
+        gap: 15px;
     }
 
     .nav-btn {
-        width: 200px;
+        width: 250px;
+        padding: 12px 25px;
+    }
+    
+    .footer {
+        padding: 30px 15px;
+    }
+    
+    .footer-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 }
 
 @media (max-width: 480px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+    
+    .nav-links {
+        width: 70%;
+    }
+    
+    .nav-links a {
+        font-size: 1.1rem;
+    }
+    
+    .main-container {
+        padding-top: 70px;
+    }
+    
     .hero-section {
-        padding: 40px 15px 60px;
+        height: 300px;
+    }
+
+    .hero-content {
+        max-width: 95%;
+        padding: 20px 15px;
+    }
+
+    .title-line1 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .title-line2 {
+        font-size: 2rem;
+        margin-bottom: 6px;
+    }
+
+    .title-line3 {
+        font-size: 1.4rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        margin-top: 12px;
     }
 
     .service-section {
-        padding: 60px 15px;
+        padding: 30px 10px;
     }
-
-    .contact-section {
-        padding: 60px 15px;
+    
+    .service-info {
+        padding: 0 5px;
+        gap: 20px;
     }
 
     .info-card {
-        padding: 25px 15px;
+        padding: 20px 15px;
+    }
+    
+    .card-image {
+        height: 250px;
+    }
+    
+    .card-text h3 {
+        font-size: 16px;
+    }
+    
+    .card-text p {
+        font-size: 13px;
+    }
+    
+    .info-card h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .info-card li {
+        font-size: 14px;
+        margin-bottom: 8px;
     }
 
+    .section-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    
+    .section-container h2::after {
+        width: 120px;
+    }
+    
+    .contact-section {
+        padding: 50px 10px;
+    }
+    
     .contact-card {
-        padding: 25px 20px;
+        padding: 20px 15px;
+    }
+    
+    .contact-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    .contact-card p {
+        font-size: 0.9rem;
+    }
+    
+    .contact-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 35px;
+    }
+    
+    .contact-container h2::after {
+        width: 60px;
+        height: 3px;
+    }
+
+    .navigation {
+        padding: 40px 10px;
+        gap: 12px;
+    }
+
+    .nav-btn {
+        width: 200px;
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .footer {
+        padding: 25px 10px;
+    }
+    
+    .footer-content p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        margin-bottom: 8px;
     }
 }

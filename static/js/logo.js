@@ -64,13 +64,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(style);
 
     // ===============================
-    // Floating Animation for Logo Images
+    // Floating Animation for Logo Images (모바일에서도 유지)
     // ===============================
     function addFloatingAnimation() {
         const logos = document.querySelectorAll('.paran-logo, .paran-slogan');
         
         logos.forEach((logo, index) => {
-            logo.style.animation = `float ${3 + index * 0.5}s ease-in-out infinite`;
+            // 모바일에서는 더 부드러운 애니메이션
+            const duration = window.innerWidth <= 768 ? 4 + index * 0.3 : 3 + index * 0.5;
+            logo.style.animation = `float ${duration}s ease-in-out infinite`;
         });
 
         // Add floating keyframes
@@ -78,27 +80,29 @@ document.addEventListener('DOMContentLoaded', function() {
         floatingStyle.textContent = `
             @keyframes float {
                 0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
+                50% { transform: translateY(${window.innerWidth <= 768 ? '-5px' : '-10px'}); }
             }
         `;
         document.head.appendChild(floatingStyle);
     }
 
     // ===============================
-    // Parallax Effect for Hero Section
+    // Parallax Effect for Hero Section (데스크톱에서만)
     // ===============================
     function parallaxEffect() {
-        const heroSection = document.querySelector('.hero-section');
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        
-        if (heroSection) {
-            heroSection.style.transform = `translateY(${rate}px)`;
+        if (window.innerWidth > 768) {
+            const heroSection = document.querySelector('.hero-section');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${rate}px)`;
+            }
         }
     }
 
     // ===============================
-    // Typewriter Effect for Title
+    // Typewriter Effect for Title (모바일에서도 유지, 더 빠르게)
     // ===============================
     function typewriterEffect() {
         const titleLines = document.querySelectorAll('.title-line1, .title-line2, .title-line3');
@@ -107,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const text = line.textContent;
             line.textContent = '';
             line.style.opacity = '1';
+            
+            // 모바일에서는 더 빠른 타이핑과 짧은 딜레이
+            const typingSpeed = window.innerWidth <= 768 ? 30 : 50;
+            const delayBetweenLines = window.innerWidth <= 768 ? 500 : 1000;
             
             setTimeout(() => {
                 let i = 0;
@@ -117,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         clearInterval(timer);
                     }
-                }, 50);
-            }, index * 1000);
+                }, typingSpeed);
+            }, index * delayBetweenLines);
         });
     }
 
@@ -140,27 +148,47 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===============================
-    // Particle Background Effect
+    // Particle Background Effect (모바일에서도 가벼운 버전 유지)
     // ===============================
     function createParticles() {
         const heroSection = document.querySelector('.hero-section');
-        const particleCount = 50;
+        
+        // 화면 크기에 따라 파티클 수 조정 (모바일에서도 소량 유지)
+        let particleCount;
+        if (window.innerWidth <= 480) {
+            particleCount = 15; // 작은 모바일
+        } else if (window.innerWidth <= 768) {
+            particleCount = 25; // 모바일
+        } else if (window.innerWidth <= 1024) {
+            particleCount = 35; // 태블릿
+        } else {
+            particleCount = 50; // 데스크톱
+        }
         
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            const size = 8 + Math.random() * 12; // 8px ~ 20px 랜덤 크기
+            
+            // 모바일에서는 더 작은 파티클
+            const baseSize = window.innerWidth <= 768 ? 4 : 8;
+            const sizeRange = window.innerWidth <= 768 ? 6 : 12;
+            const size = baseSize + Math.random() * sizeRange;
+            
+            // 모바일에서는 더 느린 애니메이션
+            const animationDuration = window.innerWidth <= 768 ? 
+                8 + Math.random() * 12 : 5 + Math.random() * 10;
+            
             particle.style.cssText = `
                 position: absolute;
                 width: ${size}px;
                 height: ${size}px;
-                background: rgba(255, 255, 255, 0.4);
+                background: rgba(255, 255, 255, ${window.innerWidth <= 768 ? 0.3 : 0.4});
                 border-radius: 50%;
                 left: ${Math.random() * 100}%;
                 top: ${Math.random() * 100}%;
-                animation: particle-float ${5 + Math.random() * 10}s linear infinite;
+                animation: particle-float ${animationDuration}s linear infinite;
                 animation-delay: ${Math.random() * 5}s;
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+                box-shadow: 0 0 ${window.innerWidth <= 768 ? 5 : 10}px rgba(255, 255, 255, 0.2);
             `;
             heroSection.appendChild(particle);
         }
@@ -364,4 +392,150 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Throttled scroll event
     window.addEventListener('scroll', requestTick);
+    
+    // ===============================
+    // 추가 반응형 기능들
+    // ===============================
+    
+    // 이미지 로드 오류 처리
+    const images = document.querySelectorAll('.paran-logo, .paran-slogan');
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            this.style.display = 'none';
+            const placeholder = document.createElement('div');
+            placeholder.style.cssText = `
+                width: 100%;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                color: #999;
+                font-size: 14px;
+                text-align: center;
+            `;
+            placeholder.textContent = '이미지를 불러올 수 없습니다';
+            this.parentNode.insertBefore(placeholder, this);
+        });
+    });
+    
+    // 윈도우 리사이즈 시 효과 재조정
+    window.addEventListener('resize', function() {
+        // 플로팅 애니메이션 재조정
+        const logos = document.querySelectorAll('.paran-logo, .paran-slogan');
+        logos.forEach((logo, index) => {
+            const duration = window.innerWidth <= 768 ? 4 + index * 0.3 : 3 + index * 0.5;
+            logo.style.animation = `float ${duration}s ease-in-out infinite`;
+        });
+        
+        // 파티클 효과 재조정 (모바일에서도 유지)
+        const existingParticles = document.querySelectorAll('.particle');
+        if (existingParticles.length > 0) {
+            // 기존 파티클 제거 후 새로운 크기로 재생성
+            existingParticles.forEach(particle => particle.remove());
+            createParticles();
+        }
+        
+        // 네비게이션 메뉴 상태 초기화
+        const nav = document.querySelector('.nav-links');
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        
+        if (window.innerWidth > 768) {
+            nav.classList.remove('nav-active');
+            burger.classList.remove('toggle');
+            navLinks.forEach(link => {
+                link.style.animation = '';
+                link.style.opacity = '1';
+            });
+        }
+    });
+    
+    // 터치 디바이스 감지 및 호버 효과 조정
+    function isTouchDevice() {
+        return (('ontouchstart' in window) ||
+                (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0));
+    }
+    
+    if (isTouchDevice()) {
+        // 터치 디바이스에서는 호버 효과를 탭 효과로 변경
+        const logoItems = document.querySelectorAll('.logo-item');
+        logoItems.forEach(item => {
+            item.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 15px 40px rgba(74, 144, 226, 0.3)';
+            });
+            
+            item.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 20px rgba(3, 77, 161, 0.15)';
+                }, 150);
+            });
+        });
+    }
+    
+    // 키보드 네비게이션 지원
+    document.addEventListener('keydown', function(e) {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const currentActive = document.querySelector('.nav-links a.nav-active');
+        const currentIndex = Array.from(navLinks).indexOf(currentActive);
+        
+        let newIndex;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                e.preventDefault();
+                newIndex = currentIndex > 0 ? currentIndex - 1 : navLinks.length - 1;
+                break;
+            case 'ArrowRight':
+            case 'ArrowDown':
+                e.preventDefault();
+                newIndex = currentIndex < navLinks.length - 1 ? currentIndex + 1 : 0;
+                break;
+            case 'Home':
+                e.preventDefault();
+                newIndex = 0;
+                break;
+            case 'End':
+                e.preventDefault();
+                newIndex = navLinks.length - 1;
+                break;
+            case 'Enter':
+            case ' ':
+                if (currentActive) {
+                    e.preventDefault();
+                    currentActive.click();
+                }
+                break;
+        }
+        
+        if (newIndex !== undefined && navLinks[newIndex]) {
+            navLinks[newIndex].focus();
+            navLinks[newIndex].click();
+        }
+    });
+    
+    // 접근성 개선
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach((link, index) => {
+        link.setAttribute('tabindex', '0');
+        link.setAttribute('role', 'menuitem');
+        if (index === 0) {
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+    
+    // 스크롤 위치 복원 (페이지 새로고침 시)
+    if (window.location.hash) {
+        setTimeout(() => {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 1000);
+    }
 });

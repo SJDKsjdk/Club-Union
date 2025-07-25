@@ -85,15 +85,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===============================
-    // Parallax Effect for Hero Section
+    // Parallax Effect for Hero Section (데스크톱에서만)
     // ===============================
     function parallaxEffect() {
-        const heroSection = document.querySelector('.hero-section');
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.3;
-        
-        if (heroSection) {
-            heroSection.style.transform = `translateY(${rate}px)`;
+        if (window.innerWidth > 768) {
+            const heroSection = document.querySelector('.hero-section');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${rate}px)`;
+            }
         }
     }
 
@@ -138,27 +140,47 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===============================
-    // Particle Background Effect
+    // Particle Background Effect (반응형 개선)
     // ===============================
     function createParticles() {
         const heroSection = document.querySelector('.hero-section');
-        const particleCount = 30;
+        
+        // 화면 크기에 따라 파티클 수 조정
+        let particleCount;
+        if (window.innerWidth <= 480) {
+            particleCount = 15; // 작은 모바일
+        } else if (window.innerWidth <= 768) {
+            particleCount = 20; // 모바일
+        } else if (window.innerWidth <= 1024) {
+            particleCount = 25; // 태블릿
+        } else {
+            particleCount = 30; // 데스크톱
+        }
         
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            const size = 6 + Math.random() * 10;
+            
+            // 모바일에서는 더 작은 파티클
+            const baseSize = window.innerWidth <= 768 ? 4 : 6;
+            const sizeRange = window.innerWidth <= 768 ? 6 : 10;
+            const size = baseSize + Math.random() * sizeRange;
+            
+            // 모바일에서는 더 느린 애니메이션
+            const animationDuration = window.innerWidth <= 768 ? 
+                10 + Math.random() * 15 : 8 + Math.random() * 12;
+            
             particle.style.cssText = `
                 position: absolute;
                 width: ${size}px;
                 height: ${size}px;
-                background: rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, ${window.innerWidth <= 768 ? 0.25 : 0.3});
                 border-radius: 50%;
                 left: ${Math.random() * 100}%;
                 top: ${Math.random() * 100}%;
-                animation: particle-float ${8 + Math.random() * 12}s linear infinite;
+                animation: particle-float ${animationDuration}s linear infinite;
                 animation-delay: ${Math.random() * 8}s;
-                box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+                box-shadow: 0 0 ${window.innerWidth <= 768 ? 6 : 8}px rgba(255, 255, 255, 0.2);
             `;
             heroSection.appendChild(particle);
         }
@@ -393,4 +415,166 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Throttled scroll event
     window.addEventListener('scroll', requestTick);
+    
+    // ===============================
+    // 추가 반응형 기능들
+    // ===============================
+    
+    // 이미지 로드 오류 처리
+    const images = document.querySelectorAll('.card-image img');
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            this.style.display = 'none';
+            const placeholder = document.createElement('div');
+            placeholder.style.cssText = `
+                width: 100%;
+                height: 100%;
+                background: #f0f0f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                color: #999;
+                font-size: 14px;
+                text-align: center;
+            `;
+            placeholder.textContent = '이미지를 불러올 수 없습니다';
+            this.parentNode.appendChild(placeholder);
+        });
+    });
+    
+    // 윈도우 리사이즈 시 효과 재조정
+    window.addEventListener('resize', function() {
+        // 파티클 효과 재조정
+        const existingParticles = document.querySelectorAll('.particle');
+        if (existingParticles.length > 0) {
+            // 기존 파티클 제거 후 새로운 크기로 재생성
+            existingParticles.forEach(particle => particle.remove());
+            createParticles();
+        }
+        
+        // 네비게이션 메뉴 상태 초기화
+        const nav = document.querySelector('.nav-links');
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        
+        if (window.innerWidth > 768) {
+            nav.classList.remove('nav-active');
+            burger.classList.remove('toggle');
+            navLinks.forEach(link => {
+                link.style.animation = '';
+                link.style.opacity = '1';
+            });
+        }
+    });
+    
+    // 터치 디바이스 감지 및 호버 효과 조정
+    function isTouchDevice() {
+        return (('ontouchstart' in window) ||
+                (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0));
+    }
+    
+    if (isTouchDevice()) {
+        // 터치 디바이스에서는 호버 효과를 탭 효과로 변경
+        const cards = document.querySelectorAll('.info-card, .contact-card');
+        cards.forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-5px) scale(1.01)';
+            });
+            
+            card.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }, 150);
+            });
+        });
+    }
+    
+    // 키보드 네비게이션 지원
+    document.addEventListener('keydown', function(e) {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const currentActive = document.querySelector('.nav-links a.nav-active');
+        const currentIndex = Array.from(navLinks).indexOf(currentActive);
+        
+        let newIndex;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                e.preventDefault();
+                newIndex = currentIndex > 0 ? currentIndex - 1 : navLinks.length - 1;
+                break;
+            case 'ArrowRight':
+            case 'ArrowDown':
+                e.preventDefault();
+                newIndex = currentIndex < navLinks.length - 1 ? currentIndex + 1 : 0;
+                break;
+            case 'Home':
+                e.preventDefault();
+                newIndex = 0;
+                break;
+            case 'End':
+                e.preventDefault();
+                newIndex = navLinks.length - 1;
+                break;
+            case 'Enter':
+            case ' ':
+                if (currentActive) {
+                    e.preventDefault();
+                    currentActive.click();
+                }
+                break;
+        }
+        
+        if (newIndex !== undefined && navLinks[newIndex]) {
+            navLinks[newIndex].focus();
+            navLinks[newIndex].click();
+        }
+    });
+    
+    // 접근성 개선
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach((link, index) => {
+        link.setAttribute('tabindex', '0');
+        link.setAttribute('role', 'menuitem');
+        if (index === 0) {
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+    
+    // 스크롤 위치 복원 (페이지 새로고침 시)
+    if (window.location.hash) {
+        setTimeout(() => {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 1000);
+    }
+    
+    // 모바일에서 스크롤 시 네비게이션 자동 닫기
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        if (window.innerWidth <= 768) {
+            const nav = document.querySelector('.nav-links');
+            const burger = document.querySelector('.burger');
+            const navLinks = document.querySelectorAll('.nav-links li');
+            
+            if (nav.classList.contains('nav-active')) {
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // 스크롤이 50px 이상 움직이면 메뉴 닫기
+                if (Math.abs(currentScrollTop - lastScrollTop) > 50) {
+                    nav.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                    navLinks.forEach(link => {
+                        link.style.animation = '';
+                    });
+                }
+                
+                lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            }
+        }
+    });
 });
