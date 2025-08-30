@@ -52,32 +52,29 @@ main {
 }
 
 /* ===============================
-    [수정됨] Header & Hero Section Styles
+    Header & Hero Section Styles
    =============================== */
-/* [추가] 헤더와 슬라이더의 부모 컨테이너 */
 .hero-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
+  position: relative;
+  width: 100%;
+  height: 100vh;
 }
 
 .main-header {
-    position: absolute; /* fixed에서 absolute로 변경 */
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10; /* 슬라이더보다 위에 오도록 설정 */
-    pointer-events: none; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none; 
 }
 
-/* 스크롤 관련 스타일 제거 */
-
 .header-logo, .btn-gnb {
-    pointer-events: auto;
+  pointer-events: auto;
 }
 
 .ku-logo {
@@ -94,6 +91,8 @@ main {
   height: 100vh;
   overflow: hidden;
   z-index: 2;
+  /* 렌더링 오류(흰 여백) 방지용 배경색 */
+  background-color: #000;
 }
 .slider-container {
   position: relative;
@@ -109,6 +108,9 @@ main {
   height: 100vh;
   flex-shrink: 0;
   overflow: hidden;
+  /* 렌더링 오류(투명화) 방지를 위한 GPU 가속 */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .slide img {
   position: absolute;
@@ -333,13 +335,13 @@ main {
 }
 
 .gnb-bg-image {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 0.5s ease-in-out;
-    z-index: -1;
-    opacity: 0;
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.5s ease-in-out;
+  z-index: -1;
+  opacity: 0;
 }
 
 .gnb-bg-image.visible {
@@ -347,80 +349,80 @@ main {
 }
 
 .gnb-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
 }
 
 .gnb-panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 120px 40px 80px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    text-align: right;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    opacity: 0;
-    visibility: hidden;
-    overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 120px 40px 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: right;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
 }
 .gnb-panel.is-active {
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
 }
 .gnb-panel.is-parent {
-    transform: translateX(-30%);
-    opacity: 0.5;
+  transform: translateX(-30%);
+  opacity: 0.5;
 }
 
 /* ===============================
     Panel Content (Text Clipping)
    =============================== */
 .gnb-main-list {
-    list-style: none;
-    font-family: "Noto Medium", sans-serif;
-    font-size: clamp(22px, 6vw, 44px); 
-    line-height: 1.8;
-    color: #fff;
-    width: max-content;
-    max-width: 100%;
+  list-style: none;
+  font-family: "Noto Medium", sans-serif;
+  font-size: clamp(22px, 6vw, 44px); 
+  line-height: 1.8;
+  color: #fff;
+  width: max-content;
+  max-width: 100%;
 }
 .gnb-main-list li {
-    position: relative;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    font-weight: 700;
-    white-space: nowrap; 
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: 700;
+  white-space: nowrap; 
 }
 .gnb-main-list li span {
-    position: relative;
-    display: inline-block;
-    padding-bottom: 5px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
 }
 .gnb-main-list li span::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #fff;
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.5s ease;
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s ease;
 }
 .gnb-main-list li:hover span::after, 
 .gnb-main-list li.active span::after {
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .midmenu-list, .submenu-list {
@@ -444,31 +446,30 @@ main {
 }
 
 .midmenu-item {
-    color: white;
-    cursor: pointer;
-    font-family: "Noto Medium";
-    font-size: clamp(22px, 3.5vw, 25px);
-    line-height: 1.5;
-    transition: color 0.25s ease;
-    margin-bottom: 20px;
+  color: white;
+  cursor: pointer;
+  font-family: "Noto Medium";
+  font-size: clamp(22px, 3.5vw, 25px);
+  line-height: 1.5;
+  transition: color 0.25s ease;
+  margin-bottom: 20px;
 }
 .midmenu-item.active {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .submenu-item a {
-    display: block;
-    margin-bottom: 15px;
-    color: #a8a8a8;
-    font-size: clamp(16px, 2.5vw, 18px);
-    text-decoration: none;
-    transition: color 0.3s ease;
+  display: block;
+  margin-bottom: 15px;
+  color: #a8a8a8;
+  font-size: clamp(16px, 2.5vw, 18px);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 .submenu-item a:hover {
-    color: #fff;
+  color: #fff;
 }
 
-/* Desktop View: Multi-column Layout */
 @media (min-width: 1024px) {
   .gnb-container {
     justify-content: flex-end;
@@ -495,8 +496,8 @@ main {
     opacity: 1;
   }
   .gnb-panel.is-parent {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
   .gnb-back-btn {
     display: none;
@@ -507,27 +508,27 @@ main {
     Other Styles
    =============================== */
 .background-wrapper {
-    position: relative;
-    width: 100vw;
-    min-height: 100vh;
-    overflow: hidden;
-    background-color: #0a0a3f;
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    backdrop-filter: blur(5px);
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: clamp(2rem, 5vh, 4rem);
-    padding: 0;
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #0a0a3f;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  backdrop-filter: blur(5px);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2rem, 5vh, 4rem);
+  padding: 0;
 }
 
 .hero {
-    position: relative;
-    width: 100%;
-    z-index: 2;
+  position: relative;
+  width: 100%;
+  z-index: 2;
 }
 
 a { all: unset; }
@@ -536,28 +537,28 @@ a { all: unset; }
 .footer p { margin: 0; padding: 5px 0; }
 
 .hero-logo-anim {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
 }
 .hero-logo-anim svg { width: 100%; height: 100%; }
 .hero-logo-anim svg text { font-size: 5vw; font-family: 'Noto Bold', sans-serif; text-transform: uppercase; text-anchor: middle; dominant-baseline: middle; fill: transparent; stroke: #ffffff; stroke-width: 2px; stroke-linejoin: round; stroke-linecap: butt; opacity: 0.6; animation: stroke 5s ease infinite; }
 @keyframes stroke { 0% { stroke-dasharray: 0 100%; stroke-dashoffset: 0%; stroke-width: 2px; opacity: 0.5; } 50% { stroke-dasharray: 60% 40%; stroke-dashoffset: -10%; stroke-width: 0.5px; opacity: 0.8; } 100% { stroke-dasharray: 100% 0; stroke-dashoffset: -100%; stroke-width: 2px; opacity: 0.3; } }
 
 .scroll-text {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    font-size: clamp(1.5rem, 6.5vw, 4rem);  
-    font-weight: 700;
-    white-space: normal;
-    padding: 0 20px;
-    line-height: 1.3;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-size: clamp(1.5rem, 6.5vw, 4rem);  
+  font-weight: 700;
+  white-space: normal;
+  padding: 0 20px;
+  line-height: 1.3;
 }
 .scroll-text span { display: inline-block; transform: translateX(100vw); opacity: 0; }
 @keyframes slideInFromRight { from { transform: translateX(100vw); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
@@ -566,62 +567,90 @@ a { all: unset; }
 .text-white { color: #fff; } .text-blue { color: #034da1; }
 
 .custom-gallery-wrap {
-    z-index: 1000;
-    width:100%;
-    overflow:hidden;
-    cursor:grab;
-    opacity:0;
-    transform:translateY(40px);
+  z-index: 1000;
+  width:100%;
+  overflow:hidden;
+  cursor:grab;
+  opacity:0;
+  transform:translateY(40px);
 }
 
 .custom-gallery {  
-    display:flex;  
-    flex-wrap:nowrap;  
-    gap: clamp(15px, 3vw, 40px);
-    padding: 0 clamp(20px, 5vw, 50px);  
-    overflow-x:auto;  
-    -webkit-overflow-scrolling:touch;  
-    scrollbar-width:none;  
-    user-select:none;  
-    cursor:grab;  
-    min-width:100%;  
+  display:flex;  
+  flex-wrap:nowrap;  
+  gap: clamp(15px, 3vw, 40px);
+  padding: 0 clamp(20px, 5vw, 50px);  
+  overflow-x:auto;  
+  -webkit-overflow-scrolling:touch;  
+  scrollbar-width:none;  
+  user-select:none;  
+  cursor:grab;  
+  min-width:100%;
+  overscroll-behavior-x: contain;
 }
 .custom-gallery::-webkit-scrollbar{display:none}  
 .custom-gallery.dragging{cursor:grabbing}
 
 .gallery-item {
-    flex: 0 0 auto;
-    position: relative;
-    width: clamp(280px, 75vw, 1000px);
-    aspect-ratio: 16 / 9;
-    border-radius: 10px;
-    overflow: hidden;
+  flex: 0 0 auto;
+  position: relative;
+  width: clamp(280px, 75vw, 1000px);
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  /* 렌더링 오류(투명화) 방지를 위한 GPU 가속 */
+  transform: translateZ(0);
 }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .6s ease; }
-.gallery-item:hover img { transform: scale(1.05); filter: brightness(70%); }
 
 .gallery-item .overlay {  
-    position: absolute;  
-    inset: 0;  
-    background: linear-gradient(to top, rgba(0,0,0,.7), transparent 50%);  
-    color: #fff;  
-    padding: 40px;  
-    display: flex;  
-    flex-direction: column;  
-    justify-content: flex-end;  
-    opacity: 0;  
-    transition: opacity .4s ease;  
-    pointer-events: none;
+  position: absolute;  
+  inset: 0;  
+  background: linear-gradient(to top, rgba(0,0,0,.7), transparent 50%);  
+  color: #fff;  
+  padding: 40px;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: flex-end;  
+  opacity: 0;  
+  transition: opacity .4s ease;  
+  pointer-events: none;
 }
-.gallery-item:hover .overlay,
 .gallery-item.overlay-active .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* PC(호버 가능 기기)에서만 호버 효과 적용 */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(70%);
+  }
+  .gallery-item:hover .overlay {
     opacity: 1;
     pointer-events: auto;
+  }
 }
-.gallery-item .overlay h3{ font: 500 30px 'Noto Sans KR', sans-serif; margin: 0 0 20px; }
-.gallery-item .overlay p{ font: 300 18px/1.5 'Noto Sans KR', sans-serif; margin: 0 0 50px; }
+
+.gallery-item .overlay h3 { 
+  margin: 0 0 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+  white-space: nowrap;
+}
+.gallery-item .overlay p { 
+  font: 300 18px/1.5 'Noto Sans KR', sans-serif; 
+  margin: 0 0 50px; 
+}
 @keyframes fadeSlideUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:none; } }
 .custom-gallery-wrap.reveal { animation: fadeSlideUp .8s ease-out 2s forwards; }
+
+/* 모바일 전용 줄바꿈 기본 숨김 처리 */
+.mobile-break {
+  display: none;
+}
 
 /* ===============================
     Responsive Tweaks
@@ -633,29 +662,48 @@ a { all: unset; }
   }  
 }
 
-@media (max-width: 768px) {
-    .background-wrapper {
-        justify-content: flex-start;
-        padding-top: 15vh;
-        padding-bottom: 15vh;
-        gap: 3rem;
-    }
+/* 태블릿 및 모바일(1024px 이하) 스타일 */
+@media (max-width: 1024px) {
+  .background-wrapper {
+    justify-content: flex-start;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    gap: 3rem;
+  }
 
-    .gallery-item {
-        aspect-ratio: 4 / 5;
-    }
-    
-    .hero {  
-        padding: 0;  
-        gap: 0;  
-    }
+  .gallery-item {
+    aspect-ratio: 4 / 5;
+  }
+  
+  /* 모바일에서 오버레이 항상 활성화 */
+  .gallery-item .overlay {
+    opacity: 1;
+    pointer-events: auto;
+    background: linear-gradient(to top, rgba(0,0,0,.8), transparent 60%);
+  }
 
-    .gnb-panel {
-      padding: 100px 40px 40px 40px;
-    }
+  /* 모바일에서 이미지 기본 스타일 (호버된 것처럼) */
+  .gallery-item img {
+    transform: scale(1.05);
+    filter: brightness(60%);
+  }
+
+  /* 모바일에서 줄바꿈 태그 보이기 */
+  .mobile-break {
+    display: block;
+  }
+  
+  .hero {  
+    padding: 0;  
+    gap: 0;  
+  }
+
+  .gnb-panel {
+    padding: 100px 40px 40px 40px;
+  }
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .gnb-panel {  
     padding: 80px 20px 20px 20px;  
   }

@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ===========================
       [제거됨] Header Scroll Script
-      =========================== */
+     =========================== */
 
   /* ===========================
       1. Hero Slider Script
-      =========================== */
+     =========================== */
   const heroSlider = document.querySelector('.hero-slider');
   const sliderContainer = document.querySelector('.slider-container');
   const slides = document.querySelectorAll('.slide');
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ===========================
       2. GNB Overlay Script (REVISED FOR SLIDING PANELS)
-      =========================== */
+     =========================== */
   const menuBtn = document.getElementById('menuBtn');
   const gnbMenu = document.getElementById('gnbMenu');
   const closeBtn = document.querySelector('.btn-mgnb-close');
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ===========================
       3. Scroll Text Animation Script
-      =========================== */
+     =========================== */
   const txt = document.getElementById('scrollText');
   if (txt) {
     const ioText = new IntersectionObserver((entries, obs) => {
@@ -265,86 +265,71 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ===========================
-      4. Custom Gallery Script
-      =========================== */
+      4. Custom Gallery Script (REVISED)
+     =========================== */
   const gallery = document.getElementById('gallery');
   if (gallery) {
-      let isDown = false;
-      let startX = 0;
-      let scroll0 = 0;
-      let isDragging = false; 
+    let isDown = false;
+    let startX = 0;
+    let scroll0 = 0;
+    let isDragging = false; 
 
-      gallery.addEventListener('dragstart', e => e.preventDefault());
+    gallery.addEventListener('dragstart', e => e.preventDefault());
 
-      gallery.addEventListener('pointerdown', e => {
-        isDown = true;
-        isDragging = false; 
-        startX = e.clientX;
-        scroll0 = gallery.scrollLeft;
-        gallery.setPointerCapture(e.pointerId);
-        gallery.classList.add('dragging');
-      });
+    gallery.addEventListener('pointerdown', e => {
+      isDown = true;
+      isDragging = false; 
+      startX = e.clientX;
+      scroll0 = gallery.scrollLeft;
+      gallery.setPointerCapture(e.pointerId);
+      gallery.classList.add('dragging');
+    });
 
-      gallery.addEventListener('pointermove', e => {
-        if (!isDown) return;
-        const dx = e.clientX - startX;
-        if (Math.abs(dx) > 10) {
-          isDragging = true;
-        }
-        gallery.scrollLeft = scroll0 - dx * 1.2;
-      });
-
-      function handlePointerUpOrCancel(e) {
-          if (!isDown) return;
-          isDown = false;
-          gallery.releasePointerCapture(e.pointerId);
-          gallery.classList.remove('dragging');
-          snapToCard();
+    gallery.addEventListener('pointermove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) {
+        isDragging = true;
       }
+      gallery.scrollLeft = scroll0 - dx * 1.2;
+    });
+    
+    function handlePointerUpOrCancel(e) {
+      if (!isDown) return;
+      isDown = false;
+      gallery.releasePointerCapture(e.pointerId);
+      gallery.classList.remove('dragging');
 
-      gallery.addEventListener('pointerup', handlePointerUpOrCancel);
-      gallery.addEventListener('pointercancel', handlePointerUpOrCancel);
-
-      gallery.addEventListener('click', e => {
-          if (isDragging) {
-              e.preventDefault();
-              e.stopPropagation();
-              return;
-          }
-
-          const galleryItem = e.target.closest('.gallery-item');
-          if (!galleryItem) return;
-
-          const link = galleryItem.closest('a');
-          const isOverlayActive = galleryItem.classList.contains('overlay-active');
-
-          if (link) {
-              if (!isOverlayActive) {
-                  e.preventDefault();
-                  document.querySelectorAll('.gallery-item.overlay-active').forEach(item => {
-                      item.classList.remove('overlay-active');
-                  });
-                  galleryItem.classList.add('overlay-active');
-              }
-          } else {
-              galleryItem.classList.toggle('overlay-active');
-          }
-      });
-
-      function snapToCard() {
-        const card = gallery.querySelector('.gallery-item');
-        if (!card) return;
-        const gap = parseInt(getComputedStyle(gallery).gap) || 0;
-        const step = card.offsetWidth + gap;
-        const left = gallery.scrollLeft;
-        const snapX = Math.round(left / step) * step;
-        gallery.scrollTo({ left: snapX, behavior: 'smooth' });
+      // 드래그 동작이었을 경우에만 카드로 스냅되도록 함
+      if(isDragging) {
+        // 클릭 이벤트가 실수로 발생하는 것을 막기 위해 isDragging 플래그를 잠시 유지
+        setTimeout(() => isDragging = false, 0); 
+        snapToCard();
       }
+    }
+
+    gallery.addEventListener('pointerup', handlePointerUpOrCancel);
+    gallery.addEventListener('pointercancel', handlePointerUpOrCancel);
+
+    // ▼▼▼ 수정 사항: 모바일 오버레이 인터랙션 관련 click 이벤트 리스너 제거 ▼▼▼
+    // gallery.addEventListener('click', ...); -> 이 부분이 완전히 제거되었습니다.
+
+    function snapToCard() {
+      const card = gallery.querySelector('.gallery-item');
+      if (!card) return;
+      const gap = parseInt(getComputedStyle(gallery).gap) || 0;
+      const step = card.offsetWidth + gap;
+      const left = gallery.scrollLeft;
+      const snapX = Math.round(left / step) * step;
+      gallery.scrollTo({ left: snapX, behavior: 'smooth' });
+    }
   }
 
   /* ===========================
       5. Custom Gallery Wrap Reveal Animation Script
-      =========================== */
+     =========================== */
   const wrap = document.querySelector('.custom-gallery-wrap');
   if (wrap) {
     const io = new IntersectionObserver((entries, obs) => {
