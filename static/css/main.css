@@ -276,21 +276,23 @@ main {
 .btn-gnb button:hover span:nth-child(3){ transform:rotate(15deg);  transform-origin:right center; }
 
 /* ===============================
-   GNB Overlay
+   GNB Overlay (REVISED)
    =============================== */
 .head_navi.gnb {
   position: fixed;
-  top: -100%;
+  top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,.95);
-  transition: top .6s ease;
+  background: rgba(0, 0, 0, 0.797);
   z-index: 998;
-  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .6s ease, visibility .6s ease;
 }
 .head_navi.gnb.active {
-  top: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 .btn-mgnb-close {
@@ -300,7 +302,7 @@ main {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1001;
 }
 .btn-mgnb-close img {
   width: 35px;
@@ -314,6 +316,11 @@ main {
     background-position: center;
     transition: opacity 0.5s ease-in-out;
     z-index: -1;
+    opacity: 0;
+}
+
+.gnb-bg-image.visible {
+  opacity: 1;
 }
 
 .gnb-container {
@@ -321,35 +328,58 @@ main {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 120px 80px 80px 80px;
-    gap: 40px;
+    overflow: hidden;
 }
 
-.gnb-main-list.right {
+.gnb-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 120px 40px 80px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: right;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+}
+.gnb-panel.is-active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+.gnb-panel.is-parent {
+    transform: translateX(-30%);
+    opacity: 0.5;
+}
+
+/* Panel Content Styles */
+.gnb-main-list {
     list-style: none;
     font-family: "Noto Medium", sans-serif;
-    font-size: 50px;
-    line-height: 90px;
+    font-size: clamp(32px, 5vw, 50px);
+    line-height: 1.8;
     color: #fff;
     width: max-content;
-    text-align: right;
 }
-.gnb-main-list.right li {
+.gnb-main-list li {
     position: relative;
     cursor: pointer;
     transition: color 0.3s ease;
     font-weight: 700;
-    padding-bottom: 5px;
 }
-.gnb-main-list.right li span {
+.gnb-main-list li span {
     position: relative;
     display: inline-block;
     padding-bottom: 5px;
 }
-.gnb-main-list.right li span::after {
+.gnb-main-list li span::after {
     content: "";
     position: absolute;
     bottom: -5px;
@@ -361,21 +391,37 @@ main {
     transform-origin: left center;
     transition: transform 0.5s ease;
 }
-.gnb-main-list.right li:hover span::after,
-.gnb-main-list.right li.active span::after {
+.gnb-main-list li:hover span::after,
+.gnb-main-list li.active span::after {
     transform: scaleX(1);
 }
 
-.gnb-center {
-    width: max-content;
-    text-align: right;
+.midmenu-list, .submenu-list {
+  width: max-content;
 }
+
+.gnb-back-btn {
+  font-size: 16px;
+  color: #a8a8a8;
+  cursor: pointer;
+  margin-bottom: 30px;
+  display: inline-block;
+  padding-left: 20px;
+  position: relative;
+}
+.gnb-back-btn::before {
+  content: '<';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
 .midmenu-item {
     color: white;
     cursor: pointer;
     font-family: "Noto Medium";
-    font-size: 25px;
-    line-height: 37.5px;
+    font-size: clamp(22px, 3.5vw, 25px);
+    line-height: 1.5;
     transition: color 0.25s ease;
     margin-bottom: 20px;
 }
@@ -383,22 +429,51 @@ main {
     text-decoration: underline;
 }
 
-.gnb-left {
-    width: max-content;
-    text-align: right;
-}
-.submenu-item {
+.submenu-item a {
     display: block;
     margin-bottom: 15px;
-}
-.submenu-item a {
     color: #a8a8a8;
-    font-size: 18px;
+    font-size: clamp(16px, 2.5vw, 18px);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 .submenu-item a:hover {
     color: #fff;
+}
+
+/* Desktop View: Multi-column Layout */
+@media (min-width: 1024px) {
+  .gnb-container {
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  .gnb-panel {
+    position: relative;
+    transform: translateX(0);
+    width: auto;
+    flex: 0 0 33.33%;
+    max-width: 400px;
+    transition: flex-basis 0.5s ease, opacity 0.5s ease;
+    opacity: 1;
+    visibility: visible;
+  }
+  .gnb-panel:not(.is-active) {
+    flex-basis: 0;
+    padding: 120px 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+  .gnb-panel.is-active {
+    flex-basis: 33.33%;
+    opacity: 1;
+  }
+  .gnb-panel.is-parent { /* Desktop에서는 is-parent 사용 안함 */
+      transform: translateX(0);
+      opacity: 1;
+  }
+  .gnb-back-btn {
+    display: none; /* Desktop에서는 뒤로가기 버튼 숨김 */
+  }
 }
 
 /* ===============================
@@ -552,41 +627,13 @@ a { all: unset; }
         display: none;
     }
 
-    .gnb-container {
-        padding: 100px 40px 40px 40px;
-        gap: 30px;
-    }
-    .gnb-main-list.right { 
-        font-size: 40px; 
-        line-height: 60px; 
-    }
-    .gnb-center { 
-        font-size: 22px; 
-        line-height: 32px; 
-    }
-    .midmenu-item { 
-        font-size: inherit; 
-        line-height: inherit; 
-    }
-    .gnb-left { 
-        font-size: 16px; 
-        line-height: 24px; 
-    }
-    .submenu-item a { 
-        font-size: inherit; 
+    .gnb-panel {
+      padding: 100px 40px 40px 40px;
     }
 }
 
 @media (max-width:480px) {
-  .gnb-container { 
+  .gnb-panel { 
     padding: 80px 20px 20px 20px; 
-  }
-  .gnb-main-list.right { 
-    font-size: 32px; 
-    line-height: 48px; 
-  }
-  .gnb-center { 
-    font-size: 18px; 
-    line-height: 27px; 
   }
 }

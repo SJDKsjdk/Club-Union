@@ -25,16 +25,18 @@
 
   <div class="gnb-bg-image" id="gnbBg"></div>
 
-  <div class="gnb-container">
-    <div class="gnb-left" id="subMenuContainer"></div>
-    <div class="gnb-center" id="midMenuContainer"></div>
-    <ul class="gnb-main-list right" id="mainMenu">
-      <li data-menu="ClubUnion"><span>총동아리연합회 소개</span></li>
-      <li data-menu="Clubs"><span>동아리 분과</span></li>
-      <li data-menu="Notification"><span>공지사항</span></li>
-      <li data-menu="Service"><span>동아리 활동지원</span></li>
-      <li data-menu="Communication"><span>소통</span></li>
-    </ul>
+  <div class="gnb-container" id="gnbPanelContainer">
+    <div class="gnb-panel gnb-main-panel" id="mainMenuPanel">
+      <ul class="gnb-main-list" id="mainMenu">
+        <li data-menu="ClubUnion"><span>총동아리연합회 소개</span></li>
+        <li data-menu="Clubs"><span>동아리 분과</span></li>
+        <li data-menu="Notification"><span>공지사항</span></li>
+        <li data-menu="Service"><span>동아리 활동지원</span></li>
+        <li data-menu="Communication"><span>소통</span></li>
+      </ul>
+    </div>
+    <div class="gnb-panel gnb-mid-panel" id="midMenuPanel"></div>
+    <div class="gnb-panel gnb-sub-panel" id="subMenuPanel"></div>
   </div>
 </nav>
 
@@ -91,7 +93,7 @@
       <text x="50%" y="50%" dy=".35em" text-anchor="middle">CLUB UNION</text>
     </svg>
   </div>
-  
+ 
   <div class="scroll-text" id="scrollText">
     <span class="text-white">총동아리연합회.</span>
     <span class="text-blue">파란.</span>
