@@ -1,5 +1,5 @@
 /* ===============================
-   Global Reset & Variables
+    Global Reset & Variables
    =============================== */
 * {
   margin: 0;
@@ -23,7 +23,7 @@ body {
 }
 
 /* ===============================
-   Font Face
+    Font Face
    =============================== */
 @font-face {
   font-family: "Noto Medium";
@@ -35,7 +35,7 @@ body {
 }
 
 /* ===============================
-   Base Typography & Body
+    Base Typography & Body
    =============================== */
 body {
   font-family: 'Noto Sans KR', sans-serif;
@@ -52,19 +52,42 @@ main {
 }
 
 /* ===============================
-   Hero Slider & Visuals
+    [수정됨] Header & Hero Section Styles
    =============================== */
-.logo-overlay {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  z-index: 2000;
+/* [추가] 헤더와 슬라이더의 부모 컨테이너 */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
 }
+
+.main-header {
+    position: absolute; /* fixed에서 absolute로 변경 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10; /* 슬라이더보다 위에 오도록 설정 */
+    pointer-events: none; 
+}
+
+/* 스크롤 관련 스타일 제거 */
+
+.header-logo, .btn-gnb {
+    pointer-events: auto;
+}
+
 .ku-logo {
-  height: clamp(45px, 10vw, 65px);
+  height: 45px;
   width: auto;
 }
 
+/* ===============================
+    Hero Slider & Visuals
+   =============================== */
 .hero-slider {
   position: relative;
   width: 100%;
@@ -121,14 +144,14 @@ main {
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.slider-initialized .slide .text_1,
-.slider-initialized .slide .text_2,
+.slider-initialized .slide .text_1, 
+.slider-initialized .slide .text_2, 
 .slider-initialized .slide .text_3 {
   visibility: visible;
 }
 
-.slide .text_1.show,
-.slide .text_2.show,
+.slide .text_1.show, 
+.slide .text_2.show, 
 .slide .text_3.show {
   opacity: 1;
   transform: translateY(0);
@@ -155,7 +178,7 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 표시할 줄 수 */
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
 }
 
@@ -207,7 +230,7 @@ main {
   position: static;
 }
 
-.wrap_visual .vis-prev,
+.wrap_visual .vis-prev, 
 .wrap_visual .vis-next {
   background-color: transparent;
   border: none;
@@ -222,7 +245,7 @@ main {
   opacity: 0.8;
   transition: opacity 0.3s;
 }
-.wrap_visual .vis-prev:hover,
+.wrap_visual .vis-prev:hover, 
 .wrap_visual .vis-next:hover {
   opacity: 1;
 }
@@ -236,12 +259,10 @@ main {
 }
 
 /* ===============================
-   Hamburger Button
+    Hamburger Button (Positioning)
    =============================== */
 .btn-gnb {
-  position: fixed;
-  top: 25px;
-  right: 25px;
+  position: relative;
   z-index: 999;
 }
 .btn-gnb.hidden {
@@ -276,7 +297,7 @@ main {
 .btn-gnb button:hover span:nth-child(3){ transform:rotate(15deg);  transform-origin:right center; }
 
 /* ===============================
-   GNB Overlay (REVISED)
+    GNB Overlay (Interaction)
    =============================== */
 .head_navi.gnb {
   position: fixed;
@@ -289,10 +310,12 @@ main {
   opacity: 0;
   visibility: hidden;
   transition: opacity .6s ease, visibility .6s ease;
+  pointer-events: none; 
 }
 .head_navi.gnb.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto; 
 }
 
 .btn-mgnb-close {
@@ -359,20 +382,24 @@ main {
     opacity: 0.5;
 }
 
-/* Panel Content Styles */
+/* ===============================
+    Panel Content (Text Clipping)
+   =============================== */
 .gnb-main-list {
     list-style: none;
     font-family: "Noto Medium", sans-serif;
-    font-size: clamp(32px, 5vw, 50px);
+    font-size: clamp(22px, 6vw, 44px); 
     line-height: 1.8;
     color: #fff;
     width: max-content;
+    max-width: 100%;
 }
 .gnb-main-list li {
     position: relative;
     cursor: pointer;
     transition: color 0.3s ease;
     font-weight: 700;
+    white-space: nowrap; 
 }
 .gnb-main-list li span {
     position: relative;
@@ -391,7 +418,7 @@ main {
     transform-origin: left center;
     transition: transform 0.5s ease;
 }
-.gnb-main-list li:hover span::after,
+.gnb-main-list li:hover span::after, 
 .gnb-main-list li.active span::after {
     transform: scaleX(1);
 }
@@ -467,17 +494,17 @@ main {
     flex-basis: 33.33%;
     opacity: 1;
   }
-  .gnb-panel.is-parent { /* Desktop에서는 is-parent 사용 안함 */
+  .gnb-panel.is-parent {
       transform: translateX(0);
       opacity: 1;
   }
   .gnb-back-btn {
-    display: none; /* Desktop에서는 뒤로가기 버튼 숨김 */
+    display: none;
   }
 }
 
 /* ===============================
-   Other Styles
+    Other Styles
    =============================== */
 .background-wrapper {
     position: relative;
@@ -526,7 +553,7 @@ a { all: unset; }
     position: relative;
     z-index: 2;
     text-align: center;
-    font-size: clamp(1.5rem, 6.5vw, 4rem); 
+    font-size: clamp(1.5rem, 6.5vw, 4rem);  
     font-weight: 700;
     white-space: normal;
     padding: 0 20px;
@@ -547,19 +574,19 @@ a { all: unset; }
     transform:translateY(40px);
 }
 
-.custom-gallery { 
-    display:flex; 
-    flex-wrap:nowrap; 
+.custom-gallery {  
+    display:flex;  
+    flex-wrap:nowrap;  
     gap: clamp(15px, 3vw, 40px);
-    padding: 0 clamp(20px, 5vw, 50px); 
-    overflow-x:auto; 
-    -webkit-overflow-scrolling:touch; 
-    scrollbar-width:none; 
-    user-select:none; 
-    cursor:grab; 
-    min-width:100%; 
+    padding: 0 clamp(20px, 5vw, 50px);  
+    overflow-x:auto;  
+    -webkit-overflow-scrolling:touch;  
+    scrollbar-width:none;  
+    user-select:none;  
+    cursor:grab;  
+    min-width:100%;  
 }
-.custom-gallery::-webkit-scrollbar{display:none} 
+.custom-gallery::-webkit-scrollbar{display:none}  
 .custom-gallery.dragging{cursor:grabbing}
 
 .gallery-item {
@@ -573,17 +600,17 @@ a { all: unset; }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .6s ease; }
 .gallery-item:hover img { transform: scale(1.05); filter: brightness(70%); }
 
-.gallery-item .overlay { 
-    position: absolute; 
-    inset: 0; 
-    background: linear-gradient(to top, rgba(0,0,0,.7), transparent 50%); 
-    color: #fff; 
-    padding: 40px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; 
-    opacity: 0; 
-    transition: opacity .4s ease; 
+.gallery-item .overlay {  
+    position: absolute;  
+    inset: 0;  
+    background: linear-gradient(to top, rgba(0,0,0,.7), transparent 50%);  
+    color: #fff;  
+    padding: 40px;  
+    display: flex;  
+    flex-direction: column;  
+    justify-content: flex-end;  
+    opacity: 0;  
+    transition: opacity .4s ease;  
     pointer-events: none;
 }
 .gallery-item:hover .overlay,
@@ -597,13 +624,13 @@ a { all: unset; }
 .custom-gallery-wrap.reveal { animation: fadeSlideUp .8s ease-out 2s forwards; }
 
 /* ===============================
-   Responsive Tweaks
+    Responsive Tweaks
    =============================== */
-@media (max-width: 1400px) { 
-  .hero { 
-    padding: 0; 
-    gap: 0; 
-  } 
+@media (max-width: 1400px) {  
+  .hero {  
+    padding: 0;  
+    gap: 0;  
+  }  
 }
 
 @media (max-width: 768px) {
@@ -618,13 +645,9 @@ a { all: unset; }
         aspect-ratio: 4 / 5;
     }
     
-    .hero { 
-        padding: 0; 
-        gap: 0; 
-    }
-    
-    .hero-logo-anim {
-        display: none;
+    .hero {  
+        padding: 0;  
+        gap: 0;  
     }
 
     .gnb-panel {
@@ -633,7 +656,7 @@ a { all: unset; }
 }
 
 @media (max-width:480px) {
-  .gnb-panel { 
-    padding: 80px 20px 20px 20px; 
+  .gnb-panel {  
+    padding: 80px 20px 20px 20px;  
   }
 }

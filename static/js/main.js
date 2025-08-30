@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+
   /* ===========================
-     1. Hero Slider Script
-   =========================== */
+      [제거됨] Header Scroll Script
+      =========================== */
+
+  /* ===========================
+      1. Hero Slider Script
+      =========================== */
   const heroSlider = document.querySelector('.hero-slider');
   const sliderContainer = document.querySelector('.slider-container');
   const slides = document.querySelectorAll('.slide');
@@ -33,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const text1 = active.querySelector('.text_1');
     const text2 = active.querySelector('.text_2');
     const text3 = active.querySelector('.text_3');
-   
+    
     if (text1) {
       const span1 = text1.querySelector('span');
       if (span1 && span1.dataset.color) {
@@ -67,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSlider.classList.add('slider-initialized');
   }, 100);
 
-
   let touchStartX = 0;
   sliderContainer.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
@@ -80,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ===========================
-     2. GNB Overlay Script (REVISED FOR SLIDING PANELS)
-   =========================== */
+      2. GNB Overlay Script (REVISED FOR SLIDING PANELS)
+      =========================== */
   const menuBtn = document.getElementById('menuBtn');
   const gnbMenu = document.getElementById('gnbMenu');
   const closeBtn = document.querySelector('.btn-mgnb-close');
@@ -92,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgLayer = document.getElementById('gnbBg');
 
   const panels = [mainMenuPanel, midMenuPanel, subMenuPanel];
- 
+  
   const bgImages = {
     ClubUnion: '/static/images/menu-bg1.jpg',
     Clubs: '/static/images/menu-bg2.jpg',
@@ -103,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const menuHierarchy = {
     ClubUnion: {
-      '연합회': [
-        { name: '소개', url: 'introduce' }, { name: '연혁', url: 'history' }, { name: '조직도', url: 'introduce' },
+      '총동아리연합회': [
+        { name: '설명', url: 'introduce' }, { name: '연혁', url: 'history' }, { name: '조직도', url: 'introduce' },
       ],
       '공약보고': [{ name: '회장단 공약', url: 'introduce' }],
       '로고/슬로건': [{ name: '공식 로고', url: 'logo' }, { name: '슬로건', url: 'logo' }]
@@ -144,14 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Desktop: make sure parent panels are visible
     if (window.innerWidth >= 1024) {
       panels.forEach((panel, i) => {
         if (i <= level) panel.classList.add('is-active');
       });
     }
   }
- 
+  
   function resetMenu() {
     navigateTo(0);
     setTimeout(() => {
@@ -159,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subMenuPanel.innerHTML = '';
         mainMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
         bgLayer.classList.remove('visible');
-    }, 500); // Wait for transition to finish
+    }, 500);
   }
 
   menuBtn.addEventListener('click', () => {
@@ -179,17 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
   mainMenu.addEventListener('click', (e) => {
     const li = e.target.closest('li');
     if (!li) return;
-   
+    
     mainMenu.querySelectorAll('li').forEach(item => item.classList.remove('active'));
     li.classList.add('active');
-   
+    
     const mainKey = li.dataset.menu;
-   
-    // Update background
+    
     bgLayer.style.backgroundImage = `url('${bgImages[mainKey]}')`;
     bgLayer.classList.add('visible');
 
-    // Render mid-menu
     const midMenus = menuHierarchy[mainKey];
     if (!midMenus || Object.keys(midMenus).length === 0) {
       midMenuPanel.innerHTML = '<div class="midmenu-list"><div class="midmenu-item">하위 메뉴가 없습니다.</div></div>';
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       midMenuPanel.innerHTML = midMenuHTML;
     }
-   
+    
     navigateTo(1);
   });
 
@@ -248,15 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ===========================
-     3. Meteor Animation Script
-   =========================== */
-  // ... (기존 코드와 동일하여 생략)
-  const canvas = document.getElementById('meteor-canvas');
-  if (canvas) { /* ... */ }
-
-  /* ===========================
-     4. Scroll Text Animation Script
-   =========================== */
+      3. Scroll Text Animation Script
+      =========================== */
   const txt = document.getElementById('scrollText');
   if (txt) {
     const ioText = new IntersectionObserver((entries, obs) => {
@@ -271,77 +265,71 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ===========================
-     5. Custom Gallery Script (Final Version)
-   =========================== */
+      4. Custom Gallery Script
+      =========================== */
   const gallery = document.getElementById('gallery');
   if (gallery) {
       let isDown = false;
       let startX = 0;
       let scroll0 = 0;
-      let isDragging = false;
-      let lastTap = 0;
+      let isDragging = false; 
 
       gallery.addEventListener('dragstart', e => e.preventDefault());
 
       gallery.addEventListener('pointerdown', e => {
         isDown = true;
+        isDragging = false; 
         startX = e.clientX;
         scroll0 = gallery.scrollLeft;
         gallery.setPointerCapture(e.pointerId);
         gallery.classList.add('dragging');
-        isDragging = false; 
       });
 
       gallery.addEventListener('pointermove', e => {
         if (!isDown) return;
         const dx = e.clientX - startX;
-        if (Math.abs(dx) > 10) { 
+        if (Math.abs(dx) > 10) {
           isDragging = true;
         }
         gallery.scrollLeft = scroll0 - dx * 1.2;
       });
 
-      gallery.addEventListener('pointerup', e => {
-        if (!isDown) return;
-       
-        if (!isDragging) {
-          toggleOverlay(e);
-        }
-       
-        isDown = false;
-        gallery.releasePointerCapture(e.pointerId);
-        gallery.classList.remove('dragging');
-        snapToCard();
-        isDragging = false;
-      }, true);
+      function handlePointerUpOrCancel(e) {
+          if (!isDown) return;
+          isDown = false;
+          gallery.releasePointerCapture(e.pointerId);
+          gallery.classList.remove('dragging');
+          snapToCard();
+      }
 
-      gallery.addEventListener('pointercancel', e => {
-        if (!isDown) return;
-        isDown = false;
-        gallery.releasePointerCapture(e.pointerId);
-        gallery.classList.remove('dragging');
-        isDragging = false;
-      });
+      gallery.addEventListener('pointerup', handlePointerUpOrCancel);
+      gallery.addEventListener('pointercancel', handlePointerUpOrCancel);
 
-      function toggleOverlay(event) {
-          const galleryItem = event.target.closest('.gallery-item');
+      gallery.addEventListener('click', e => {
+          if (isDragging) {
+              e.preventDefault();
+              e.stopPropagation();
+              return;
+          }
+
+          const galleryItem = e.target.closest('.gallery-item');
           if (!galleryItem) return;
 
           const link = galleryItem.closest('a');
           const isOverlayActive = galleryItem.classList.contains('overlay-active');
 
-          if (link && !isOverlayActive) {
-              event.preventDefault();
-          }
-
-          document.querySelectorAll('.gallery-item').forEach(item => {
-              if (item !== galleryItem) {
-                  item.classList.remove('overlay-active');
+          if (link) {
+              if (!isOverlayActive) {
+                  e.preventDefault();
+                  document.querySelectorAll('.gallery-item.overlay-active').forEach(item => {
+                      item.classList.remove('overlay-active');
+                  });
+                  galleryItem.classList.add('overlay-active');
               }
-          });
-         
-          galleryItem.classList.toggle('overlay-active');
-      }
+          } else {
+              galleryItem.classList.toggle('overlay-active');
+          }
+      });
 
       function snapToCard() {
         const card = gallery.querySelector('.gallery-item');
@@ -355,18 +343,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ===========================
-     6. Custom Gallery Wrap Reveal Animation Script
-   =========================== */
+      5. Custom Gallery Wrap Reveal Animation Script
+      =========================== */
   const wrap = document.querySelector('.custom-gallery-wrap');
-  if (!wrap) return;
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        wrap.classList.add('reveal');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  io.observe(wrap);
+  if (wrap) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          wrap.classList.add('reveal');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(wrap);
+  }
 });
