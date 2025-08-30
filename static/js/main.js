@@ -34,14 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const text2 = active.querySelector('.text_2');
     const text3 = active.querySelector('.text_3');
     
-    // ✨ [수정] text_1의 동적 색상 적용 로직 복원
     if (text1) {
       const span1 = text1.querySelector('span');
       if (span1 && span1.dataset.color) {
-        // HTML의 data-color 속성값을 읽어와 해당 span의 글자색으로 설정
         span1.style.color = span1.dataset.color;
       } else if (span1) {
-        // data-color 속성이 없는 경우를 대비한 기본 색상
         span1.style.color = '#FFFFFF';
       }
     }
@@ -83,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ===========================
-     2. GNB Overlay Script (이하 변경 없음)
+     2. GNB Overlay Script
   =========================== */
   const menuBtn = document.getElementById('menuBtn');
   const gnbMenu = document.getElementById('gnbMenu');
@@ -205,62 +202,66 @@ document.addEventListener('DOMContentLoaded', () => {
     mainMenuItems.forEach(v => v.classList.remove('active'));
     bgLayer.style.backgroundImage = 'none';
   }
-});
 
-const canvas = document.getElementById('meteor-canvas');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let meteors = [];
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  function createMeteor() {
-    const startFromTop = Math.random() < 0.5;
-    let x, y;
-    if (startFromTop) {
-      x = Math.random() * canvas.width;
-      y = -Math.random() * 100;
-    } else {
-      x = -Math.random() * 100;
-      y = Math.random() * canvas.height;
+  /* ===========================
+     3. Meteor Animation Script
+  =========================== */
+  const canvas = document.getElementById('meteor-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let meteors = [];
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-    return {
-      x, y, length: Math.random() * 60 + 20, speed: Math.random() * 2 + 2, angle: Math.PI / 4, alpha: Math.random() * 0.5 + 0.5
-    };
-  }
-  function drawMeteor(meteor) {
-    const { x, y, length, angle, alpha } = meteor;
-    const xEnd = x + Math.cos(angle) * length;
-    const yEnd = y + Math.sin(angle) * length;
-    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(xEnd, yEnd);
-    ctx.stroke();
-  }
-  function updateMeteors() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    meteors.forEach((meteor, index) => {
-      meteor.x += meteor.speed;
-      meteor.y += meteor.speed;
-      drawMeteor(meteor);
-      if (meteor.x > canvas.width || meteor.y > canvas.height) {
-        meteors[index] = createMeteor();
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    function createMeteor() {
+      const startFromTop = Math.random() < 0.5;
+      let x, y;
+      if (startFromTop) {
+        x = Math.random() * canvas.width;
+        y = -Math.random() * 100;
+      } else {
+        x = -Math.random() * 100;
+        y = Math.random() * canvas.height;
       }
-    });
-    requestAnimationFrame(updateMeteors);
+      return {
+        x, y, length: Math.random() * 60 + 20, speed: Math.random() * 2 + 2, angle: Math.PI / 4, alpha: Math.random() * 0.5 + 0.5
+      };
+    }
+    function drawMeteor(meteor) {
+      const { x, y, length, angle, alpha } = meteor;
+      const xEnd = x + Math.cos(angle) * length;
+      const yEnd = y + Math.sin(angle) * length;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(xEnd, yEnd);
+      ctx.stroke();
+    }
+    function updateMeteors() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      meteors.forEach((meteor, index) => {
+        meteor.x += meteor.speed;
+        meteor.y += meteor.speed;
+        drawMeteor(meteor);
+        if (meteor.x > canvas.width || meteor.y > canvas.height) {
+          meteors[index] = createMeteor();
+        }
+      });
+      requestAnimationFrame(updateMeteors);
+    }
+    for (let i = 0; i < 15; i++) {
+      meteors.push(createMeteor());
+    }
+    updateMeteors();
   }
-  for (let i = 0; i < 15; i++) {
-    meteors.push(createMeteor());
-  }
-  updateMeteors();
-}
 
-document.addEventListener('DOMContentLoaded', function () {
+  /* ===========================
+     4. Scroll Text Animation Script
+  =========================== */
   const txt = document.getElementById('scrollText');
   if (txt) {
     const ioText = new IntersectionObserver((entries, obs) => {
@@ -273,47 +274,97 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.3 });
     ioText.observe(txt);
   }
-});
 
-const gallery = document.getElementById('gallery');
-if (gallery) {
-    let isDown = false;
-    let startX = 0;
-    let scroll0 = 0;
-    gallery.addEventListener('dragstart', e => e.preventDefault());
-    gallery.addEventListener('pointerdown', e => {
-      isDown = true;
-      startX = e.clientX;
-      scroll0 = gallery.scrollLeft;
-      gallery.setPointerCapture(e.pointerId);
-      gallery.classList.add('dragging');
-    });
-    gallery.addEventListener('pointermove', e => {
-      if (!isDown) return;
-      const dx = e.clientX - startX;
-      gallery.scrollLeft = scroll0 - dx * 1.2;
-    });
-    ['pointerup', 'pointercancel'].forEach(type => {
-      gallery.addEventListener(type, e => {
+  /* ===========================
+     5. Custom Gallery Script (Final Version)
+  =========================== */
+  const gallery = document.getElementById('gallery');
+  if (gallery) {
+      let isDown = false;
+      let startX = 0;
+      let scroll0 = 0;
+      let isDragging = false;
+      let lastTap = 0;
+
+      gallery.addEventListener('dragstart', e => e.preventDefault());
+
+      gallery.addEventListener('pointerdown', e => {
+        isDown = true;
+        startX = e.clientX;
+        scroll0 = gallery.scrollLeft;
+        gallery.setPointerCapture(e.pointerId);
+        gallery.classList.add('dragging');
+        isDragging = false; 
+      });
+
+      gallery.addEventListener('pointermove', e => {
         if (!isDown) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 10) { 
+          isDragging = true;
+        }
+        gallery.scrollLeft = scroll0 - dx * 1.2;
+      });
+
+      // pointerup 이벤트를 click 이벤트보다 먼저 처리하기 위해 capture 옵션 사용
+      gallery.addEventListener('pointerup', e => {
+        if (!isDown) return;
+        
+        if (!isDragging) {
+          // 드래그가 아니었다면(탭), toggleOverlay 함수를 호출
+          toggleOverlay(e); // 이벤트 객체(e)를 그대로 전달
+        }
+        
         isDown = false;
         gallery.releasePointerCapture(e.pointerId);
         gallery.classList.remove('dragging');
         snapToCard();
-      });
-    });
-    function snapToCard() {
-      const card = gallery.querySelector('.gallery-item');
-      if (!card) return;
-      const gap = parseInt(getComputedStyle(gallery).gap) || 0;
-      const step = card.offsetWidth + gap;
-      const left = gallery.scrollLeft;
-      const snapX = Math.round(left / step) * step;
-      gallery.scrollTo({ left: snapX, behavior: 'smooth' });
-    }
-}
+        isDragging = false;
+      }, true); // Capture phase
 
-document.addEventListener('DOMContentLoaded', () => {
+      gallery.addEventListener('pointercancel', e => {
+        if (!isDown) return;
+        isDown = false;
+        gallery.releasePointerCapture(e.pointerId);
+        gallery.classList.remove('dragging');
+        isDragging = false;
+      });
+
+      function toggleOverlay(event) {
+          const galleryItem = event.target.closest('.gallery-item');
+          if (!galleryItem) return;
+
+          const link = galleryItem.closest('a');
+          const isOverlayActive = galleryItem.classList.contains('overlay-active');
+
+          if (link && !isOverlayActive) {
+              // 오버레이가 활성화되지 않은 상태에서의 첫 클릭이면, 기본 링크 동작을 막음
+              event.preventDefault();
+          }
+
+          document.querySelectorAll('.gallery-item').forEach(item => {
+              if (item !== galleryItem) {
+                  item.classList.remove('overlay-active');
+              }
+          });
+          
+          galleryItem.classList.toggle('overlay-active');
+      }
+
+      function snapToCard() {
+        const card = gallery.querySelector('.gallery-item');
+        if (!card) return;
+        const gap = parseInt(getComputedStyle(gallery).gap) || 0;
+        const step = card.offsetWidth + gap;
+        const left = gallery.scrollLeft;
+        const snapX = Math.round(left / step) * step;
+        gallery.scrollTo({ left: snapX, behavior: 'smooth' });
+      }
+  }
+
+  /* ===========================
+     6. Custom Gallery Wrap Reveal Animation Script
+  =========================== */
   const wrap = document.querySelector('.custom-gallery-wrap');
   if (!wrap) return;
   const io = new IntersectionObserver((entries, obs) => {
