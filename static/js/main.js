@@ -343,3 +343,43 @@ document.addEventListener('DOMContentLoaded', () => {
     io.observe(wrap);
   }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ===========================
+      6. First Visit Popup Script
+     =========================== */
+  const popupOverlay = document.getElementById('popup-overlay');
+  const closeButton = document.getElementById('popup-close-btn');
+
+  // localStorage에 'hasSeenPopup' 값이 없으면 팝업을 보여줌
+  if (!localStorage.getItem('hasSeenPopup')) {
+    // 팝업을 부드럽게 표시
+    setTimeout(() => {
+      popupOverlay.classList.add('active');
+    }, 500); // 0.5초 후에 팝업 표시
+  }
+
+  const closePopup = () => {
+    popupOverlay.classList.remove('active');
+    // 팝업을 닫을 때 localStorage에 'true' 값을 저장
+    // 이 값은 브라우저를 닫았다가 다시 열어도 유지됩니다.
+    localStorage.setItem('hasSeenPopup', 'true');
+  };
+
+  // 닫기 버튼을 클릭했을 때
+  if (closeButton) {
+    closeButton.addEventListener('click', closePopup);
+  }
+
+  // 뒷 배경을 클릭했을 때도 닫히도록 설정
+  if (popupOverlay) {
+    popupOverlay.addEventListener('click', (event) => {
+      // 팝업의 흰색 영역이 아닌, 어두운 배경을 클릭했을 때만 닫히도록 함
+      if (event.target === popupOverlay) {
+        closePopup();
+      }
+    });
+  }
+
+});

@@ -58,6 +58,7 @@ main {
   position: relative;
   width: 100%;
   height: 100vh;
+  background-color: #000;
 }
 
 .main-header {
@@ -83,7 +84,7 @@ main {
 }
 
 /* ===============================
-    Hero Slider & Visuals
+    Hero Slider & Visuals (Fade Animation)
    =============================== */
 .hero-slider {
   position: relative;
@@ -91,26 +92,28 @@ main {
   height: 100vh;
   overflow: hidden;
   z-index: 2;
-  /* 렌더링 오류(흰 여백) 방지용 배경색 */
-  background-color: #000;
 }
 .slider-container {
   position: relative;
-  width: 400%;
+  width: 100%;
   height: 100%;
-  display: flex;
-  transition: transform .5s cubic-bezier(.4,0,.2,1);
-  will-change: transform;
 }
 .slide {
-  position: relative;
-  width: 25%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
-  flex-shrink: 0;
   overflow: hidden;
-  /* 렌더링 오류(투명화) 방지를 위한 GPU 가속 */
-  transform: translateZ(0);
-  backface-visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s;
+  will-change: opacity;
+}
+.slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
 }
 .slide img {
   position: absolute;
@@ -146,15 +149,15 @@ main {
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.slider-initialized .slide .text_1, 
-.slider-initialized .slide .text_2, 
-.slider-initialized .slide .text_3 {
+.slide.is-active .text_1, 
+.slide.is-active .text_2, 
+.slide.is-active .text_3 {
   visibility: visible;
 }
 
-.slide .text_1.show, 
-.slide .text_2.show, 
-.slide .text_3.show {
+.slide.is-active .text_1.show, 
+.slide.is-active .text_2.show, 
+.slide.is-active .text_3.show {
   opacity: 1;
   transform: translateY(0);
 }
@@ -567,12 +570,10 @@ a { all: unset; }
 .text-white { color: #fff; } .text-blue { color: #034da1; }
 
 .custom-gallery-wrap {
+  position: relative;
   z-index: 1000;
   width:100%;
   overflow:hidden;
-  cursor:grab;
-  opacity:0;
-  transform:translateY(40px);
 }
 
 .custom-gallery {  
@@ -580,28 +581,24 @@ a { all: unset; }
   flex-wrap:nowrap;  
   gap: clamp(15px, 3vw, 40px);
   padding: 0 clamp(20px, 5vw, 50px);  
-  overflow-x:auto;  
-  -webkit-overflow-scrolling:touch;  
-  scrollbar-width:none;  
   user-select:none;  
-  cursor:grab;  
   min-width:100%;
-  overscroll-behavior-x: contain;
 }
-.custom-gallery::-webkit-scrollbar{display:none}  
-.custom-gallery.dragging{cursor:grabbing}
 
 .gallery-item {
   flex: 0 0 auto;
   position: relative;
   width: clamp(280px, 75vw, 1000px);
-  aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
-  /* 렌더링 오류(투명화) 방지를 위한 GPU 가속 */
   transform: translateZ(0);
 }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .6s ease; }
+.gallery-item img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transition: transform .6s ease, filter .6s ease; 
+}
 
 .gallery-item .overlay {  
   position: absolute;  
@@ -616,13 +613,18 @@ a { all: unset; }
   transition: opacity .4s ease;  
   pointer-events: none;
 }
-.gallery-item.overlay-active .overlay {
-  opacity: 1;
-  pointer-events: auto;
-}
 
-/* PC(호버 가능 기기)에서만 호버 효과 적용 */
 @media (hover: hover) and (pointer: fine) {
+  .custom-gallery {
+    overflow-x: scroll;  
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .custom-gallery::-webkit-scrollbar { display:none; }  
+  .gallery-item {
+    scroll-snap-align: center;
+  }
   .gallery-item:hover img {
     transform: scale(1.05);
     filter: brightness(70%);
@@ -647,64 +649,205 @@ a { all: unset; }
 @keyframes fadeSlideUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:none; } }
 .custom-gallery-wrap.reveal { animation: fadeSlideUp .8s ease-out 2s forwards; }
 
-/* 모바일 전용 줄바꿈 기본 숨김 처리 */
 .mobile-break {
   display: none;
+}
+
+.gallery-nav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0 10px;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.gallery-nav button {
+  pointer-events: all;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+  transition: opacity 0.3s;
+}
+.gallery-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+#gallery-prev-btn {
+  background-image: url("/static/images/visual-left.png");
+}
+#gallery-next-btn {
+  background-image: url("/static/images/visual-right.png");
 }
 
 /* ===============================
     Responsive Tweaks
    =============================== */
-@media (max-width: 1400px) {  
-  .hero {  
-    padding: 0;  
-    gap: 0;  
-  }  
+@media (max-width: 1024px) {
+  .custom-gallery {
+    overflow: hidden;
+    transition: transform 0.4s ease-in-out;
+  }
+  .gallery-nav {
+    display: flex;
+  }
 }
 
-/* 태블릿 및 모바일(1024px 이하) 스타일 */
-@media (max-width: 1024px) {
-  .background-wrapper {
-    justify-content: flex-start;
-    padding-top: 15vh;
-    padding-bottom: 15vh;
-    gap: 3rem;
-  }
-
+@media (max-width: 768px) {
   .gallery-item {
     aspect-ratio: 4 / 5;
   }
-  
-  /* 모바일에서 오버레이 항상 활성화 */
+  .gnb-panel {
+    padding: 100px 40px 40px 40px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
   .gallery-item .overlay {
     opacity: 1;
     pointer-events: auto;
     background: linear-gradient(to top, rgba(0,0,0,.8), transparent 60%);
   }
-
-  /* 모바일에서 이미지 기본 스타일 (호버된 것처럼) */
   .gallery-item img {
-    transform: scale(1.05);
     filter: brightness(60%);
   }
-
-  /* 모바일에서 줄바꿈 태그 보이기 */
   .mobile-break {
     display: block;
-  }
-  
-  .hero {  
-    padding: 0;  
-    gap: 0;  
-  }
-
-  .gnb-panel {
-    padding: 100px 40px 40px 40px;
   }
 }
 
 @media (max-width: 480px) {
   .gnb-panel {  
     padding: 80px 20px 20px 20px;  
+  }
+}
+
+/* ===============================
+    Popup Styles
+   =============================== */
+#popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+#popup-notice {
+  position: relative;
+  background-color: #fff;
+  color: #333;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  font-family: 'Noto Sans KR', sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transform: translateY(10px);
+  transition: transform 0.3s ease-out;
+}
+#popup-overlay.active #popup-notice {
+  transform: translateY(0);
+}
+.popup-header-accent {
+  width: 100%;
+  height: 6px;
+  background-color: var(--ku-red, #8B1E31);
+}
+.popup-content {
+  padding: 25px 35px 35px 35px;
+  text-align: center;
+}
+.popup-title-area {
+  margin-bottom: 20px;
+}
+.popup-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+.popup-content h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  color: var(--ku-dark, #2C2C2C);
+}
+.popup-responsible {
+  font-size: 14px;
+  color: #555;
+}
+.popup-divider {
+  border: none;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 0 auto 25px auto;
+  width: 80%;
+}
+.popup-message {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  color: #444;
+  word-break: keep-all;
+}
+#popup-close-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: var(--ku-dark, #2C2C2C);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+#popup-close-btn:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+    Popup Responsive Styles
+   =============================== */
+@media (max-width: 768px) {
+  .popup-content {
+    padding: 20px 20px 25px 20px;
+  }
+  .popup-icon {
+    font-size: 2.2rem;
+  }
+  .popup-content h2 {
+    font-size: 22px;
+  }
+  .popup-responsible {
+    font-size: 13px;
+  }
+  .popup-message {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  #popup-close-btn {
+    padding: 12px 15px;
+    font-size: 15px;
   }
 }
