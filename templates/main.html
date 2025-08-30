@@ -12,30 +12,22 @@
 </head>
 <body>
 
-<!-- 햄버거 버튼 -->
 <div id="menuBtn" class="btn-gnb only-button">
   <button type="button" title="메뉴 열기" aria-label="메뉴 열기">
     <span></span><span></span><span></span>
   </button>
 </div>
 
-<!-- GNB 전체 오버레이 -->
 <nav class="head_navi gnb" id="gnbMenu">
   <button class="btn-mgnb-close" title="메뉴 닫기" aria-label="메뉴 닫기">
     <img src="/static/images/menu-close.png" alt="닫기 버튼" />
   </button>
 
-  <!-- 배경 이미지는 JS 에서 동적으로 교체 -->
   <div class="gnb-bg-image" id="gnbBg"></div>
 
   <div class="gnb-container">
-    <!-- 소분류 -->
     <div class="gnb-left" id="subMenuContainer"></div>
-
-    <!-- 중분류 -->
     <div class="gnb-center" id="midMenuContainer"></div>
-
-    <!-- 대분류 -->
     <ul class="gnb-main-list right" id="mainMenu">
       <li data-menu="ClubUnion"><span>총동아리연합회 소개</span></li>
       <li data-menu="Clubs"><span>동아리 분과</span></li>
@@ -46,7 +38,6 @@
   </div>
 </nav>
 
-  <!-- 메인 슬라이더 -->
   <div class="hero-slider">
     <div class="logo-overlay">
       <img src="/static/images/union_logo.png" alt="고려대학교 로고" class="ku-logo" />
@@ -54,33 +45,33 @@
     <div class="slider-container">
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="고려대학교 커피스" />
-        <div class="item">
-          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The 45th Korea University Sejong Campus</span></p>
-          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">KUS Club Union Paran</strong>'</span></p>
+        <div class="text-container">
+          <p class="text_1"><span data-color="#034da1">The 45th Korea University Sejong Campus</span></p>
+          <p class="text_2">'KUS Club Union Paran'</p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
       </div>
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="중앙광장" />
-        <div class="item">
-          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The Power of Korea</span></p>
-          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">More Than Clubs, A Community</strong>'</span></p>
+        <div class="text-container">
+          <p class="text_1"><span data-color="#034da1">The Power of Korea</span></p>
+          <p class="text_2">'More Than Clubs, A Community'</p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
       </div>
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="동아리 활동" />
-        <div class="item">
-          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The Power of Korea</span></p>
-          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">Opportunity comes to those who are ready</strong>'</span></p>
+        <div class="text-container">
+          <p class="text_1"><span data-color="#034da1">The Power of Korea</span></p>
+          <p class="text_2">'Opportunity comes to those who are ready'</p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
       </div>
       <div class="slide">
         <img src="/static/images/main_jpg_1.jpg" alt="학생 활동" />
-        <div class="item">
-          <p class="text_1"><span span data-color="#034da1" style="font-family: Comic Sans MS, serif;">The Power of Korea</span></p>
-          <p class="text_2"><span>'<strong style="font-family: 'Noto Sans KR', sans-serif; font-weight: 500;">Create your future</strong>'</span></p>
+        <div class="text-container">
+          <p class="text_1"><span data-color="#034da1">The Power of Korea</span></p>
+          <p class="text_2">'Create your future'</p>
           <p class="text_3"><span class="oku-link">고려대 상징 로고</span></p>
         </div>
       </div>
@@ -94,13 +85,8 @@
     </div>
   </div>
 
-<!-- 소개 영역 -->
 <div class="background-wrapper">
-  <!-- (선택) 유성 애니메이션 캔버스 -->
-  <!-- <canvas id="meteor-canvas"></canvas> -->
-
   <section class="hero">
-    <!-- ▣ 드래그‑갤러리 -->
     <div class="custom-gallery-wrap">
       <div class="custom-gallery" id="gallery">
         <a href="/introduce" class="gallery-link">
@@ -112,7 +98,6 @@
             </div>
           </div>
         </a>
-
         <div class="gallery-item">
           <img src="/static/images/전간수.jpg" alt="갤러리 이미지 2" draggable="false" />
           <div class="overlay">
@@ -120,7 +105,6 @@
             <p>중요 공지사항에 대해 알려드립니다.</p>
           </div>
         </div>
-
         <div class="gallery-item">
           <img src="/static/images/전간수.jpg" alt="갤러리 이미지 3" draggable="false" />
           <div class="overlay">
@@ -128,41 +112,28 @@
             <p>동아리 활동에 대해 알아볼까요?</p>
           </div>
         </div>
-        <!-- 필요 시 gallery-item 추가 -->
       </div>
     </div>
-
-    <!-- ▣ SVG 로고 애니메이션 -->
     <div class="hero-logo-anim">
       <svg viewBox="0 0 300 300">
-        <text x="50%" y="50%" dy=".35em" text-anchor="middle">
-          CLUB UNION
-        </text>
+        <text x="50%" y="50%" dy=".35em" text-anchor="middle">CLUB UNION</text>
       </svg>
     </div>
-
-    <!-- ▣ 스크롤 인 텍스트 -->
     <div class="scroll-text" id="scrollText">
       <span class="text-white">총동아리연합회.</span>
       <span class="text-blue">파란.</span>
     </div>
-  </section> <!-- ★ 누락되어 있던 section 닫기 -->
-
-</div> <!-- background-wrapper 닫기 -->
-
-
-  <!-- 푸터 -->
-  <footer class="footer">
+  </section>
+</div>
+<footer class="footer">
     <div class="footer-content">
       <p>(30019) 세종특별자치시 세종로 2511 고려대학교 세종캠퍼스 Tel : 044-860-1114  Fax : 044-860-1048</p>
-      <p>&copy; 2025 Korea University(Sejong Campus) Club Union. All rights reserved.</p>
+      <p>© 2025 Korea University(Sejong Campus) Club Union. All rights reserved.</p>
     </div>
-  </footer>
+</footer>
 
-
-  <!-- JS 파일 -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script src="/static/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/static/js/main.js"></script>
 </body>
 </html>
