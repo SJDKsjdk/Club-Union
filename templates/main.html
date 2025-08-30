@@ -141,26 +141,21 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="/static/js/main.js"></script>
-<div id="popup-overlay">
-  <div id="popup-notice">
-    <div class="popup-header-accent"></div>
-    
-    <div class="popup-content">
-      <div class="popup-title-area">
-        <span class="popup-icon">📢</span>
-        <h2>개발 진행 안내</h2>
-        <p class="popup-responsible">책임자 : 기획국장(장선규) / 문화국장(김주빈)</p>
-      </div>
-      
-      <hr class="popup-divider">
-      
-      <p class="popup-message">
-        현재 보고 계신 웹사이트는 개발 및 테스트 단계에 있습니다.
-        일부 정보가 누락되거나, 기능이 불안정하여 예기치 않은 버그가 발생할 수 있으니,
-        이용에 참고 부탁드립니다.
-      </p>
-      <button id="popup-close-btn">오늘 하루 보지 않기</button>
+
+<!-- 팝업 HTML -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-content">
+    <button class="popup-close" id="popupClose" title="팝업 닫기" aria-label="팝업 닫기">
+      <img src="/static/images/menu-close.png" alt="닫기 버튼" />
+    </button>
+    <div class="popup-text">
+      <h2>📢 개발 진행 안내</h2>
+      <p><strong>책임자:</strong> 기획국장(장선규) / 문화국장(김주빈)</p>
+      <p>현재 보고 계신 웹사이트는 개발 및 테스트 단계에 있습니다.
+      일부 정보가 누락되거나, 기능이 불안정하여 예기치 않은 버그가 발생할 수 있으니,
+      이용에 참고 부탁드립니다.</p>
     </div>
+    <button class="popup-text-close" id="popupTextClose">닫기</button>
   </div>
 </div>
 </body>

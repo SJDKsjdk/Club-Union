@@ -1,9 +1,5 @@
+
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ===========================
-      [제거됨] Header Scroll Script
-     =========================== */
-
   /* ===========================
       1. Hero Slider Script
      =========================== */
@@ -247,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 
-
   /* ===========================
       3. Scroll Text Animation Script
      =========================== */
@@ -302,9 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gallery.releasePointerCapture(e.pointerId);
       gallery.classList.remove('dragging');
 
-      // 드래그 동작이었을 경우에만 카드로 스냅되도록 함
       if(isDragging) {
-        // 클릭 이벤트가 실수로 발생하는 것을 막기 위해 isDragging 플래그를 잠시 유지
         setTimeout(() => isDragging = false, 0); 
         snapToCard();
       }
@@ -312,9 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     gallery.addEventListener('pointerup', handlePointerUpOrCancel);
     gallery.addEventListener('pointercancel', handlePointerUpOrCancel);
-
-    // ▼▼▼ 수정 사항: 모바일 오버레이 인터랙션 관련 click 이벤트 리스너 제거 ▼▼▼
-    // gallery.addEventListener('click', ...); -> 이 부분이 완전히 제거되었습니다.
 
     function snapToCard() {
       const card = gallery.querySelector('.gallery-item');
@@ -342,44 +332,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.2 });
     io.observe(wrap);
   }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
 
   /* ===========================
-      6. First Visit Popup Script
+      6. Popup Script
      =========================== */
-  const popupOverlay = document.getElementById('popup-overlay');
-  const closeButton = document.getElementById('popup-close-btn');
+  const popupOverlay = document.getElementById('popupOverlay');
+  const popupClose = document.getElementById('popupClose');
+  const popupTextClose = document.getElementById('popupTextClose');
 
-  // localStorage에 'hasSeenPopup' 값이 없으면 팝업을 보여줌
-  if (!localStorage.getItem('hasSeenPopup')) {
-    // 팝업을 부드럽게 표시
-    setTimeout(() => {
-      popupOverlay.classList.add('active');
-    }, 500); // 0.5초 후에 팝업 표시
-  }
+  if (popupOverlay && popupClose && popupTextClose) {
+    console.log('Popup elements found'); // 디버깅용 로그
+    // 세션 스토리지에서 팝업 표시 여부 확인
+    if (!sessionStorage.getItem('popupShown')) {
+      console.log('Popup not shown yet, displaying...'); // 디버깅용 로그
+      setTimeout(() => {
+        popupOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 스크롤 방지
+      }, 500); // 페이지 로드 후 0.5초 뒤 표시
+    } else {
+      console.log('Popup already shown in this session'); // 디버깅용 로그
+    }
 
-  const closePopup = () => {
-    popupOverlay.classList.remove('active');
-    // 팝업을 닫을 때 localStorage에 'true' 값을 저장
-    // 이 값은 브라우저를 닫았다가 다시 열어도 유지됩니다.
-    localStorage.setItem('hasSeenPopup', 'true');
-  };
+    // 이미지 닫기 버튼
+    popupClose.addEventListener('click', () => {
+      console.log('Popup close button clicked'); // 디버깅용 로그
+      popupOverlay.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 복구
+      sessionStorage.setItem('popupShown', 'true'); // 세션 동안 팝업 표시 기록
+    });
 
-  // 닫기 버튼을 클릭했을 때
-  if (closeButton) {
-    closeButton.addEventListener('click', closePopup);
-  }
+    // 텍스트 닫기 버튼
+    popupTextClose.addEventListener('click', () => {
+      console.log('Popup text close button clicked'); // 디버깅용 로그
+      popupOverlay.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 복구
+      sessionStorage.setItem('popupShown', 'true'); // 세션 동안 팝업 표시 기록
+    });
 
-  // 뒷 배경을 클릭했을 때도 닫히도록 설정
-  if (popupOverlay) {
-    popupOverlay.addEventListener('click', (event) => {
-      // 팝업의 흰색 영역이 아닌, 어두운 배경을 클릭했을 때만 닫히도록 함
-      if (event.target === popupOverlay) {
-        closePopup();
+    // 팝업 외부 클릭 시 닫기
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        console.log('Popup overlay clicked'); // 디버깅용 로그
+        popupOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('popupShown', 'true');
       }
     });
+  } else {
+    console.error('Popup elements not found'); // 디버깅용 로그
   }
-
 });
