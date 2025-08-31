@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공지 작성 AI</title>
+  <style>
+    #chatBox { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; margin-top: 10px; }
+    #userInput { width: 70%; padding: 5px; }
+    button { padding: 5px 10px; }
+    .loading-message { font-style: italic; color: #888; }
+  </style>
+</head>
+<body>
+  <h2>공지 작성 AI</h2>
+  <input id="userInput" type="text" placeholder="공지 요청을 입력하세요..." />
+  <button onclick="sendMessage()">전송</button>
+  <div id="chatBox"></div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value;
+      if(!input.trim()) return;
+
+      const chatBox = document.getElementById("chatBox");
+
+      // 1. 사용자 메시지 출력
+      chatBox.innerHTML += "<p><b>사용자:</b> " + input + "</p>";
+      
+      // 2. 입력창 초기화
+      document.getElementById("userInput").value = "";
+
+      // 3. 로딩 메시지 추가
+      const loadingMessage = document.createElement("p");
+      loadingMessage.className = "loading-message";
+      loadingMessage.textContent = "AI가 공지 초안을 작성 중입니다...";
+      chatBox.appendChild(loadingMessage);
+
+      // 스크롤 맨 아래로
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        // 4. LLM 요청
+        const res = await fetch("/notice-ai", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: input })
+        });
+        
+        const data = await res.json();
+        
+        // 5. 로딩 메시지 제거
+        loadingMessage.remove();
+
+        // 6. AI 응답 출력
+        chatBox.innerHTML += "<p><b>AI:</b> " + data.reply + "</p>";
+
+      } catch (error) {
+        // API 요청 실패 시 로딩 메시지 제거 및 오류 메시지 출력
+        loadingMessage.remove();
+        chatBox.innerHTML += "<p style='color:red;'><b>오류:</b> AI 응답을 가져오는 데 실패했습니다. 서버 상태를 확인하세요.</p>";
+        console.error("Fetch Error:", error);
+      }
+      
+      // 7. 스크롤 맨 아래로
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>

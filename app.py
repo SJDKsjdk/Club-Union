@@ -1,6 +1,9 @@
 # 2025.07.24
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request, jsonify
 import os
+from dotenv import load_dotenv
+import requests
+import json
 
 app = Flask(__name__, 
             static_folder='static',
@@ -9,6 +12,7 @@ app = Flask(__name__,
 # 정적 파일 캐싱 설정 (선택사항)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 3600
 
+# 라우트 핸들러를 한 곳에 모으는 것이 좋습니다.
 @app.route('/')
 def main():
     return render_template('main.html')
@@ -181,6 +185,59 @@ def news():
 def mana():
     return render_template('mana.html')
 
+@app.route('/sjdkllm')
+def sjdkllm():
+    print("sjdkllm 라우트 진입!")
+    return render_template('sjdkllm.html')
+
+# notice.json 파일 로드
+try:
+    with open("/Users/sjdk/Desktop/ClubUnion/Club-Union/notice.json", "r", encoding="utf-8") as f:
+        notices = json.load(f)
+except FileNotFoundError:
+    print("notice.json 파일을 찾을 수 없습니다. 경로를 확인해 주세요.")
+    notices = []
+
+
+@app.route('/notice-ai', methods=['POST'])
+def notice_ai():
+    data = request.json
+    user_input = data.get("message", "")
+
+    related_notices = [n for n in notices if any(w in n for w in user_input.split())]
+    related_text = "\n".join(related_notices[:3])
+
+    load_dotenv()
+
+    groq_api_url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {os.getenv('GROQ_API_KEY')}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": "llama-3.3-70b-versatile", 
+        "messages": [
+            {"role": "system", "content": "너는 학생회 공지문 작성 보조 도우미야. 항상 단정하고 정중한 문체로 작성해."},
+            {"role": "user", "content": f"참고 공지:\n{related_text}\n\n새 요청: {user_input}"}
+        ]
+    }
+
+    try:
+        response = requests.post(groq_api_url, headers=headers, json=payload)
+        
+        # API 응답 상태 및 본문 출력 (추가된 디버깅 라인)
+        print(f"API 응답 상태 코드: {response.status_code}")
+        print(f"API 응답 본문: {response.text}")
+        
+        response.raise_for_status() # HTTP 오류가 발생하면 예외를 발생시킵니다.
+        reply = response.json()["choices"][0]["message"]["content"]
+        
+    except requests.exceptions.RequestException as e:
+        print(f"API 호출 중 오류 발생: {e}")
+        return jsonify({"reply": "AI 응답을 가져오는 데 문제가 발생했습니다. 잠시 후 다시 시도해 주세요."}), 500
+
+    return jsonify({"reply": reply})
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
