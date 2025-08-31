@@ -1,7 +1,9 @@
+
 document.addEventListener('DOMContentLoaded', () => {
   /* ===========================
-     1. Hero Slider Script
-  =========================== */
+      1. Hero Slider Script
+     =========================== */
+  const heroSlider = document.querySelector('.hero-slider');
   const sliderContainer = document.querySelector('.slider-container');
   const slides = document.querySelectorAll('.slide');
   const currentSpan = document.querySelector('.wrap_visual .now');
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function goToSlide(idx) {
     currentSlide = (idx + totalSlides) % totalSlides;
-    sliderContainer.style.transform = `translateX(-${currentSlide * 25}%)`;
+    sliderContainer.style.transform = `translateX(-${currentSlide * 100 / totalSlides}%)`;
 
     slides.forEach(s => {
       s.querySelector('.text_1')?.classList.remove('show');
@@ -32,24 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const text1 = active.querySelector('.text_1');
     const text2 = active.querySelector('.text_2');
     const text3 = active.querySelector('.text_3');
-
+    
     if (text1) {
       const span1 = text1.querySelector('span');
-      if (span1) {
-        span1.style.color = span1.getAttribute('data-color') || '#8B0029';
-        span1.style.fontFamily = `'Comic Sans MS', serif`;
+      if (span1 && span1.dataset.color) {
+        span1.style.color = span1.dataset.color;
+      } else if (span1) {
+        span1.style.color = '#FFFFFF';
       }
-      setTimeout(() => text1.classList.add('show'), 100);
     }
-    if (text2) {
-      const strong = text2.querySelector('strong');
-      if (strong) {
-        strong.style.fontFamily = `'Noto Sans KR', sans-serif`;
-        strong.style.fontWeight = '500';
-      }
-      setTimeout(() => text2.classList.add('show'), 700);
-    }
-    if (text3) setTimeout(() => text3.classList.add('show'), 1200);
+
+    setTimeout(() => {
+      if (text1) setTimeout(() => text1.classList.add('show'), 200);
+      if (text2) setTimeout(() => text2.classList.add('show'), 600);
+      if (text3) setTimeout(() => text3.classList.add('show'), 1000);
+    }, 50);
 
     if (currentSpan) currentSpan.textContent = (currentSlide + 1).toString().padStart(2, '0');
   }
@@ -65,6 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
   startInterval();
   goToSlide(0);
 
+  setTimeout(() => {
+    heroSlider.classList.add('slider-initialized');
+  }, 100);
+
   let touchStartX = 0;
   sliderContainer.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
@@ -77,16 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ===========================
-     2. GNB Overlay Script
-  =========================== */
+      2. GNB Overlay Script (REVISED FOR SLIDING PANELS)
+     =========================== */
   const menuBtn = document.getElementById('menuBtn');
   const gnbMenu = document.getElementById('gnbMenu');
   const closeBtn = document.querySelector('.btn-mgnb-close');
-  const mainMenuItems = document.querySelectorAll('#mainMenu li');
-  const midWrap = document.getElementById('midMenuContainer');
-  const subWrap = document.getElementById('subMenuContainer');
+  const mainMenu = document.getElementById('mainMenu');
+  const mainMenuPanel = document.getElementById('mainMenuPanel');
+  const midMenuPanel = document.getElementById('midMenuPanel');
+  const subMenuPanel = document.getElementById('subMenuPanel');
   const bgLayer = document.getElementById('gnbBg');
 
+  const panels = [mainMenuPanel, midMenuPanel, subMenuPanel];
+  
   const bgImages = {
     ClubUnion: '/static/images/menu-bg1.jpg',
     Clubs: '/static/images/menu-bg2.jpg',
@@ -97,218 +103,149 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const menuHierarchy = {
     ClubUnion: {
-      '연합회': [
-        { name: '소개', url: 'introduce' },
-        { name: '연혁', url: 'history' },
-        { name: '조직도', url: 'introduce' },
+      '총동아리연합회': [
+        { name: '설명', url: 'introduce' }, { name: '연혁', url: 'history' }, { name: '조직도', url: 'introduce' },
       ],
-      '공약보고': [
-        { name: '회장단 공약', url: 'introduce' }
-      ],
-      '로고/슬로건': [
-        { name: '공식 로고', url: 'logo' },
-        { name: '슬로건', url: 'logo' }
-      ]
+      '공약보고': [{ name: '회장단 공약', url: 'introduce' }],
+      '로고/슬로건': [{ name: '공식 로고', url: 'logo' }, { name: '슬로건', url: 'logo' }]
     },
     Clubs: {
       '동아리 분과': [
-        { name: '공연예술분과', url: 'clubs' },
-        { name: '과학기술분과', url: 'clubs' },
-        { name: '기악예술분과', url: 'clubs' },
-        { name: '사회공헌분과', url: 'clubs' },
-        { name: '스포츠분과', url: 'clubs' },
-        { name: '전시창작분과', url: 'clubs' },
+        { name: '공연예술분과', url: 'clubs' }, { name: '과학기술분과', url: 'clubs' }, { name: '기악예술분과', url: 'clubs' },
+        { name: '사회공헌분과', url: 'clubs' }, { name: '스포츠분과', url: 'clubs' }, { name: '전시창작분과', url: 'clubs' },
         { name: '학술분과', url: 'clubs' }
       ]
     },
     Notification: {
-      '공지사항': [
-        { name: '안내사항', url: '/univ/status' },
-        { name: '일반공지', url: '/univ/status' },
-      ],
-      '자료실': [
-        { name: '가등록 동아리 신청서', url: '/univ/president' },
-        { name: '회칙 및 규정', url: '/univ/president' }
-      ]
+      '공지사항': [{ name: '안내사항', url: '/univ/status' }, { name: '일반공지', url: '/univ/status' }],
+      '자료실': [{ name: '가등록 동아리 신청서', url: '/univ/president' }, { name: '회칙 및 규정', url: '/univ/president' }]
     },
     Service: {
-      '물품대여서비스': [
-        { name: '이용 방법', url: 'help' },
-        { name: '대여 목록', url: 'help' },
-      ],
-      '상주': [
-        { name: '상주 활동 소개', url: 'help' }
-      ],
-      '제휴업체': [
-        { name: '업체 목록', url: 'help' },
-        { name: '업체 혜택 소개', url: 'help' }
-      ]
+      '물품대여서비스': [{ name: '이용 방법', url: 'help' }, { name: '대여 목록', url: 'help' }],
+      '상주': [{ name: '상주 활동 소개', url: 'help' }],
+      '제휴업체': [{ name: '업체 목록', url: 'help' }, { name: '업체 혜택 소개', url: 'help' }]
     },
     Communication: {
       'SNS': [
         { name: '카카오톡 오픈채팅 바로가기', url: 'https://open.kakao.com/o/goqQFNkh' },
         { name: '인스타그램 바로가기', url: 'https://www.instagram.com/ku_club_union/' },
       ],
-      '위치': [
-        { name: '오시는 길', url: 'https://www.google.com/maps/place/고려대학교+세종캠퍼스+학생회관/data=!3m1!4b1!4m6!3m5!1s0x357ad2c9b054dd75:0x641e42fdcccfe16f!8m2!3d36.610424!4d127.2896703!16s%2Fg%2F11sskr3kpv?entry=ttu&g_ep=EgoyMDI1MDcyMS4wIKXMDSoASAFQAw%3D%3D' }
-      ]
+      '위치': [{ name: '오시는 길', url: 'https://www.google.com/maps/place/고려대학교+세종캠퍼스+학생회관/data=!3m1!4b1!4m6!3m5!1s0x357ad2c9b054dd75:0x641e42fdcccfe16f!8m2!3d36.610424!4d127.2896703!16s%2Fg%2F11sskr3kpv?entry=ttu&g_ep=EgoyMDI1MDcyMS4wIKXMDSoASAFQAw%3D%3D' }]
     }
   };
+
+  function navigateTo(level, context = {}) {
+    panels.forEach((panel, i) => {
+      panel.classList.remove('is-active', 'is-parent');
+      if (i < level) {
+        panel.classList.add('is-parent');
+      } else if (i === level) {
+        panel.classList.add('is-active');
+      }
+    });
+
+    if (window.innerWidth >= 1024) {
+      panels.forEach((panel, i) => {
+        if (i <= level) panel.classList.add('is-active');
+      });
+    }
+  }
+  
+  function resetMenu() {
+    navigateTo(0);
+    setTimeout(() => {
+        midMenuPanel.innerHTML = '';
+        subMenuPanel.innerHTML = '';
+        mainMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+        bgLayer.classList.remove('visible');
+    }, 500);
+  }
 
   menuBtn.addEventListener('click', () => {
     gnbMenu.classList.add('active');
     menuBtn.classList.add('hidden');
     document.body.style.overflow = 'hidden';
-    midWrap.innerHTML = '';
-    subWrap.innerHTML = '';
-    mainMenuItems.forEach(v => v.classList.remove('active'));
-
-    const defaultKey = 'ClubUnion';
-    bgLayer.style.backgroundImage = `url('${bgImages[defaultKey]}')`;
-
+    navigateTo(0);
   });
 
   closeBtn.addEventListener('click', () => {
     gnbMenu.classList.remove('active');
     menuBtn.classList.remove('hidden');
     document.body.style.overflow = '';
-    clearGnb();
+    resetMenu();
   });
 
-  mainMenuItems.forEach(li => {
-    li.addEventListener('click', () => {
-      mainMenuItems.forEach(v => v.classList.remove('active'));
-      li.classList.add('active');
-      const key = li.dataset.menu;
-      bgLayer.style.backgroundImage = `url('${bgImages[key]}')`;
-      renderMidMenus(key);
-      subWrap.innerHTML = '';
-    });
-  });
+  mainMenu.addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    
+    mainMenu.querySelectorAll('li').forEach(item => item.classList.remove('active'));
+    li.classList.add('active');
+    
+    const mainKey = li.dataset.menu;
+    
+    bgLayer.style.backgroundImage = `url('${bgImages[mainKey]}')`;
+    bgLayer.classList.add('visible');
 
-  function renderMidMenus(mainKey) {
-    const mids = Object.keys(menuHierarchy[mainKey] || {});
-    if (mids.length === 0) {
-      midWrap.innerHTML = '<div class="midmenu-item">중분류 없음</div>';
-      return;
-    }
-
-    midWrap.innerHTML = '';
-    mids.forEach((mid, i) => {
-      const el = document.createElement('div');
-      el.className = 'midmenu-item';
-      el.dataset.mid = mid;
-      el.dataset.parent = mainKey;
-      el.textContent = mid;
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(-20px)';
-      el.style.transition = `all 0.4s ease ${i * 0.1}s`;
-
-      setTimeout(() => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }, 10);
-
-      el.addEventListener('click', () => {
-        midWrap.querySelectorAll('.midmenu-item').forEach(v => v.classList.remove('active'));
-        el.classList.add('active');
-        renderSubMenus(el.dataset.parent, el.dataset.mid);
-      });
-      midWrap.appendChild(el);
-    });
-  }
-
-  function renderSubMenus(mainKey, midKey) {
-    const subs = menuHierarchy[mainKey][midKey] || [];
-    subWrap.innerHTML = subs.map(sub =>
-      `<div class="submenu-item"><a href="${sub.url}">${sub.name}</a></div>`
-    ).join('');
-  }
-
-  function clearGnb() {
-    midWrap.innerHTML = '';
-    subWrap.innerHTML = '';
-    mainMenuItems.forEach(v => v.classList.remove('active'));
-    bgLayer.style.backgroundImage = 'none';
-  }
-});
-
-
-const canvas = document.getElementById('meteor-canvas');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  const heroSection = document.querySelector('.hero');
-  let meteors = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  function createMeteor() {
-    // 화면 상단의 랜덤한 x 위치 또는 왼쪽의 랜덤한 y 위치에서 시작
-    const startFromTop = Math.random() < 0.5;
-
-    let x, y;
-    if (startFromTop) {
-      // 화면 위쪽에서 시작하되 x 위치는 화면 전체로 확장
-      x = Math.random() * canvas.width;
-      y = -Math.random() * 100; // 살짝 위쪽
+    const midMenus = menuHierarchy[mainKey];
+    if (!midMenus || Object.keys(midMenus).length === 0) {
+      midMenuPanel.innerHTML = '<div class="midmenu-list"><div class="midmenu-item">하위 메뉴가 없습니다.</div></div>';
     } else {
-      // 왼쪽에서 시작하되 y 위치도 다양화
-      x = -Math.random() * 100;
-      y = Math.random() * canvas.height;
+      const midMenuHTML = `
+        <div class="gnb-back-btn" data-level="0">뒤로 가기</div>
+        <div class="midmenu-list">
+          ${Object.keys(midMenus).map(midKey => `
+            <div class="midmenu-item" data-main-key="${mainKey}" data-mid-key="${midKey}">${midKey}</div>
+          `).join('')}
+        </div>
+      `;
+      midMenuPanel.innerHTML = midMenuHTML;
+    }
+    
+    navigateTo(1);
+  });
+
+  midMenuPanel.addEventListener('click', (e) => {
+    if (e.target.classList.contains('gnb-back-btn')) {
+        navigateTo(parseInt(e.target.dataset.level));
+        return;
     }
 
-    return {
-      x,
-      y,
-      length: Math.random() * 60 + 20,
-      speed: Math.random() * 2 + 2,
-      angle: Math.PI / 4, // 그대로 45도 유지
-      alpha: Math.random() * 0.5 + 0.5
-    };
-  }
+    const midItem = e.target.closest('.midmenu-item');
+    if (!midItem) return;
 
-  function drawMeteor(meteor) {
-    const { x, y, length, angle, alpha } = meteor;
-    const xEnd = x + Math.cos(angle) * length;
-    const yEnd = y + Math.sin(angle) * length;
-    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(xEnd, yEnd);
-    ctx.stroke();
-  }
+    midMenuPanel.querySelectorAll('.midmenu-item').forEach(item => item.classList.remove('active'));
+    midItem.classList.add('active');
 
-  function updateMeteors() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const { mainKey, midKey } = midItem.dataset;
+    const subMenus = menuHierarchy[mainKey][midKey];
 
-    meteors.forEach((meteor, index) => {
-      meteor.x += meteor.speed;
-      meteor.y += meteor.speed;
+    if (!subMenus || subMenus.length === 0) {
+        subMenuPanel.innerHTML = '<div class="submenu-list"><div class="submenu-item"><a>하위 메뉴가 없습니다.</a></div></div>';
+    } else {
+        const subMenuHTML = `
+            <div class="gnb-back-btn" data-level="1">뒤로 가기</div>
+            <div class="submenu-list">
+                ${subMenus.map(item => `
+                    <div class="submenu-item"><a href="${item.url}">${item.name}</a></div>
+                `).join('')}
+            </div>
+        `;
+        subMenuPanel.innerHTML = subMenuHTML;
+    }
 
-      drawMeteor(meteor);
+    navigateTo(2);
+  });
 
-      if (meteor.x > canvas.width || meteor.y > canvas.height) {
-        meteors[index] = createMeteor();
+  subMenuPanel.addEventListener('click', (e) => {
+      if (e.target.classList.contains('gnb-back-btn')) {
+          navigateTo(parseInt(e.target.dataset.level));
       }
-    });
+  });
 
-    requestAnimationFrame(updateMeteors);
-  }
-
-  for (let i = 0; i < 15; i++) {
-    meteors.push(createMeteor());
-  }
-  updateMeteors();
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  // 1) 스크롤 텍스트(in-view) 관찰
+  /* ===========================
+      3. Scroll Text Animation Script
+     =========================== */
   const txt = document.getElementById('scrollText');
   if (txt) {
     const ioText = new IntersectionObserver((entries, obs) => {
@@ -321,72 +258,127 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.3 });
     ioText.observe(txt);
   }
-});
 
+  /* ===========================
+      4. Custom Gallery Script (REVISED)
+     =========================== */
+  const gallery = document.getElementById('gallery');
+  if (gallery) {
+    let isDown = false;
+    let startX = 0;
+    let scroll0 = 0;
+    let isDragging = false; 
 
-// 여기서 부터 이미지 컨테이너 부분 (2025.04.23 수정정)
+    gallery.addEventListener('dragstart', e => e.preventDefault());
 
-/* --- 갤러리 스크립트 (main.js 아래 부분) ------------------ */
-const gallery = document.getElementById('gallery');
+    gallery.addEventListener('pointerdown', e => {
+      isDown = true;
+      isDragging = false; 
+      startX = e.clientX;
+      scroll0 = gallery.scrollLeft;
+      gallery.setPointerCapture(e.pointerId);
+      gallery.classList.add('dragging');
+    });
 
-let isDown = false;
-let startX = 0;
-let scroll0 = 0;
+    gallery.addEventListener('pointermove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) {
+        isDragging = true;
+      }
+      gallery.scrollLeft = scroll0 - dx * 1.2;
+    });
+    
+    function handlePointerUpOrCancel(e) {
+      if (!isDown) return;
+      isDown = false;
+      gallery.releasePointerCapture(e.pointerId);
+      gallery.classList.remove('dragging');
 
-/* 1) 이미지 기본 drag 차단 */
-gallery.addEventListener('dragstart', e => e.preventDefault());
+      if(isDragging) {
+        setTimeout(() => isDragging = false, 0); 
+        snapToCard();
+      }
+    }
 
-/* 2) pointer down ─ 모든 입력(마우스·터치·펜) 대응 */
-gallery.addEventListener('pointerdown', e => {
-  isDown = true;
-  startX = e.clientX;
-  scroll0 = gallery.scrollLeft;
-  gallery.setPointerCapture(e.pointerId);
-  gallery.classList.add('dragging');
-});
+    gallery.addEventListener('pointerup', handlePointerUpOrCancel);
+    gallery.addEventListener('pointercancel', handlePointerUpOrCancel);
 
-/* 3) pointer move */
-gallery.addEventListener('pointermove', e => {
-  if (!isDown) return;
-  const dx = e.clientX - startX;
-  gallery.scrollLeft = scroll0 - dx * 1.2;   // 감도 계수
-});
+    function snapToCard() {
+      const card = gallery.querySelector('.gallery-item');
+      if (!card) return;
+      const gap = parseInt(getComputedStyle(gallery).gap) || 0;
+      const step = card.offsetWidth + gap;
+      const left = gallery.scrollLeft;
+      const snapX = Math.round(left / step) * step;
+      gallery.scrollTo({ left: snapX, behavior: 'smooth' });
+    }
+  }
 
-/* 4) pointer up / cancel */
-['pointerup', 'pointercancel'].forEach(type => {
-  gallery.addEventListener(type, e => {
-    if (!isDown) return;
-    isDown = false;
-    gallery.releasePointerCapture(e.pointerId);
-    gallery.classList.remove('dragging');
-    snapToCard();
-  });
-});
-
-/* 5) 카드 폭 단위로 스냅 정렬 */
-function snapToCard() {
-  const card = gallery.querySelector('.gallery-item');
-  if (!card) return;
-  const gap = parseInt(getComputedStyle(gallery).gap) || 0;
-  const step = card.offsetWidth + gap;                 // 한 장 + 간격
-  const left = gallery.scrollLeft;
-  const snapX = Math.round(left / step) * step;
-  gallery.scrollTo({ left: snapX, behavior: 'smooth' });
-}
-
-/* --- 갤러리 등장 애니메이션 ----------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
+  /* ===========================
+      5. Custom Gallery Wrap Reveal Animation Script
+     =========================== */
   const wrap = document.querySelector('.custom-gallery-wrap');
-  if (!wrap) return;
+  if (wrap) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          wrap.classList.add('reveal');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(wrap);
+  }
 
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        wrap.classList.add('reveal');   // 2초 뒤 애니메이션 시작
-        obs.unobserve(entry.target);    // 한 번만 실행
+  /* ===========================
+      6. Popup Script
+     =========================== */
+  const popupOverlay = document.getElementById('popupOverlay');
+  const popupClose = document.getElementById('popupClose');
+  const popupTextClose = document.getElementById('popupTextClose');
+
+  if (popupOverlay && popupClose && popupTextClose) {
+    console.log('Popup elements found'); // 디버깅용 로그
+    // 세션 스토리지에서 팝업 표시 여부 확인
+    if (!sessionStorage.getItem('popupShown')) {
+      console.log('Popup not shown yet, displaying...'); // 디버깅용 로그
+      setTimeout(() => {
+        popupOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 스크롤 방지
+      }, 500); // 페이지 로드 후 0.5초 뒤 표시
+    } else {
+      console.log('Popup already shown in this session'); // 디버깅용 로그
+    }
+
+    // 이미지 닫기 버튼
+    popupClose.addEventListener('click', () => {
+      console.log('Popup close button clicked'); // 디버깅용 로그
+      popupOverlay.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 복구
+      sessionStorage.setItem('popupShown', 'true'); // 세션 동안 팝업 표시 기록
+    });
+
+    // 텍스트 닫기 버튼
+    popupTextClose.addEventListener('click', () => {
+      console.log('Popup text close button clicked'); // 디버깅용 로그
+      popupOverlay.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 복구
+      sessionStorage.setItem('popupShown', 'true'); // 세션 동안 팝업 표시 기록
+    });
+
+    // 팝업 외부 클릭 시 닫기
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        console.log('Popup overlay clicked'); // 디버깅용 로그
+        popupOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('popupShown', 'true');
       }
     });
-  }, { threshold: 0.2 });
-
-  io.observe(wrap);
+  } else {
+    console.error('Popup elements not found'); // 디버깅용 로그
+  }
 });
