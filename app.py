@@ -187,7 +187,6 @@ def mana():
 
 @app.route('/sjdkllm')
 def sjdkllm():
-    print("sjdkllm 라우트 진입!")
     return render_template('sjdkllm.html')
 
 # notice.json 파일 로드
@@ -204,34 +203,44 @@ def notice_ai():
     data = request.json
     user_input = data.get("message", "")
 
+    # 관련 공지를 찾아 프롬프트에 포함시킵니다.
     related_notices = [n for n in notices if any(w in n for w in user_input.split())]
     related_text = "\n".join(related_notices[:3])
 
+    # Gemini API를 위한 환경 변수 로드
     load_dotenv()
+    google_api_key = os.getenv("GOOGLE_API_KEY")
 
-    groq_api_url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {os.getenv('GROQ_API_KEY')}",
-        "Content-Type": "application/json"
-    }
+    if not google_api_key:
+        print("Gemini API 키를 찾을 수 없습니다. .env 파일을 확인해 주세요.")
+        return jsonify({"reply": "AI 응답을 가져오는 데 문제가 발생했습니다. API 키가 설정되지 않았습니다."}), 500
+
+    # Gemini API 호출을 위한 URL
+    gemini_api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={google_api_key}"
+
+    # Gemini API에 전달할 페이로드
     payload = {
-        "model": "llama-3.3-70b-versatile", 
-        "messages": [
-            {"role": "system", "content": "너는 학생회 공지문 작성 보조 도우미야. 항상 단정하고 정중한 문체로 작성해."},
-            {"role": "user", "content": f"참고 공지:\n{related_text}\n\n새 요청: {user_input}"}
+        "contents": [
+            {
+                "parts": [
+                    {
+                        "text": f"다음은 학생회 공지입니다. 참고 공지를 바탕으로 새로운 공지 초안을 작성해주세요.\n\n참고 공지:\n{related_text}\n\n새 요청: {user_input}"
+                    }
+                ]
+            }
         ]
+    }
+    
+    headers = {
+        "Content-Type": "application/json"
     }
 
     try:
-        response = requests.post(groq_api_url, headers=headers, json=payload)
-        
-        # API 응답 상태 및 본문 출력 (추가된 디버깅 라인)
-        print(f"API 응답 상태 코드: {response.status_code}")
-        print(f"API 응답 본문: {response.text}")
-        
+        response = requests.post(gemini_api_url, headers=headers, json=payload)
         response.raise_for_status() # HTTP 오류가 발생하면 예외를 발생시킵니다.
-        reply = response.json()["choices"][0]["message"]["content"]
         
+        reply = response.json()["candidates"][0]["content"]["parts"][0]["text"]
+
     except requests.exceptions.RequestException as e:
         print(f"API 호출 중 오류 발생: {e}")
         return jsonify({"reply": "AI 응답을 가져오는 데 문제가 발생했습니다. 잠시 후 다시 시도해 주세요."}), 500
