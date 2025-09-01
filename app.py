@@ -192,7 +192,7 @@ def sjdkllm():
 
 # notice.json 파일 로드
 try:
-    with open("/Users/sjdk/Desktop/ClubUnion/Club-Union/notice.json", "r", encoding="utf-8") as f:
+    with open("/Users/sjdk/Desktop/ClubUnion/Club-Union/static/js/notice.json", "r", encoding="utf-8") as f:
         notices = json.load(f)
 except FileNotFoundError:
     print("notice.json 파일을 찾을 수 없습니다. 경로를 확인해 주세요.")
