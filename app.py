@@ -192,9 +192,9 @@ def sjdkllm():
 
 # notice.json 파일 로드
 try:
-    with open("/Users/sjdk/Desktop/ClubUnion/Club-Union/static/js/notice.json", "r", encoding="utf-8") as f:
+    with open("/static/notice.json", "r", encoding="utf-8") as f:
         notices = json.load(f)
-except FileNotFoundError:
+except FileNotFoundError: 
     print("notice.json 파일을 찾을 수 없습니다. 경로를 확인해 주세요.")
     notices = []
 
@@ -239,5 +239,5 @@ def notice_ai():
     return jsonify({"reply": reply})
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
+    port = int(os.environ.get('PORT', 1231))
     app.run(host='0.0.0.0', port=port, debug=True)
