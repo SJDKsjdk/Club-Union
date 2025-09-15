@@ -302,3 +302,44 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 }); 
+
+// --- 갤러리 이미지 클릭 확대/축소 기능 시작 ---
+document.addEventListener('DOMContentLoaded', () => {
+  // 모달 관련 요소들을 가져옵니다.
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("img01");
+  const captionText = document.getElementById("caption");
+  const closeButton = document.querySelector(".close-button");
+
+  // 모든 갤러리 아이템에 클릭 리스너를 추가합니다.
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  galleryItems.forEach(item => {
+    const img = item.querySelector('img'); // 각 갤러리 아이템 안의 img 태그
+    const overlayTitle = item.querySelector('.gallery-overlay h3').textContent; // 오버레이의 제목 가져오기
+    const overlayDesc = item.querySelector('.gallery-overlay p').textContent; // 오버레이의 설명 가져오기
+
+    if (img) { // img 태그가 존재하는 경우에만 처리
+      img.addEventListener('click', function() {
+        modal.style.display = "block"; // 모달을 보이게 합니다.
+        modalImg.src = this.src; // 클릭된 이미지의 src를 모달 이미지에 설정합니다.
+        captionText.innerHTML = `<h3>${overlayTitle}</h3><p>${overlayDesc}</p>`; // 캡션 설정
+        document.body.style.overflow = 'hidden'; // 모달이 열리면 본문 스크롤 방지
+      });
+    }
+  });
+
+  // 닫기 버튼을 클릭하면 모달을 닫습니다.
+  closeButton.addEventListener('click', function() {
+    modal.style.display = "none";
+    document.body.style.overflow = ''; // 본문 스크롤 다시 허용
+  });
+
+  // 모달 외부 영역을 클릭하면 모달을 닫습니다.
+  window.addEventListener('click', function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = ''; // 본문 스크롤 다시 허용
+    }
+  });
+});
+// --- 갤러리 이미지 클릭 확대/축소 기능 끝 ---

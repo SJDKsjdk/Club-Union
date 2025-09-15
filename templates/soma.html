@@ -132,28 +132,36 @@
       </div>
       <div class="gallery-container">
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">공연 사진 1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/show/soma/soma_main1.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>정기공연</h3>
             <p>2024년 여름</p>
           </div>
         </div>
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">공연 사진 2</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/show/soma/soma_main2.png" alt="축제 공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>축제 공연</h3>
             <p>2025년 봄</p>
           </div>
         </div>
         <div class="gallery-item" data-category="practice">
-          <div class="image-placeholder">연습 사진</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/show/soma/soma_sub.png" alt="정기 합주 연습 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>정기 합주</h3>
             <p>동아리방</p>
           </div>
         </div>
         <div class="gallery-item" data-category="member">
-          <div class="image-placeholder">동아리방</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/show/soma/soma_mt.png" alt="동아리 MT 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>친목 활동</h3>
             <p>친목 활동</p>
@@ -182,14 +190,14 @@
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Instagram</h3>
-                <p><i class="fab fa-instagram"></i> @sorimadang</p>
+                <p><i class="fab fa-instagram"></i> @kus_sorimadang</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Youtube</h3>
-                <p><i class="fab fa-youtube"></i> sorimadang@example.com</p>
+                <p><i class="fab fa-youtube"></i> @kus_sorimadang</p>
               </div>
             </div>
           </div>
@@ -208,13 +216,19 @@
               <option value="keyboard">키보드</option>
             </select>
             <textarea placeholder="지원 동기" id="motivation"></textarea>
-            <button type="submit" class="btn">가입 신청</button>
+            <button type="submit" class="btn">가입 신청(추후 개발 예정)</button>
             <div class="form-message"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <div id="imageModal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
   <footer>
     <div class="container">

@@ -21,6 +21,10 @@ def main():
 def clubs():
     return render_template('clubs.html')
 
+@app.route('/event')
+def event():
+    return render_template('event.html')
+
 @app.route('/introduce')
 def introduce():
     return render_template('introduce.html')
