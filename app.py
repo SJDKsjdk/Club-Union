@@ -21,6 +21,10 @@ def main():
 def clubs():
     return render_template('clubs.html')
 
+@app.route('/event')
+def event():
+    return render_template('event.html')
+
 @app.route('/introduce')
 def introduce():
     return render_template('introduce.html')
@@ -191,9 +195,9 @@ def sjdkllm():
 
 # notice.json 파일 로드
 try:
-    with open("/Users/sjdk/Desktop/ClubUnion/Club-Union/static/js/notice.json", "r", encoding="utf-8") as f:
+    with open("/static/notice.json", "r", encoding="utf-8") as f:
         notices = json.load(f)
-except FileNotFoundError:
+except FileNotFoundError: 
     print("notice.json 파일을 찾을 수 없습니다. 경로를 확인해 주세요.")
     notices = []
 

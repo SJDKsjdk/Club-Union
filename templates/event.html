@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF--8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>파란 리본 돼지 주막</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* 기본 스타일 초기화 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      /* 스크롤바가 생기지 않도록 설정 */
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #1a1a1a;
+      /* 남는 여백을 위한 어두운 배경색 */
+    }
+
+    /* 메인 컨테이너 */
+    .main-container {
+      position: relative;
+      /* 자식 요소의 위치 기준 */
+      width: 100vw;
+      /* 뷰포트 너비의 100% */
+      height: 100vh;
+      /* 뷰포트 높의 100% */
+      /* 메뉴 이미지 경로 */
+      background-image: url('static/images/event1.png');
+      /* 이미지 전체가 보이도록 contain 속성으로 변경 */
+      background-size: contain;
+      background-position: center;
+      /* 이미지가 중앙에 위치하도록 설정 */
+      background-repeat: no-repeat;
+    }
+
+    /* --- 토글 버튼 (Floating Action Button) 스타일 --- */
+    .fab-container {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column-reverse;
+      /* 아이템을 역순으로 쌓음 (토글버튼이 맨 아래) */
+      align-items: flex-end;
+      /* 오른쪽 정렬 */
+    }
+
+    /* 메인 토글 버튼 */
+    .fab-toggle {
+      width: 60px;
+      height: 60px;
+      background-image: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+      color: white;
+      border-radius: 50%;
+      border: none;
+      font-size: 28px;
+      /* 아이콘 크기 조정 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .fab-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .fab-toggle .fab,
+    .fab-toggle .fas {
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    /* 토글 활성화 시 아이콘 회전 및 변경을 위한 설정 */
+    .fab-container.active .fab-toggle .fa-instagram {
+      transform: rotate(-360deg) scale(0);
+      opacity: 0;
+    }
+
+    .fab-container .fa-times {
+      position: absolute;
+      transform: scale(0);
+      opacity: 0;
+      font-size: 24px;
+    }
+
+    .fab-container.active .fab-toggle .fa-times {
+      transform: rotate(0) scale(1);
+      opacity: 1;
+    }
+
+    /* 인스타그램 링크 버튼 */
+    .fab-link {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      text-decoration: none;
+      color: #333;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px) scale(0.9);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    /* 토글 활성화 시 링크 보이기 */
+    .fab-container.active .fab-link {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    /* 링크 나타날 때 순차적인 딜레이 효과 */
+    .fab-container.active .fab-link:nth-last-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .fab-container.active .fab-link:nth-last-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    .fab-container.active .fab-link:nth-last-child(4) {
+      transition-delay: 0.3s;
+    }
+
+    .fab-link span {
+      background-color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      margin-right: 12px;
+      white-space: nowrap;
+    }
+
+    .fab-link .fab-icon {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      color: #C13584;
+      /* 인스타그램 아이콘 색상 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* --- 이벤트 모달 스타일 --- */
+    .modal {
+      display: none;
+      /* 기본은 숨김 */
+      position: fixed;
+      z-index: 2000;
+      /* FAB보다 위에 표시 */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      /* 반투명 배경 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      position: relative;
+      margin: auto;
+      padding: 0;
+      width: 90%;
+      max-width: 500px;
+      /* 최대 너비 지정 */
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      animation: fadeIn 0.5s;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .close-button {
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      color: white;
+      background-color: #333;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 35px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .close-button:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main-container"></div>
+
+  <div class="fab-container" id="fab-container">
+    <button class="fab-toggle" id="fab-toggle" aria-label="링크 열기">
+      <i class="fab fa-instagram"></i>
+      <i class="fas fa-times"></i>
+    </button>
+
+    <a href="https://www.instagram.com/jpjujo_official/" target="_blank" class="fab-link">
+      <span>지평주조 인스타그램</span>
+      <div class="fab-icon">
+        <i class="fab fa-instagram"></i>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/ku_club_union/" target="_blank" class="fab-link">
+      <span>총동연 인스타그램</span>
+      <div class="fab-icon">
+        <i class="fab fa-instagram"></i>
+      </div>
+    </a>
+
+    <a href="#" class="fab-link" id="event-button">
+      <span>막걸리 공짜 이벤트! 🎁</span>
+      <div class="fab-icon" style="color: #FF5733;">
+        <i class="fas fa-gift"></i>
+      </div>
+    </a>
+  </div>
+
+  <div id="event-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="close-modal">&times;</span>
+      <img src="static\images\event.png" alt="막걸리 이벤트 안내">
+    </div>
+  </div>
+
+
+  <script>
+    const fabContainer = document.getElementById('fab-container');
+    const fabToggle = document.getElementById('fab-toggle');
+
+    fabToggle.addEventListener('click', () => {
+      fabContainer.classList.toggle('active');
+    });
+
+    // --- 이벤트 모달 로직 ---
+    const eventModal = document.getElementById('event-modal');
+    const eventButton = document.getElementById('event-button');
+    const closeModal = document.getElementById('close-modal');
+
+    // 이벤트 버튼 클릭 시 모달 열기
+    eventButton.addEventListener('click', (e) => {
+      e.preventDefault(); // a 태그의 기본 동작 방지
+      eventModal.style.display = 'flex';
+    });
+
+    // 닫기 버튼 클릭 시 모달 닫기
+    closeModal.addEventListener('click', () => {
+      eventModal.style.display = 'none';
+    });
+
+    // 모달 바깥 영역 클릭 시 모달 닫기
+    window.addEventListener('click', (event) => {
+      if (event.target == eventModal) {
+        eventModal.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+
+</html>
