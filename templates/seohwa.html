@@ -15,7 +15,7 @@
   <header>
     <nav>
       <div class="logo">서화회</div>
-      <ul class="nav-links"></ul>
+      <ul class="nav-links">
         <li><a href="#home" class="nav-active">홈</a></li>
         <li><a href="#about">소개</a></li>
         <li><a href="#activities">활동</a></li>
@@ -34,16 +34,16 @@
     <div class="container">
       <div class="text-section">
         <h1 class="animate-text">서화회</h1>
-        <h2 class="animate-text">글씨를 그려라!</h2>
+        <h2 class="animate-text">글씨를 그리다</h2>
         <div class="info-box">
           <p><i class="fas fa-music"></i> 분류 : 중앙 서예동아리</p>
           <p><i class="fas fa-theater-masks"></i> 소속분과 : 전시창작분과</p>
-          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 19??년</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : xxxx년</p>
         </div>
         <a href="#join" class="btn btn-animated">가입문의</a>
       </div>
       <div class="image-section">
-        <img src="/static/images/logo_clubs/display/green.png" alt="서화회" class="hero-img" />
+        <img src="/static/images/logo_clubs/display/seohwa.png" alt="서화회" class="hero-img" />
       </div>
     </div>
     <div class="scroll-down">
@@ -62,7 +62,7 @@
         </div>
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-number" data-target="30">0</span>
+            <span class="stat-number" data-target="??">0</span>
             <span class="stat-text">활동 년수</span>
           </div>
           <div class="stat-item">
@@ -70,7 +70,7 @@
             <span class="stat-text">회원 수</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="10">0</span>
+            <span class="stat-number" data-target="??">0</span>
             <span class="stat-text">연간 활동</span>
           </div>
         </div>
@@ -132,28 +132,36 @@
       </div>
       <div class="gallery-container">
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">전시회 사진 1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/seohwa/seohwa_main1.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>전시회</h3>
             <p>2024년 여름</p>
           </div>
         </div>
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">전시회 사진 2</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/seohwa/seohwa_main2.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>전시회</h3>
             <p>2024년 겨울</p>
           </div>
         </div>
         <div class="gallery-item" data-category="practice">
-          <div class="image-placeholder">답사 사진</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/seohwa/seohwa_sub.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>답사</h3>
             <p>학생회관</p>
           </div>
         </div>
         <div class="gallery-item" data-category="member">
-          <div class="image-placeholder">동아리방</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/seohwa/seohwa_mt.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>친목 활동</h3>
             <p>친목 활동</p>
@@ -182,14 +190,14 @@
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Instagram</h3>
-                <p><i class="fab fa-instagram"></i> @seohwa</p>
+                <p><i class="fab fa-instagram"></i> @ku_seohwa</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Youtube</h3>
-                <p><i class="fab fa-youtube"></i> seohwa@example.com</p>
+                <p><i class="fab fa-youtube"></i> x</p>
               </div>
             </div>
           </div>
@@ -204,13 +212,19 @@
               <option value="none">None</option>
             </select>
             <textarea placeholder="지원 동기" id="motivation"></textarea>
-            <button type="submit" class="btn">가입 신청</button>
+            <button type="submit" class="btn">가입 신청(추후 개발 예정)</button>
             <div class="form-message"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <div id="imageModal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
   <footer>
     <div class="container">

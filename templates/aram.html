@@ -34,11 +34,11 @@
     <div class="container">
       <div class="text-section">
         <h1 class="animate-text">아람소래</h1>
-        <h2 class="animate-text">통기타는 재밌다!</h2>
+        <h2 class="animate-text">통기타가 그려내는 예술</h2>
         <div class="info-box">
           <p><i class="fas fa-music"></i> 분류 : 중앙 기타동아리</p>
           <p><i class="fas fa-theater-masks"></i> 소속분과 : 기악예술분과</p>
-          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 19??년</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 1981년</p>
         </div>
         <a href="#join" class="btn btn-animated">가입문의</a>
       </div>
@@ -57,20 +57,21 @@
       <h2 class="section-title">동아리 소개</h2>
       <div class="about-content">
         <div class="about-text">
-          <p class="typewriter-text">아람소래는 클래식기타, 통기타를 사랑하는 사람들이 모인 동아리로, <br> 함께 기타를 연습하고 연주하는 활동을 합니다.</p>
-          <p>기타를 배우고 싶으신 분, 기타를 좋아하시는 분, <br> 새로운 사람을 만나고 싶으신 분 모두 환영합니다!</p>
+          <p class="typewriter-text">안녕하세요. 고려대학교 세종캠퍼스 고전기타연구회 아람소래입니다.
+            ‘아람소래’는 ‘아름답다’의 옛말인 ‘아름답다’와 ‘소리’의 옛말인 ‘소리’가 더해져 ‘아름다운 소리’를 뜻하는 고전기타(Classical Guitar) 동아리입니다.</p>
+          <p>아람소래 기타 동아리는 초보·경험자 모두 참여 가능하며, 조별 레슨·합주·친목 활동을 진행합니다. 기타를 배우고 싶으신 분, 기타를 좋아하시는 분, 새로운 사람을 만나고 싶으신 분 모두 환영합니다.</p>
         </div>
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-number" data-target="35">0</span>
             <span class="stat-text">활동 년수</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-number" data-target="90">0</span>
             <span class="stat-text">회원 수</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="0">0</span>
+            <span class="stat-number" data-target="2">0</span>
             <span class="stat-text">연간 공연</span>
           </div>
         </div>
@@ -132,28 +133,36 @@
       </div>
       <div class="gallery-container">
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">공연 사진 1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/instrument/aram/aram_main1.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>정기공연</h3>
             <p>2024년 여름</p>
           </div>
         </div>
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">공연 사진 2</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/instrument/aram/aram_main2.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
-            <h3>정기공연</h3>
+            <h3>정기레슨</h3>
             <p>2025년 봄</p>
           </div>
         </div>
         <div class="gallery-item" data-category="practice">
-          <div class="image-placeholder">연습 사진1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/instrument/aram/aram_sub.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
-            <h3>정기 연습</h3>
+            <h3>개강총회</h3>
             <p>동아리방</p>
           </div>
         </div>
         <div class="gallery-item" data-category="member">
-          <div class="image-placeholder">동아리방</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/instrument/aram/aram_mt.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>친목 활동</h3>
             <p>친목 활동</p>
@@ -182,14 +191,14 @@
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Instagram</h3>
-                <p><i class="fab fa-instagram"></i> @aramsorae</p>
+                <p><i class="fab fa-instagram"></i> @ku_aramsore</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Youtube</h3>
-                <p><i class="fab fa-youtube"></i> aramsorae@example.com</p>
+                <p><i class="fab fa-youtube"></i> x</p>
               </div>
             </div>
           </div>
@@ -205,13 +214,19 @@
               <option value="guitar">클래식기타</option>
             </select>
             <textarea placeholder="지원 동기" id="motivation"></textarea>
-            <button type="submit" class="btn">가입 신청</button>
+            <button type="submit" class="btn">가입 신청(추후 개발 예정)</button>
             <div class="form-message"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <div id="imageModal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
   <footer>
     <div class="container">

@@ -34,11 +34,11 @@
     <div class="container">
       <div class="text-section">
         <h1 class="animate-text">별빛항해</h1>
-        <h2 class="animate-text">저 별은 나의 별, 저 별은 너의 별!</h2>
+        <h2 class="animate-text">무한한 우주 속 별을 향해</h2>
         <div class="info-box">
           <p><i class="fas fa-music"></i> 분류 : 중앙 천체관측동아리</p>
           <p><i class="fas fa-theater-masks"></i> 소속분과 : 과학기술분과</p>
-          <p><i class="fas fa-calendar-alt"></i> 등록연도 : ????년</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 2012년</p>
         </div>
         <a href="#join" class="btn btn-animated">가입문의</a>
       </div>
@@ -57,16 +57,16 @@
       <h2 class="section-title">동아리 소개</h2>
       <div class="about-content">
         <div class="about-text">
-          <p class="typewriter-text">별빛항해는 천체를 주제로 낭만적인 설화부터 신비한 우주 과학까지 <br> 신비한 우주 과학까지 전반적인 우주,천체에 대해 탐구하는 동아리입니다.</p>
-          <p>천체에 관심이 있는 모든 분을 환영합니다. <br> 천문학을 잘 몰라도 상관 없습니다. 함께 배워나가요.</p>
+          <p class="typewriter-text">안녕하십니까! 밤하늘의 광활한 우주를 탐구하는 고려대학교 세종캠퍼스의 천체 관측 동아리 별빛항해입니다.</p>
+          <p>길을 가다 문득 밤하늘을 수놓은 별들의 아름다움에 발걸음을 멈춰본 적 있으신가요? ‘별빛항해’는 천체에 얽힌 설화와 우주 과학 전반을 탐구하는 활동을 진행하고 있습니다.</p>
         </div>
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-number" data-target="20">0</span>
+            <span class="stat-number" data-target="15">0</span>
             <span class="stat-text">활동 년수</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-number" data-target="60">0</span>
             <span class="stat-text">회원 수</span>
           </div>
           <div class="stat-item">
@@ -114,8 +114,8 @@
           <div class="card-icon">
             <i class="fas fa-users"></i>
           </div>
-          <h3>천문대견학</h3>
-          <p>부원들과 함께 근처 천문대를 견학합니다.</p>
+          <h3>미디어 속 우주</h3>
+          <p>미디어 속 숨은 우주의 비밀을 얘기합니다.</p>
         </div>
       </div>
     </div>
@@ -132,28 +132,37 @@
       </div>
       <div class="gallery-container">
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">관측 사진 1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/science/star/star_main1.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
-            <h3>정기관측</h3>
+            <h3>미디어 속 우주</h3>
             <p>2024년 여름</p>
           </div>
         </div>
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">관측 사진 2</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/science/star/star_main2.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>새벽관측</h3>
             <p>2024년 겨울</p>
           </div>
         </div>
         <div class="gallery-item" data-category="practice">
-          <div class="image-placeholder">견학 사진</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/science/star/star_sub.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>천문대견학</h3>
             <p>근처 천문대</p>
           </div>
         </div>
         <div class="gallery-item" data-category="member">
-          <div class="image-placeholder">동아리방</div>
+          <div class="image-placeholder">
+            <div class="image-placeholder">
+              <img src="static/images/active_clubs/science/star/star_mt.png" alt="정기공연 사진">
+            </div>
           <div class="gallery-overlay">
             <h3>친목 활동</h3>
             <p>친목 활동</p>
@@ -182,14 +191,14 @@
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Instagram</h3>
-                <p><i class="fab fa-instagram"></i> @star</p>
+                <p><i class="fab fa-instagram"></i> @starrysailing_kus</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Youtube</h3>
-                <p><i class="fab fa-youtube"></i> star@example.com</p>
+                <p><i class="fab fa-youtube"></i> x</p>
               </div>
             </div>
           </div>
@@ -204,13 +213,19 @@
               <option value="none">None</option>
             </select>
             <textarea placeholder="지원 동기" id="motivation"></textarea>
-            <button type="submit" class="btn">가입 신청</button>
+            <button type="submit" class="btn">가입 신청(추후 개발 예정)</button>
             <div class="form-message"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <div id="imageModal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
   <footer>
     <div class="container">

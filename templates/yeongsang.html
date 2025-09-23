@@ -14,8 +14,8 @@
 
   <header>
     <nav>
-      <div class="logo">서화회</div>
-      <ul class="nav-links"></ul>
+      <div class="logo">영상놀</div>
+      <ul class="nav-links">
         <li><a href="#home" class="nav-active">홈</a></li>
         <li><a href="#about">소개</a></li>
         <li><a href="#activities">활동</a></li>
@@ -34,11 +34,11 @@
     <div class="container">
       <div class="text-section">
         <h1 class="animate-text">영상놀</h1>
-        <h2 class="animate-text">인생은 영화다!</h2>
+        <h2 class="animate-text">영화같은 인생, 인생을 담은 영화</h2>
         <div class="info-box">
           <p><i class="fas fa-music"></i> 분류 : 중앙 영화제작동아리</p>
           <p><i class="fas fa-theater-masks"></i> 소속분과 : 전시창작분과</p>
-          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 19??년</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 1987년</p>
         </div>
         <a href="#join" class="btn btn-animated">가입문의</a>
       </div>
@@ -57,16 +57,16 @@
       <h2 class="section-title">동아리 소개</h2>
       <div class="about-content">
         <div class="about-text">
-          <p class="typewriter-text">영상놀은 영화를 만들고 싶은 사람들이 모인 동아리로 <br> 즐거운 시간을 보내실 분들을 환영합니다</p>
-          <p>영화와 영상에 열정과 관심이 있는 분 뿐 만 아니라 <br> 새로운 사람들과 인연을 만들고 싶은 분 모두 환영합니다.</p>
+          <p class="typewriter-text">영화 제작 중앙 동아리 영상놀입니다. 주요 활동으로는 영화 제작, 친목활동, MT가 있습니다.</p>
+          <p>작은 장면들이 모여 우리의 청춘이 되고, 한 편의 영화가 우리만의 추억이 되는 곳. 함께 웃고 즐기는 영화동아리 영상놀입니다. </p>
         </div>
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-number" data-target="30">0</span>
+            <span class="stat-number" data-target="35">0</span>
             <span class="stat-text">활동 년수</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-number" data-target="30">0</span>
             <span class="stat-text">회원 수</span>
           </div>
           <div class="stat-item">
@@ -132,28 +132,36 @@
       </div>
       <div class="gallery-container">
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">상영회 사진 1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/yeongsang/yeongsang_main1.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>상영회</h3>
             <p>2024년 여름</p>
           </div>
         </div>
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">상영회 사진 2</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/yeongsang/yeongsang_main2.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>상영회</h3>
             <p>2024년 겨울</p>
           </div>
         </div>
         <div class="gallery-item" data-category="practice">
-          <div class="image-placeholder">영화 관람 사진</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/yeongsang/yeongsang_sub.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
-            <h3>영화 관람</h3>
-            <p>학생회관</p>
+            <h3>거리제 행사</h3>
+            <p>거리제 행사</p>
           </div>
         </div>
         <div class="gallery-item" data-category="member">
-          <div class="image-placeholder">동아리방</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/display/yeongsang/yeongsang_mt.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>친목 활동</h3>
             <p>친목 활동</p>
@@ -182,14 +190,14 @@
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Instagram</h3>
-                <p><i class="fab fa-instagram"></i> @yeongsangnol</p>
+                <p><i class="fab fa-instagram"></i> @youngsangnol</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Youtube</h3>
-                <p><i class="fab fa-youtube"></i> yeongsangnol@example.com</p>
+                <p><i class="fab fa-youtube"></i> x</p>
               </div>
             </div>
           </div>
@@ -204,13 +212,19 @@
               <option value="none">None</option>
             </select>
             <textarea placeholder="지원 동기" id="motivation"></textarea>
-            <button type="submit" class="btn">가입 신청</button>
+            <button type="submit" class="btn">가입 신청(추후 개발 예정)</button>
             <div class="form-message"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <div id="imageModal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
   <footer>
     <div class="container">

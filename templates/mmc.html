@@ -15,7 +15,7 @@
   <header>
     <nav>
       <div class="logo">MMC</div>
-      <ul class="nav-links"></ul>
+      <ul class="nav-links">
         <li><a href="#home" class="nav-active">홈</a></li>
         <li><a href="#about">소개</a></li>
         <li><a href="#activities">활동</a></li>
@@ -38,7 +38,7 @@
         <div class="info-box">
           <p><i class="fas fa-music"></i> 분류 : 중앙 마케팅동아리</p>
           <p><i class="fas fa-theater-masks"></i> 소속분과 : 학술분과</p>
-          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 19??년</p>
+          <p><i class="fas fa-calendar-alt"></i> 등록연도 : 2016년</p>
         </div>
         <a href="#join" class="btn btn-animated">가입문의</a>
       </div>
@@ -57,16 +57,16 @@
       <h2 class="section-title">동아리 소개</h2>
       <div class="about-content">
         <div class="about-text">
-          <p class="typewriter-text">MMC는 마케팅에 관심있는 사람들이 모인 동아리로 <br> 마케팅에 흥미가 있으신 모든 분들을 환영합니다.</p>
-          <p>MMC는 주 2회 정기 세미나를 통해 각종 공모전 및 교내 활동 참여, 부서별 활동, <br> 산학협력 프로젝트, 마케팅 이론 교육 등의 활동을 진행합니다.</p>
+          <p class="typewriter-text">MMC는 고려대학교 유일의, 최고의 중앙 마케팅 학술동아리입니다.</p>
+          <p>MMC는 Marketing Mad Club의 약자로, 마케팅, 공모전 대외활동에 관심있는 사람들끼리 모인 "경험중심"의 동아리입니다.</p>
         </div>
         <div class="stats">
           <div class="stat-item">
-            <span class="stat-number" data-target="30">0</span>
+            <span class="stat-number" data-target="10">0</span>
             <span class="stat-text">활동 년수</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="??">0</span>
+            <span class="stat-number" data-target="30">0</span>
             <span class="stat-text">회원 수</span>
           </div>
           <div class="stat-item">
@@ -132,28 +132,36 @@
       </div>
       <div class="gallery-container">
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">활동 사진 1</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/study/mmc/mmc_main1.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>부서별 활동</h3>
             <p>2024년 여름</p>
           </div>
         </div>
         <div class="gallery-item" data-category="performance">
-          <div class="image-placeholder">활동 사진 2</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/study/mmc/mmc_main2.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>부서별 활동</h3>
             <p>2024년 겨울</p>
           </div>
         </div>
         <div class="gallery-item" data-category="practice">
-          <div class="image-placeholder">사례분석 사진</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/study/mmc/mmc_sub.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>사례분석</h3>
             <p>학생회관</p>
           </div>
         </div>
         <div class="gallery-item" data-category="member">
-          <div class="image-placeholder">동아리방</div>
+          <div class="image-placeholder">
+            <img src="static/images/active_clubs/study/mmc/mmc_mt.png" alt="정기공연 사진">
+          </div>
           <div class="gallery-overlay">
             <h3>친목 활동</h3>
             <p>친목 활동</p>
@@ -182,14 +190,14 @@
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Instagram</h3>
-                <p><i class="fab fa-instagram"></i> @mmc</p>
+                <p><i class="fab fa-instagram"></i> @mmc_since06</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
                 <h3>Youtube</h3>
-                <p><i class="fab fa-youtube"></i> mmc@example.com</p>
+                <p><i class="fab fa-youtube"></i> x</p>
               </div>
             </div>
           </div>
@@ -204,13 +212,19 @@
               <option value="none">None</option>
             </select>
             <textarea placeholder="지원 동기" id="motivation"></textarea>
-            <button type="submit" class="btn">가입 신청</button>
+            <button type="submit" class="btn">가입 신청(추후 개발 예정)</button>
             <div class="form-message"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <div id="imageModal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
   <footer>
     <div class="container">
